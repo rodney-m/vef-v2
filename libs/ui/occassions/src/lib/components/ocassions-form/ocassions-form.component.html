@@ -1,0 +1,15 @@
+<div>
+    <form nz-form nzLayout="vertical" [formGroup]="form">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="24" nzFor="email">Occassion Type</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <input nz-input name="occassion" formControlName="type" type="text" id="occassion">
+          </nz-form-control>
+        </nz-form-item >
+      </form>
+
+      <div *nzModalFooter>
+        <button nz-button nzType="primary" [nzLoading]="loading" (click)="submit()">Submit</button>
+        <button nz-button nzType="default" (click)="cancel()">Cancel</button>
+      </div>
+</div>

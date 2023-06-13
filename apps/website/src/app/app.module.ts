@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { NxWelcomeComponent } from './nx-welcome.component';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent],
@@ -11,7 +12,10 @@ import { NxWelcomeComponent } from './nx-welcome.component';
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US }
+
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

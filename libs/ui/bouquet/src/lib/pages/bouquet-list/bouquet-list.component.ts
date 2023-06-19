@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { BouquetFormComponent } from '../../components/bouquet-form/bouquet-form.component';
 
 @Component({
   selector: 'vef-bouquet-list',
@@ -11,14 +13,19 @@ export class BouquetListComponent implements OnInit {
   bouquets : any[] = [];
   tableLoading = false;
 
-  constructor(private service : ApiService, private notification : NzNotificationService ){}
+  constructor(private service : ApiService, private notification : NzNotificationService , private modal : NzModalService){}
   
   ngOnInit(): void {
       this.getBouquets()
   }
   
 
-  openModal(){}
+  openModal(){
+    const addModal = this.modal.create({
+      nzTitle: 'Add a bouquet',
+      nzContent: BouquetFormComponent
+    })
+  }
 
 
   getBouquets(){

@@ -24,7 +24,7 @@
             "output": "/assets/"
           }
         ],
-        "styles": ["apps/website/src/styles.scss", "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"],
+        "styles": ["apps/website/src/styles.scss", "apps/website/src/swiper.css", "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"],
         "scripts": []
       },
       "configurations": {

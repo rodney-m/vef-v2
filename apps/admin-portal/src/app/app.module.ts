@@ -6,7 +6,6 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { AppRoutingModule } from './app.routing.module';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import { JwtInterceptor } from '@vef/core';
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent],

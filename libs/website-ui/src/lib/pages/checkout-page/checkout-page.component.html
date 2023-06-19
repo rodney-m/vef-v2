@@ -1,0 +1,231 @@
+
+
+<section>
+  <h1 class="sr-only">Checkout</h1>
+
+  <div class="mx-auto grid max-w-screen-2xl grid-cols-1 md:grid-cols-2">
+    <div class="bg-gray-50 py-12 md:py-24">
+      <div class="mx-auto max-w-lg space-y-8 px-4 lg:px-8">
+        <div class="flex items-center gap-4"></div>
+
+        <div>
+          <p class="text-2xl font-medium tracking-tight text-gray-900">
+            {{ totalPrice | currency }}
+          </p>
+
+          <p class="mt-1 text-sm text-gray-600">For the purchase of</p>
+        </div>
+
+        <div>
+          <div class="flow-root">
+            <ul class="-my-4 divide-y divide-gray-100">
+              <li
+                class="flex items-center gap-4 py-4"
+                *ngFor="let item of cart"
+              >
+                <img
+                  [src]="item?.images[0]?.imageUrl"
+                  alt=""
+                  class="h-16 w-16 rounded object-cover"
+                />
+
+                <div>
+                  <h3 class="text-sm text-gray-900">{{ item?.name }}</h3>
+
+                  <dl class="mt-0.5 space-y-px text-[14px] text-gray-600">
+                    <div>
+                      <dt class="inline">{{ item?.price | currency }}</dt>
+                    </div>
+                  </dl>
+                </div>
+              </li>
+            </ul>
+
+            <div
+              class="bg-white p-6 mt-6"
+              
+            >
+            <h3 class="text-gray-900 text-center">Add Ons</h3>
+
+            <p class="italic text-center my-2" *ngIf="addOns.length < 1">No add-ons added</p>
+             
+              <div class="mt-4 space-y-6" >
+                <ul class="space-y-4" *ngIf="addOns.length > 0">
+                  <li class="flex items-center gap-4" *ngFor="let addOn of addOns">
+                    <img
+                      [src]="addOn?.imageUrl"
+                      alt=""
+                      class="h-16 w-16 rounded object-cover"
+                    />
+
+                    <div>
+                      <h3 class="text-sm text-gray-900">Basic Tee 6-Pack</h3>
+
+                      <dl class="mt-0.5 space-y-px text-[14px] text-gray-600">
+                        <div>
+                          <dt class="inline">{{addOn?.price | currency }}</dt>
+                        </div>
+
+                        
+                      </dl>
+                    </div>
+
+                    <div class="flex flex-1 items-center justify-end gap-2">
+                      <form>
+                        <label for="Line1Qty" class="sr-only"> Quantity </label>
+
+                        <input
+                          [(ngModel)]="addOn.quantity"
+                          type="number"
+                          min="1"
+                          value="1"
+                          name="Line1Qty"
+                          class="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+                        />
+                      </form>
+
+                      <button
+                        class="text-gray-600 transition hover:text-red-600"
+                      >
+                        <span class="sr-only">Remove item</span>
+
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="h-4 w-4"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="space-y-4 text-center">
+                  <a
+                    (click)="openAddOnModal()"
+                    class="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
+                  >
+                    Add Add Ons
+                  </a>
+
+                 
+
+                  <!-- <a
+                    href="#"
+                    class="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
+                  >
+                    Add Add Ons
+                  </a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white py-12 md:py-24">
+      <div class="mx-auto max-w-lg px-4 lg:px-8">
+        <form class="grid grid-cols-6 gap-4" [formGroup]="paymentDetailsForm">
+          
+
+          <div class="col-span-6">
+            <label
+              for="LastName"
+              class="block text-xs font-medium text-gray-700"
+            >
+              Full Name
+            </label>
+            <input nz-input formControlName="customerName" placeholder="" class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
+
+          </div>
+
+          <div class="col-span-6">
+            <label for="Email" class="block text-xs font-medium text-gray-700">
+              Email
+            </label>
+
+            <input formControlName="customerEmail" nz-input class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
+
+
+           
+          </div>
+
+          <div class="col-span-6">
+            <label for="Phone" class="block text-xs font-medium text-gray-700">
+              Phone
+            </label>
+            <input formControlName="customerPhone" nz-input class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
+
+          </div>
+          <div class="col-span-6">
+            <label for="Phone" class="block text-xs font-medium text-gray-700">
+              Delivery date
+            </label>
+
+            
+            <nz-date-picker formControlName="deliveryDate"  class="hidden mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"></nz-date-picker>
+          </div>
+
+          
+
+          <fieldset class="col-span-6">
+            <legend class="block text-sm font-medium text-gray-700">
+              Billing Address
+            </legend>
+
+            <div class="mt-1 -space-y-px rounded-md bg-white shadow-sm">
+              <!-- <div class="mb-2">
+                <label for="Country" class="sr-only">City</label>
+
+                <select
+                  id="Country"
+                  class="relative w-full rounded-md p-2 border border-gray-200 focus:z-10 sm:text-sm"
+                >
+                  <option *ngFor="let city of cities" value="city.name">{{city?.name}}</option>
+                 
+                </select>
+              </div> -->
+
+              <div>
+                <label class="sr-only" for="PostalCode"> Address</label>
+
+                
+                <textarea formControlName="deliveryAddress" class="relative w-full rounded-b-md p-2 border border-gray-200 focus:z-10 sm:text-sm" nz-input placeholder="" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+
+              </div>
+            </div>
+          </fieldset>
+          <div class="col-span-6">
+            <label class="sr-only" for="PostalCode"> Payment Method</label>
+
+            <p class="text-gray-400 text-xs italic">
+              Currently we only accept payments through cash. Pick <strong>Cash drop off</strong> if you want to pass by and drop off the payment OR <strong>Cash pick up</strong> If you would like us to come and collect the payment
+            </p>
+
+            <nz-radio-group formControlName="paymentMethod" nzButtonStyle="solid">
+              <label nz-radio-button [nzValue]="1">Cash drop off</label>
+              <label nz-radio-button [nzValue]="2">Cash pick up</label>
+            </nz-radio-group>
+          </div>
+
+          <div class="col-span-6">
+            <button (click)="placeOrder()"
+              class="block w-full rounded-md bg-black p-2.5 text-sm text-white transition hover:shadow-lg"
+            >
+              Place Order
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

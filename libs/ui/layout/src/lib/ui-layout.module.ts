@@ -21,6 +21,7 @@ import { CardStatsComponent } from './components/card-stats/card-stats.component
     UserDropdownComponent,
     NotificationDropdownComponent,
     CardStatsComponent,
+    
   ],
   exports: [ContainerComponent],
 })

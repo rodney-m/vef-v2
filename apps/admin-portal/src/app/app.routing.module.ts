@@ -22,6 +22,10 @@ const routes : Routes  = [
         path: 'bouquets',
         loadChildren: () => import('@vef/ui/bouquet').then(m => m.UiBouquetModule)
       },
+      {
+        path: 'add-ons',
+        loadChildren: () => import('@vef/ui/add-on').then(m => m.UiAddOnModule)
+      },
     ]
   }
 ]

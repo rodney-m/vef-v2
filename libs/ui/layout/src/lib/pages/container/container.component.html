@@ -1,10 +1,11 @@
 <div>
     <vef-sidebar></vef-sidebar>
-    <div class="relative md:ml-64 bg-blueGray-100">
+    <div class="relative md:ml-64 bg-gray-100">
         <vef-top-nav></vef-top-nav>
-        <vef-header-stats></vef-header-stats>
-        <div class="px-4 md:px-10 mx-auto w-full -m-24">
+        <vef-header-stats *ngIf="currentRoute === '/'"></vef-header-stats>
+        <div [ngClass]="currentRoute === '/'? 'px-4 md:px-10 mx-auto w-full -m-24' : 'px-4 md:px-10 mx-auto w-full mt-12 bg-gray-50 py-8'">
             <router-outlet></router-outlet>
+            
             <vef-footer-admin></vef-footer-admin>
         </div>
     </div>

@@ -9,9 +9,14 @@ import { RouterModule } from '@angular/router';
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
 import { NotificationDropdownComponent } from './components/notification-dropdown/notification-dropdown.component';
 import { CardStatsComponent } from './components/card-stats/card-stats.component';
+import {NgZorroComponentsModule} from '@vef/core'
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgZorroComponentsModule, HttpClientModule],
   declarations: [
     ContainerComponent,
     TopNavComponent,

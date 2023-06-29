@@ -9,7 +9,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit{
-  cart : any[] = [];
+  cart! : any;
   constructor(
     private shopService : ShopService,
     private notification : NzNotificationService,
@@ -21,13 +21,24 @@ export class CartComponent implements OnInit{
   }
   
   getCartItems(){    
-    this.cart = JSON.parse(this.shopService.getCart() ?? '');         
+    this.cart = JSON.parse(this.shopService.getCart() ?? '');  
+    this.cart.cart.map((x: any) => {
+      console.log("product", x.product.name)
+      x.addons.map((y: any) => {
+        console.log("add on", y.name)
+      })
+    })       
   }
 
   get totalPrice(){
     let total = 0
-    this.cart.map(product => {
-      total +=product.quantity * product.price
+    this.cart?.cart?.map((item : any) => {
+      total +=item?.quantity * item?.product?.price
+      if(item.addons.length > 0){
+        item.addons.map((addOn : any) => {
+          total +=addOn?.quantity * addOn?.price;
+        })
+      }
     })
     return total
   }
@@ -58,5 +69,9 @@ export class CartComponent implements OnInit{
       nzCancelText: 'Cancel',
       nzOnOk: () => this.deleteItem(id)
     });
+  }
+
+  removeExtra(id : string | number){
+    console.log(id)
   }
 }

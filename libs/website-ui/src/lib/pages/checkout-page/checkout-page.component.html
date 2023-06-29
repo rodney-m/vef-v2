@@ -1,231 +1,347 @@
 
-
-<section>
-  <h1 class="sr-only">Checkout</h1>
-
-  <div class="mx-auto grid max-w-screen-2xl grid-cols-1 md:grid-cols-2">
-    <div class="bg-gray-50 py-12 md:py-24">
-      <div class="mx-auto max-w-lg space-y-8 px-4 lg:px-8">
-        <div class="flex items-center gap-4"></div>
-
-        <div>
-          <p class="text-2xl font-medium tracking-tight text-gray-900">
-            {{ totalPrice | currency }}
-          </p>
-
-          <p class="mt-1 text-sm text-gray-600">For the purchase of</p>
-        </div>
-
-        <div>
-          <div class="flow-root">
-            <ul class="-my-4 divide-y divide-gray-100">
-              <li
-                class="flex items-center gap-4 py-4"
-                *ngFor="let item of cart"
-              >
-                <img
-                  [src]="item?.images[0]?.imageUrl"
-                  alt=""
-                  class="h-16 w-16 rounded object-cover"
-                />
-
-                <div>
-                  <h3 class="text-sm text-gray-900">{{ item?.name }}</h3>
-
-                  <dl class="mt-0.5 space-y-px text-[14px] text-gray-600">
-                    <div>
-                      <dt class="inline">{{ item?.price | currency }}</dt>
-                    </div>
-                  </dl>
-                </div>
-              </li>
-            </ul>
-
-            <div
-              class="bg-white p-6 mt-6"
-              
-            >
-            <h3 class="text-gray-900 text-center">Add Ons</h3>
-
-            <p class="italic text-center my-2" *ngIf="addOns.length < 1">No add-ons added</p>
-             
-              <div class="mt-4 space-y-6" >
-                <ul class="space-y-4" *ngIf="addOns.length > 0">
-                  <li class="flex items-center gap-4" *ngFor="let addOn of addOns">
-                    <img
-                      [src]="addOn?.imageUrl"
-                      alt=""
-                      class="h-16 w-16 rounded object-cover"
-                    />
-
-                    <div>
-                      <h3 class="text-sm text-gray-900">Basic Tee 6-Pack</h3>
-
-                      <dl class="mt-0.5 space-y-px text-[14px] text-gray-600">
-                        <div>
-                          <dt class="inline">{{addOn?.price | currency }}</dt>
-                        </div>
-
-                        
-                      </dl>
-                    </div>
-
-                    <div class="flex flex-1 items-center justify-end gap-2">
-                      <form>
-                        <label for="Line1Qty" class="sr-only"> Quantity </label>
-
-                        <input
-                          [(ngModel)]="addOn.quantity"
-                          type="number"
-                          min="1"
-                          value="1"
-                          name="Line1Qty"
-                          class="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                        />
-                      </form>
-
-                      <button
-                        class="text-gray-600 transition hover:text-red-600"
-                      >
-                        <span class="sr-only">Remove item</span>
-
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="h-4 w-4"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-
-                <div class="space-y-4 text-center">
-                  <a
-                    (click)="openAddOnModal()"
-                    class="block rounded border border-gray-600 px-5 py-3 text-sm text-gray-600 transition hover:ring-1 hover:ring-gray-400"
-                  >
-                    Add Add Ons
-                  </a>
-
-                 
-
-                  <!-- <a
-                    href="#"
-                    class="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
-                  >
-                    Add Add Ons
-                  </a> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="max-w-7xl mx-auto min-h-screen bg-gray-50 py-5">
+  <div class="px-5">
+    <div class="mb-2">
+      <a
+        href="#"
+        class="focus:outline-none hover:underline text-gray-500 text-sm"
+        ><i class="mdi mdi-arrow-left text-gray-400"></i>Back</a
+      >
     </div>
-
-    <div class="bg-white py-12 md:py-24">
-      <div class="mx-auto max-w-lg px-4 lg:px-8">
-        <form class="grid grid-cols-6 gap-4" [formGroup]="paymentDetailsForm">
-          
-
-          <div class="col-span-6">
-            <label
-              for="LastName"
-              class="block text-xs font-medium text-gray-700"
-            >
-              Full Name
-            </label>
-            <input nz-input formControlName="customerName" placeholder="" class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
-
-          </div>
-
-          <div class="col-span-6">
-            <label for="Email" class="block text-xs font-medium text-gray-700">
-              Email
-            </label>
-
-            <input formControlName="customerEmail" nz-input class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
-
-
-           
-          </div>
-
-          <div class="col-span-6">
-            <label for="Phone" class="block text-xs font-medium text-gray-700">
-              Phone
-            </label>
-            <input formControlName="customerPhone" nz-input class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
-
-          </div>
-          <div class="col-span-6">
-            <label for="Phone" class="block text-xs font-medium text-gray-700">
-              Delivery date
-            </label>
-
-            
-            <nz-date-picker formControlName="deliveryDate"  class="hidden mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"></nz-date-picker>
-          </div>
-
-          
-
-          <fieldset class="col-span-6">
-            <legend class="block text-sm font-medium text-gray-700">
-              Billing Address
-            </legend>
-
-            <div class="mt-1 -space-y-px rounded-md bg-white shadow-sm">
-              <!-- <div class="mb-2">
-                <label for="Country" class="sr-only">City</label>
-
-                <select
-                  id="Country"
-                  class="relative w-full rounded-md p-2 border border-gray-200 focus:z-10 sm:text-sm"
-                >
-                  <option *ngFor="let city of cities" value="city.name">{{city?.name}}</option>
-                 
-                </select>
-              </div> -->
-
+    <div class="mb-2">
+      <h1 class="text-3xl md:text-5xl font-bold text-gray-600">Checkout.</h1>
+    </div>
+    <!-- <div class="mb-5 text-gray-400">
+            <a href="#" class="focus:outline-none hover:underline text-gray-500">Home</a> / <a href="#" class="focus:outline-none hover:underline text-gray-500">Cart</a> / <span class="text-gray-600">Checkout</span>
+        </div> -->
+  </div>
+  <div
+    class="w-full bg-white border-t border-b border-gray-200 px-5 py-10 text-gray-800"
+  >
+    <div class="w-full">
+      <div class="-mx-3 md:flex items-start">
+        <div class="px-3 md:w-7/12 lg:pr-10">
+          <div
+            *ngFor="let order of cart?.cart"
+            class="cartItem w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 p-3 pb-6"
+          >
+            <div class="w-full flex items-center">
+              <div
+                class="overflow-hidden rounded-lg w-16 h-16 bg-gray-50 border border-gray-200"
+              >
+                <img [src]="order?.product?.images[0]" alt="" />
+              </div>
+              <div class="flex-grow pl-3">
+                <h6 class="font-semibold uppercase text-gray-600">
+                  {{ order?.product?.name }}
+                </h6>
+                <p class="text-gray-400">x {{ order?.quantity }}</p>
+              </div>
               <div>
-                <label class="sr-only" for="PostalCode"> Address</label>
-
-                
-                <textarea formControlName="deliveryAddress" class="relative w-full rounded-b-md p-2 border border-gray-200 focus:z-10 sm:text-sm" nz-input placeholder="" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
-
+                <span class="font-semibold text-gray-600 text-xl">{{
+                  order?.product?.price | currency
+                }}</span>
               </div>
             </div>
-          </fieldset>
-          <div class="col-span-6">
-            <label class="sr-only" for="PostalCode"> Payment Method</label>
-
-            <p class="text-gray-400 text-xs italic">
-              Currently we only accept payments through cash. Pick <strong>Cash drop off</strong> if you want to pass by and drop off the payment OR <strong>Cash pick up</strong> If you would like us to come and collect the payment
-            </p>
-
-            <nz-radio-group formControlName="paymentMethod" nzButtonStyle="solid">
-              <label nz-radio-button [nzValue]="1">Cash drop off</label>
-              <label nz-radio-button [nzValue]="2">Cash pick up</label>
-            </nz-radio-group>
+            <div *ngIf="order?.addons.length > 0" class="ml-6">
+              <h6 class="font-semibold uppercase text-gray-600 mt-4">Extras</h6>
+              <div *ngFor="let extra of order?.addons">
+                <div class="w-full flex items-center">
+                  <div
+                    class="overflow-hidden rounded-lg w-12 h-12 bg-gray-50 border border-gray-200"
+                  >
+                    <img [src]="extra?.imageUrl" alt="" />
+                  </div>
+                  <div class="flex-grow pl-3">
+                    <h6 class="font-semibold uppercase text-gray-600">
+                      {{ extra?.name }}
+                    </h6>
+                    <p class="text-gray-400">x {{ extra?.quantity }}</p>
+                  </div>
+                  <div>
+                    <span class="font-semibold text-gray-600 text-md">{{
+                      extra?.price | currency
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full flex items-center">
+              <div class="w-32">
+                <span class="text-gray-600 font-semibold">Recipient Name</span>
+              </div>
+              <div class="flex-grow pl-3">
+                <span>{{order?.recipientName}}</span>
+              </div>
+            </div>
+            <div class="w-full flex items-center">
+              <div class="w-32">
+                <span class="text-gray-600 font-semibold">Recipient Address</span>
+              </div>
+              <div class="flex-grow pl-3">
+                <span>{{order?.deliveryAddress}}</span>
+              </div>
+            </div>
+            <div class="w-full flex items-center">
+              <div class="w-32">
+                <span class="text-gray-600 font-semibold">Delivery Fee</span>
+              </div>
+              <div class="flex-grow pl-3">
+                <span class="font-semibold text-gray-600 text-md">{{
+                  order?.location?.deliveryCost | currency
+                }}</span>
+              </div>
+            </div>
           </div>
 
-          <div class="col-span-6">
-            <button (click)="placeOrder()"
-              class="block w-full rounded-md bg-black p-2.5 text-sm text-white transition hover:shadow-lg"
+          <!-- <div class="mb-6 pb-6 border-b border-gray-200">
+                        <div class="-mx-2 flex items-end justify-end">
+                            <div class="flex-grow px-2 lg:max-w-xs">
+                                <label class="text-gray-600 font-semibold text-sm mb-2 ml-1">Discount code</label>
+                                <div>
+                                    <input class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="XXXXXX" type="text"/>
+                                </div>
+                            </div>
+                            <div class="px-2">
+                                <button class="block w-full max-w-xs mx-auto border border-transparent bg-gray-400 hover:bg-gray-500 focus:bg-gray-500 text-white rounded-md px-5 py-2 font-semibold">APPLY</button>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <!-- taxes section to be implemented later -->
+          <!-- <div class="mb-6 pb-6 border-b border-gray-200 text-gray-800">
+            <div class="w-full flex mb-3 items-center">
+              <div class="flex-grow">
+                <span class="text-gray-600">Subtotal</span>
+              </div>
+              <div class="pl-3">
+                <span class="font-semibold">$190.91</span>
+              </div>
+            </div>
+            <div class="w-full flex items-center">
+              <div class="flex-grow">
+                <span class="text-gray-600">Taxes (GST)</span>
+              </div>
+              <div class="pl-3">
+                <span class="font-semibold">$19.09</span>
+              </div>
+            </div>
+          </div> -->
+          <div
+            class="mb-6 pb-6 border-b border-gray-200 md:border-none text-gray-800 text-xl"
+          >
+            <div class="w-full flex items-center">
+              <div class="flex-grow">
+                <span class="text-gray-600">Total</span>
+              </div>
+              <div class="pl-3">
+                <span class="font-semibold text-gray-400 text-sm">USD</span>
+                <span class="font-semibold">{{totalPrice | currency}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 md:w-5/12">
+          
+          <div
+            class="w-full mx-auto rounded-lg bg-white border border-gray-200 text-gray-800 font-light mb-6"
+          >
+            <div class="w-full p-3 border-b border-gray-200">
+              <div class="mb-5">
+                <label for="type1" class="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    class="form-radio h-5 w-5 text-primary disabled:text-gray-400"
+                    name="type"
+                    id="type1"
+                    [value]="3"
+                    (change)="changePaymentMethod($event)"
+                    disabled
+                    
+                  />
+                  <img
+                    src="assets/images/cards.png"
+                    class="h-6 ml-3"
+                  />
+                </label>
+              </div>
+              <div [ngSwitch]="paymentMethod">
+                <div *ngSwitchCase="3">
+                  <div class="mb-3">
+                    <label class="text-gray-600 font-semibold text-sm mb-2 ml-1"
+                      >Name on card</label
+                    >
+                    <div>
+                      <input
+                        class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="John Smith"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="text-gray-600 font-semibold text-sm mb-2 ml-1"
+                      >Card number</label
+                    >
+                    <div>
+                      <input
+                        class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder="0000 0000 0000 0000"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3 -mx-2 flex items-end">
+                    <div class="px-2 w-1/4">
+                      <label class="text-gray-600 font-semibold text-sm mb-2 ml-1"
+                        >Expiration date</label
+                      >
+                      <div>
+                        <select
+                          class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer"
+                        >
+                          <option value="01">01 - January</option>
+                          <option value="02">02 - February</option>
+                          <option value="03">03 - March</option>
+                          <option value="04">04 - April</option>
+                          <option value="05">05 - May</option>
+                          <option value="06">06 - June</option>
+                          <option value="07">07 - July</option>
+                          <option value="08">08 - August</option>
+                          <option value="09">09 - September</option>
+                          <option value="10">10 - October</option>
+                          <option value="11">11 - November</option>
+                          <option value="12">12 - December</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="px-2 w-1/4">
+                      <select
+                        class="form-select w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer"
+                      >                      
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                        <option value="2031">2031</option>
+                        <option value="2032">2032</option>
+                        <option value="2033">2033</option>
+                      </select>
+                    </div>
+                    <div class="px-2 w-1/4">
+                      <label class="text-gray-600 font-semibold text-sm mb-2 ml-1"
+                        >Security code</label
+                      >
+                      <div>
+                        <input
+                          class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                          placeholder="000"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full p-3 border-b border-gray-200">
+              <label for="type2" class="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  class="form-radio h-5 w-5 text-primary disabled:text-gray-400"
+                  name="type"
+                  id="type2"
+                  value="4"
+                  (change)="changePaymentMethod($event)"
+                  disabled
+                />
+                <img
+                  src="assets/images/PayPal.svg"
+                  width="80"
+                  class="ml-3"
+                />
+              </label>
+            </div>
+            <div class="w-full p-3 border-b border-gray-200">
+              <label for="type3" class="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  class="form-radio h-5 w-5 text-primary disabled:text-gray-400"
+                  name="type"
+                  id="type3"
+                  value="2"
+                  (change)="changePaymentMethod($event)"
+                />
+                <div class="ml-6">
+                  <label class="text-gray-600 font-semibold text-sm mb-2"
+                      >Cash Pick Up</label
+                    >
+                    <p class="text-gray-400 text-xs">VEF team to come and collect cash from you</p>
+                </div>
+              </label>
+              <div [ngSwitch]="paymentMethod">
+                <div *ngSwitchCase="2">
+                  <div class="mb-3">
+                    <label class="text-gray-600 font-semibold text-sm mb-2 ml-1"
+                      >Address For Collection</label
+                    >
+                    <div>
+                      <textarea
+                      [(ngModel)]="cart.customerAddress"
+                        class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        rows="2"
+                        type="text"
+                      > </textarea>
+                    </div>
+                    <label class="text-gray-600 font-semibold text-sm mb-2 ml-1"
+                      >Phone Number</label
+                    >
+                    <div>
+                      <input
+                      [(ngModel)]="cart.customerPhone"
+                        class="w-full px-3 py-2 mb-1 border border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors"
+                        placeholder=""
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                                    
+                </div>
+              </div>
+            </div>
+            <div class="w-full p-3">
+              <label for="type4" class="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  class="form-radio h-5 w-5 text-primary disabled:text-gray-400"
+                  name="type"
+                  id="type4"
+                  value="1"
+                  checked
+                  (change)="changePaymentMethod($event)"
+                />
+                <div class="ml-6">
+                  <label class="text-gray-600 font-semibold text-sm mb-2"
+                      >Cash Drop Off</label
+                    >
+                    <p class="text-gray-400 text-xs">I will come and drop off the cash at VEF offices (64 Bradfield Road, Hillside, Harare)</p>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button (click)="makeAPayment()"
+              class="block w-full max-w-xs mx-auto bg-primary hover:bg-lightPrimary focus:bg-lightPrimary text-white rounded-lg px-3 py-2 font-semibold"
             >
-              Place Order
+              <i class="mdi mdi-lock-outline mr-1"></i> PAY NOW
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>

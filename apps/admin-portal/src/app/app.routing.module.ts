@@ -15,17 +15,21 @@ const routes : Routes  = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'occassions',
-        loadChildren: () => import('@vef/ui/occassions').then(m => m.UiOccassionsModule)
+        path: '',
+        loadChildren: () => import('@vef/ui/admin-pages').then(m => m.UiAdminPagesModule)
       },
-      {
-        path: 'bouquets',
-        loadChildren: () => import('@vef/ui/bouquet').then(m => m.UiBouquetModule)
-      },
-      {
-        path: 'add-ons',
-        loadChildren: () => import('@vef/ui/add-on').then(m => m.UiAddOnModule)
-      },
+      // {
+      //   path: 'occassions',
+      //   loadChildren: () => import('@vef/ui/occassions').then(m => m.UiOccassionsModule)
+      // },
+      // {
+      //   path: 'bouquets',
+      //   loadChildren: () => import('@vef/ui/bouquet').then(m => m.UiBouquetModule)
+      // },
+      // {
+      //   path: 'add-ons',
+      //   loadChildren: () => import('@vef/ui/add-on').then(m => m.UiAddOnModule)
+      // },
     ]
   }
 ]

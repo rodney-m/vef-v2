@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { ApiService, ShopService } from '@vef/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AddOnsModalComponent } from '../../components/add-ons-modal/add-ons-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ThankYouPageComponent } from '../thank-you-page/thank-you-page.component';
 
 @Component({
   selector: 'vef-checkout-page',
@@ -12,8 +14,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./checkout-page.component.scss'],
 })
 export class CheckoutPageComponent implements OnInit {
-  cart: any[] = [];
+  cart!: any;
   addOns: any[] = [];
+  paymentMethod = 1;
 
   cities = [
     {
@@ -133,13 +136,34 @@ export class CheckoutPageComponent implements OnInit {
     private service: ApiService,
     private modal: NzModalService,
     private fb: FormBuilder,
-    private uiLoader : NgxUiLoaderService,
-    private router : Router,
+    private uiLoader: NgxUiLoaderService,
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private ngZone: NgZone,
+    private notification: NzNotificationService
   ) {}
+
+  orderObject = {
+    customerName: '',
+    customerEmail: '',
+    customerPhone: '',
+    customerAddress: '',
+    cart: [],
+    paymentMethod: 1,
+  };
 
   ngOnInit(): void {
     this.cart = JSON.parse(this.shopService.getCart() ?? '');
     this.innitializeForm();
+        
+  }
+
+  changePaymentMethod(e: any) {
+    this.ngZone.run(() => {
+      this.paymentMethod = e.target.value;
+      console.log(this.paymentMethod);
+      this.cd.detectChanges();
+    });
   }
 
   innitializeForm() {
@@ -154,7 +178,7 @@ export class CheckoutPageComponent implements OnInit {
   }
 
   placeOrder() {
-    const orderedProducts = this.cart.map((product) => {
+    const orderedProducts = this.cart.map((product: any) => {
       return {
         productId: product.id,
         quantity: product.quantity,
@@ -168,56 +192,56 @@ export class CheckoutPageComponent implements OnInit {
     });
 
     const orderRequest = {
-      products : orderedProducts,
+      products: orderedProducts,
       addons: orderedAddOns,
-      ...this.paymentDetailsForm.value
-    }
+      ...this.paymentDetailsForm.value,
+    };
 
-    this.processOrder(orderRequest)
-
-    
+    this.processOrder(orderRequest);
   }
 
-  processOrder(orderDetails: any){
-
-    this.uiLoader.start()
+  processOrder(orderDetails: any) {
+    this.uiLoader.start();
     this.service.postToUrl('/Order/checkout', orderDetails).subscribe({
       next: () => {
         const successModal = this.modal.success({
           nzTitle: 'Order Created',
-          nzContent: 'Progress on your order will be sent to your contact details',          
-        })
+          nzContent:
+            'Progress on your order will be sent to your contact details',
+        });
         this.uiLoader.stop();
         successModal.afterClose.subscribe(() => {
-          this.router.navigate(['/'])
-        })        
+          this.router.navigate(['/']);
+        });
       },
       error: (err) => {
         this.modal.error({
-          nzTitle:'Error',
-          nzContent : err?.error?.message ? err?.error?.message:  'Failed to place order'
-        })
-        this.uiLoader.stop()
+          nzTitle: 'Error',
+          nzContent: err?.error?.message
+            ? err?.error?.message
+            : 'Failed to place order',
+        });
+        this.uiLoader.stop();
       },
       complete: () => {
-        this.uiLoader.stop()
-      }
-      
-    })
+        this.uiLoader.stop();
+      },
+    });
   }
 
   get totalPrice() {
     let total = 0;
 
-    if (this.cart.length > 0){
-      this.cart.map((product) => {
-        total += product?.quantity * product?.price;
-      });
-    }
+    if (this.cart.cart.length > 0) {
+      this.cart.cart.map((orderItem: any) => {
+        total += orderItem.quantity * orderItem.product?.price;
+        total += orderItem?.location?.deliveryCost;
 
-    if(this.addOns.length > 0){
-      this.addOns.map((product) => {
-        total += product?.quantity * product?.price;
+        if (orderItem?.addons.length > 0) {
+          orderItem?.addons.map((addOn: any) => {
+            total += addOn?.price * addOn?.quantity;
+          });
+        }
       });
     }
 
@@ -232,9 +256,81 @@ export class CheckoutPageComponent implements OnInit {
     });
 
     addOnModal.afterClose.subscribe((data) => {
-      
-      if(data)
-        this.addOns = [...this.addOns, data];
+      if (data) this.addOns = [...this.addOns, data];
     });
   }
+
+  makeAPayment() {
+    // this.cart.paymentMethod = this.paymentMethod
+    const paymentObject = JSON.parse(JSON.stringify(this.cart));
+
+    paymentObject.cart.map((orderItem: any) => {
+      orderItem.locationId = orderItem.location.id;
+      delete orderItem.product;
+      delete orderItem.location;
+
+      orderItem.addons = orderItem.addons.map((item: any) => {
+        return {
+          addonId: item.id,
+          quantity: item.quantity,
+        };
+      });
+    });
+
+    this.finalizeOrder({ ...paymentObject, paymentMethod: this.paymentMethod });
+
+    // // Finalize Object
+    // this
+  }
+
+  finalizeOrder(order: any) {
+    this.uiLoader.start();
+    this.service.postToUrl('/Order/checkout', order).subscribe({
+      next: (res) => {
+        this.uiLoader.stop();
+        this.notification.success('Success', 'Order placed');
+        const thankYouModal = this.modal.create({
+          nzContent: ThankYouPageComponent,
+          nzComponentParams: { order: res.data },
+          nzFooter: null
+        });
+        this.shopService.clearCart()
+        thankYouModal.afterClose.subscribe(() => {
+          this.router.navigateByUrl('/');
+        });
+      },
+      error: () => {
+        this.uiLoader.stop();
+        this.notification.error('Error', 'Failed to place order');
+      },
+      complete: () => this.uiLoader.stop(),
+    });
+  }
+}
+
+interface Order {
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  customerAddress: string;
+  cart: OrderItem[];
+  paymentMethod: number;
+}
+
+interface AddOn {
+  addonId: number;
+  quantity: number;
+}
+
+interface OrderItem {
+  productId: number;
+  locationId: number;
+  quantity: number;
+  recipientName: string;
+  recipientEmail: string;
+  recipientPhone: string;
+  deliveryAddress: string;
+  deliveryInstruction: string;
+  deliveryDate: string;
+  addons: AddOn[];
 }

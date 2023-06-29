@@ -1,77 +1,31 @@
-<div class="container mx-auto px-4 h-full">
-    <div class="flex content-center items-center justify-center h-full">
-      <div class="w-full lg:w-4/12 px-4">
-        <div
-          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-200 border-0"
-        >
-          
-          <div class="flex-auto px-4 lg:px-10 py-10">
-            <div class="text-gray-400 text-center mb-3 font-bold">
-              <small>Or sign in with Email and Password</small>
-            </div>
-            <form [formGroup]="form">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-gray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  formControlName="email"
-                  class="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Email"
-                />
-              </div>
-  
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-gray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-                >
-                  Password
-                </label>
-                <input
-                formControlName="password"
-                  type="password"
-                  class="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Password"
-                />
-              </div>
-              <!-- <div>
-                <label class="inline-flex items-center cursor-pointer">
-                  <input
-                    id="customCheckLogin"
-                    type="checkbox"
-                    class="form-checkbox border-0 text-gray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
-                  />
-                  <span class="ml-2 text-sm font-semibold text-gray-600">
-                    Remember me
-                  </span>
-                </label>
-              </div> -->
-  
-              <div class="text-center mt-6" (click)="submit()">
-                <button
-                  class="bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                  type="button"
-                >
-                  Sign In
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="flex flex-wrap mt-6 relative">
-          <div class="w-1/2">
-            <a href="javascript:void(0)" class="text-gray-400">
-              <small>Forgot password?</small>
-            </a>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  
+<h2 class="m-t-20">Sign In</h2>
+                      <p class="m-b-30">Enter your credential to get access</p>
+                      <form nz-form [formGroup]="form" nzLayout="vertical" class="login-form" (ngSubmit)="submit()">
+                          <nz-form-item>
+                              <nz-form-label nzRequired nzFor="email">Email</nz-form-label>
+                              <nz-form-control nzErrorTip="Please input your email!">
+                                  <nz-input-group [nzPrefix]="prefixUser">
+                                      <input type="email" nz-input formControlName="email" placeholder="Email">
+                                  </nz-input-group>
+                              </nz-form-control>
+                          </nz-form-item>
+                          <nz-form-item class="relative">
+                              <nz-form-label nzRequired nzFor="password">Password</nz-form-label>
+                              <a class="float-right font-size-13 text-gray-700" style="position:absolute; right: 0" [routerLink]="['/authentication/reset-password-1']">Forget Password?</a>
+                              <nz-form-control nzErrorTip="Please input your Password!">
+                                  <nz-input-group [nzPrefix]="prefixLock">
+                                      <input type="password" nz-input formControlName="password" placeholder="Password">
+                                  </nz-input-group>
+                              </nz-form-control>
+                          </nz-form-item>
+                          <nz-form-item>
+                              <nz-form-control>
+                                  <div class="flex items-center justify-between">
+                                      <!-- <span class="font-size-13 text-gray-700">Don't have an account? <a class="text-xs" [routerLink]="['/authentication/sign-up-1']"> Signup</a></span> -->
+                                      <button nz-button class="login-form-button" [nzType]="'primary'">Sign In</button>
+                                  </div>
+                              </nz-form-control>
+                          </nz-form-item>
+                      </form>
+                      <ng-template #prefixUser><i nz-icon nzType="user"></i></ng-template>
+                      <ng-template #prefixLock><i nz-icon nzType="lock"></i></ng-template>

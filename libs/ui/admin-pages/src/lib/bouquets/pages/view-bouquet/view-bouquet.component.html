@@ -1,0 +1,23 @@
+<div class="flex flex-wrap " *ngIf="bouquet">
+    <div class="container mx-auto sm:px-4">
+        <nz-card nzTitle="Product Details">
+            <div class="flex items-start items-center">
+                <!-- <nz-avatar  [nzSize]="80" nzIcon="picture" [nzSrc]="bouquet?.images[0]?.imageUrl"></nz-avatar> -->
+                <div class="h-16 w-16 bg-gray-100 rounded-full flex-1">
+
+                </div>
+                <div class="ml-4 mr-4">
+                    <h5 class="mb-4 text-lg font-bold" style="font-weight: bold !important;">{{bouquet?.name}}</h5>
+                    <p class="opacity-07 font-size-13 m-b-0">
+                        {{bouquet?.description}}
+                    </p>
+                </div>
+           
+            </div>
+            <hr class="m-v-25">
+            
+        </nz-card>
+            
+    </div>
+
+</div>

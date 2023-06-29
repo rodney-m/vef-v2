@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
     <vef-sidebar></vef-sidebar>
     <div class="relative md:ml-64 bg-gray-100">
         <vef-top-nav></vef-top-nav>
@@ -9,4 +9,13 @@
             <vef-footer-admin></vef-footer-admin>
         </div>
     </div>
+</div> -->
+
+<vef-top-nav class=''></vef-top-nav>
+<div class='flex flex-wrap  m-0'>
+  <vef-sidebar class='w-1/5 p-0'></vef-sidebar>
+  <div class='w-4/5 bg-gray-50 p-4'>
+    <!--    <vef-breadcrumb></vef-breadcrumb>-->
+    <router-outlet></router-outlet>
+  </div>
 </div>

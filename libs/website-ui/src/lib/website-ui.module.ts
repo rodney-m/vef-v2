@@ -22,10 +22,19 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzAffixModule } from 'ng-zorro-antd/affix';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AllBouquetsInfiniteScrollComponent } from './components/all-bouquets-infinite-scroll/all-bouquets-infinite-scroll.component';
 import { ProductsFilteringPageComponent } from './pages/products-filtering-page/products-filtering-page.component';
+import { AddALittleExtraComponent } from './pages/add-a-little-extra/add-a-little-extra.component';
+import { RecepientDetailsComponent } from './pages/recepient-details/recepient-details.component';
+import { SendersDetailsComponent } from './pages/senders-details/senders-details.component';
+import { BuyingProcessPageComponent } from './pages/buying-process-page/buying-process-page.component';
+import { ThankYouPageComponent } from './pages/thank-you-page/thank-you-page.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 
 const routes: Route[] = [
   {
@@ -37,6 +46,10 @@ const routes: Route[] = [
     component: ProductPageComponent,
   },
   {
+    path: 'buy',
+    component: BuyingProcessPageComponent,
+  },
+  {
     path: 'cart',
     component: CartComponent,
   },
@@ -45,8 +58,16 @@ const routes: Route[] = [
     component: CheckoutPageComponent,
   },
   {
+    path: 'extras/:id',
+    component: AddALittleExtraComponent,
+  },
+  {
     path: 'all-bouquets',
     component: ProductsFilteringPageComponent,
+  },
+  {
+    path: 'receipient-details',
+    component: RecepientDetailsComponent,
   },
 ];
 
@@ -69,6 +90,9 @@ const routes: Route[] = [
     NzInputModule,
     NzRadioModule,
     InfiniteScrollModule,
+    NzAffixModule,
+    NzResultModule,
+    NzButtonModule
   ],
   declarations: [
     HomePageComponent,
@@ -79,6 +103,11 @@ const routes: Route[] = [
 
     AllBouquetsInfiniteScrollComponent,
     ProductsFilteringPageComponent,
+    AddALittleExtraComponent,
+    RecepientDetailsComponent,
+    SendersDetailsComponent,
+    BuyingProcessPageComponent,
+    ThankYouPageComponent,
   ],
   providers: [ApiService, HttpClientModule, ShopService, NzNotificationService],
 })

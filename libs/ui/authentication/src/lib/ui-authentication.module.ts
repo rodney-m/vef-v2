@@ -4,7 +4,7 @@ import { ContainerComponent } from './components/container/container.component';
 import { LoginComponent } from './components/login/login.component';
 import { UiAuthenticationRoutingModule } from './ui-authentication.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiService, AuthService } from '@vef/core';
+import { ApiService, AuthService, NgZorroComponentsModule } from '@vef/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
@@ -24,6 +24,7 @@ import { OtpComponent } from './components/otp/otp.component';
 
     NzNotificationModule,
     NzIconModule,
+    NgZorroComponentsModule
   ],
   declarations: [ContainerComponent, LoginComponent, OtpComponent],
   providers: [ApiService, HttpClientModule, NzNotificationService, AuthService],

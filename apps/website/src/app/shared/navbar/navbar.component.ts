@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
   }
 
   get CurrentCartTotal(){
-    const cart : any[] = JSON.parse(this.shopService.getCart() ?? '[]')
+    const cart : any[] = JSON.parse(this.shopService.getCart() ?? '').cart
     return cart.length
   }
 

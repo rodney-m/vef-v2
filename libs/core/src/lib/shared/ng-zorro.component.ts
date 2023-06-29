@@ -28,6 +28,9 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 
 @NgModule({
@@ -61,7 +64,10 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzStepsModule,
     NzSwitchModule,
     NzMessageModule,
-    NzImageModule
+    NzImageModule,
+    NzResultModule,
+    NzCardModule,
+    NzBreadCrumbModule
   ],
   exports: [
     NzPaginationModule,
@@ -92,7 +98,10 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     NzStepsModule,
     NzSwitchModule,
     NzMessageModule,
-    NzImageModule
+    NzImageModule,
+    NzResultModule,
+    NzCardModule,
+    NzBreadCrumbModule
   ],
   providers: [NzMessageService]
 })

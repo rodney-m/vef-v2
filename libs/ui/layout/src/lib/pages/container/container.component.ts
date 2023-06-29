@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./container.component.scss'],
 })
 export class ContainerComponent implements OnInit {
+  isFolded = false ;
+  isExpand = false;
   constructor(private router: Router) {}
 
   ngOnInit(): void {}

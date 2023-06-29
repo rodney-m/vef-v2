@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService, ShopService } from '@vef/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -17,16 +17,13 @@ export class ProductPageComponent implements OnInit {
     private activatedRoute : ActivatedRoute,
     private shopService : ShopService,
     private notification : NzNotificationService,
-    private uiLoader : NgxUiLoaderService
+    private uiLoader : NgxUiLoaderService,
+    private router : Router
     ){}
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id']
-      this.getProductDetails(id)
-
-      this.service.getFromUrl('/Cart').subscribe({
-        next: (res ) => console.log("cart ", res)
-      })
+      this.getProductDetails(id);
   }
 
   getProductDetails(id:  string | number){
@@ -38,6 +35,10 @@ export class ProductPageComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  buy(){
+    this.router.navigate(['/buy'], {queryParams: {product: this.bouquet.id, quantity: this.quantity}})
   }
 
   addToCart() {    

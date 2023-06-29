@@ -9,6 +9,7 @@ module.exports = {
     "./libs/ui/occassions/src/**/*.{html,ts}",
     "./libs/ui/bouquet/src/**/*.{html,ts}",
     "./libs/website-ui/src/**/*.{html,ts}",
+    "./libs/ui/admin-pages/src/**/*.{html,ts}",
     "./libs/ui/layout/src/**/*.{html,ts}"
   ],
   theme: {

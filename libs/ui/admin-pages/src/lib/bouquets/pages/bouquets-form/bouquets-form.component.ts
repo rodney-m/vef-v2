@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService, FileService } from '@vef/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -18,7 +18,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   templateUrl: './bouquets-form.component.html',
   styleUrls: ['./bouquets-form.component.scss'],
 })
-export class BouquetsFormComponent {
+export class BouquetsFormComponent implements OnInit {
   loading = false;
   form!: FormGroup;
   occassions: any[] = []
@@ -60,19 +60,12 @@ export class BouquetsFormComponent {
     this.getOccassions()
   }
 
-
+  
   handleUpload(): void {
-    // if(this.form.invalid){
-    //   this.notification.warning('Warning', 'Fill in all required fields', {nzAnimate : true, nzDuration: 4000});
-    //   return;
-    // }
-    // if (this.fileList.length === 0 ) {
-    //   this.notification.warning('Warning', 'Upload bouquet image', {nzAnimate : true, nzDuration: 4000}) 
-    //   return
-    // } 
-    // this.loading = true;
+    
     const formData = new FormData();  
     const imageUrls :any[]= []
+    this.loading = true;
     this.fileList.map((file, index) => {
       formData.append('file', this.fileList[index])
       this.fileService.postToUrl('',formData).subscribe({
@@ -82,34 +75,22 @@ export class BouquetsFormComponent {
         },
         error: () => {
           this.loading = false;
+          this.loading = false;
           this.notification.warning("Failed to upload Image", "", {nzAnimate: true, nzDuration:4000} )
           return;
         }
       })
     })
 
-    const uploadInterval = setInterval(() => {
-      let seconds  = 0
+    const uploadInterval = setInterval(() => {     
       console.log(imageUrls)
       if(this.fileList.length === imageUrls.length){
         clearInterval(uploadInterval)      
         this.submit(imageUrls) 
       }
-      seconds+=1000
     }, 1000)
 
-    // this.fileService.postToUrl('',formData).subscribe({
-    //   next: (res : any) => {
-    //     console.log(res)
-    //     this.imageUrl = res?.data.url;
-    //     this.submit()
-    //   },
-    //   error: () => {
-    //     this.loading = false;
-    //     this.notification.warning("Failed to upload Image", "", {nzAnimate: true, nzDuration:4000} )
-    //     return;
-    //   }
-    // })
+
    
   }
 
@@ -126,7 +107,7 @@ export class BouquetsFormComponent {
 
   submit(images :any[]) {
     
-    this.loading = true;
+    // this.loading = true;
     this.service.postToUrl('/Product', {...this.form.value, imageUrls: images }).subscribe({
       next: (res) => {
         console.log(res)

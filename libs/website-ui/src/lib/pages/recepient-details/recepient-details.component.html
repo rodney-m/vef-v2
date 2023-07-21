@@ -3,17 +3,15 @@
     class="container mx-auto bg-gray-50 m-2 mt-8 p-6 max-w-7xl flex flex-col items-center justify-center"
   >
     <h1 class="text-xl font-semibold sm:text-2xl text-center">
-      Recepient Details
+      Recipient Details
     </h1>
     <p>Complete the form below with details of the receiver</p>
   </div>
 
   <section class="max-w-2xl mx-auto mt-8">
     <form class="space-y-6" [formGroup]="recepientDetailsForm">
-      <div class="">
-        <label for="LastName" class="block text-xs font-medium text-gray-700">
-          Full Name
-        </label>
+      <div class="">        
+        <nz-form-label  nzFor="recipientName" nzRequired>Full Name</nz-form-label>
         <input
           nz-input
           formControlName="recipientName"
@@ -23,10 +21,8 @@
       </div>
 
       <div class="">
-        <label for="Email" class="block text-xs font-medium text-gray-700">
-          Email
-        </label>
-
+        
+        <nz-form-label  nzFor="recipientEmail" >Email</nz-form-label>
         <input
           formControlName="recipientEmail"
           nz-input
@@ -34,10 +30,9 @@
         />
       </div>
 
-      <div class="">
-        <label for="Phone" class="block text-xs font-medium text-gray-700">
-          Phone
-        </label>
+      <div class="">        
+        <nz-form-label  nzFor="recipientPhone" nzRequired>Phone</nz-form-label>
+
         <input
           formControlName="recipientPhone"
           nz-input
@@ -45,18 +40,16 @@
         />
       </div>
       <div class="">
-        <label for="Phone" class="block text-xs font-medium text-gray-700">
-          Delivery date
-        </label>
-
-        <nz-date-picker
+       
+        <nz-form-label  nzFor="deliveryDate" nzRequired>Delivery date</nz-form-label>
+        <nz-date-picker [nzDisabledDate]="disabledDate"
           formControlName="deliveryDate"
           class="hidden mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"
         ></nz-date-picker>
       </div>
 
       <div class="">
-        <label for="Address"> Delivery Address</label>
+        <nz-form-label  nzFor="deliveryAddress" nzRequired> Delivery Address</nz-form-label>
 
         <textarea
           formControlName="deliveryAddress"
@@ -67,7 +60,7 @@
         ></textarea>
       </div>
       <div class="">
-        <label for="Address">Area (City / Town)</label>
+        <nz-form-label  nzFor="location" nzRequired>Area (City / Town)</nz-form-label>
 
         <nz-select class="relative w-full rounded-b-md p-2 border border-gray-200 focus:z-10 sm:text-sm" nzShowSearch nzAllowClear nzPlaceHolder="Select a person" formControlName="location">
           <nz-option *ngFor="let location of locations" [nzLabel]="location.name" [nzValue]="location"></nz-option>
@@ -77,7 +70,7 @@
       <div class="">
         <div class="mt-1 -space-y-px rounded-md bg-white shadow-sm">
           <div>
-            <label class="" for="PostalCode"> Delivery Instruction</label>
+        <nz-form-label  nzFor="deliveryInstruction" >Delivery Instruction</nz-form-label>
 
             <textarea
               formControlName="deliveryInstruction"

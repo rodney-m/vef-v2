@@ -1,62 +1,142 @@
-<div class="flex flex-wrap ">
-    <div class="md:w-1/2 pr-4 pl-4 lg:w-1/4 pr-4 pl-4">
-        <nz-card>
-            <div class="flex items-start items-center">
-                <div class="rounded-full h-12 w-12 bg-gray-400 flex justify-center items-center text-white">
-                    <span nz-icon nzType="dollar" nzTheme="fill" nzTheme="outline" class="text-2xl"></span>
-                </div>
-                
-                <div class="ml-2">
-                    <h2 class="m-b-0 font-bold text-xl">$23,523</h2>
-                    <p class="m-b-0 text-gray-700">Revenue</p>
-                </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0 p-4">
+    <!-- Summary -->
+    <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg font-medium tracking-tight leading-6 truncate">Order Status</div>
+            
+            <span nz-dropdown [nzDropdownMenu]="menu">
+                <span nz-icon nzType="more" nzTheme="outline"></span>
+              </span>
+    
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item ><span>Today</span></li>
+                  <li nz-menu-item ><span>This Week</span></li>
+                  <li nz-menu-item><span>This Month</span></li>
+                </ul>
+              </nz-dropdown-menu>
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">21</div>
+            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Delivered</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">Completed:</div>
+                <div class="ml-1.5 text-lg font-semibold">13</div>
             </div>
-        </nz-card>
+        </div>
     </div>
-    <div class="md:w-1/2 pr-4 pl-4 lg:w-1/4 pr-4 pl-4">
-        <nz-card>
-            <div class="flex items-start items-center">
-                <div class="rounded-full h-12 w-12 bg-gray-400 flex justify-center items-center text-white">
-                    <span nz-icon nzType="profile" nzTheme="fill" nzTheme="outline" class="text-2xl"></span>
-                </div>
-                
-                <div class="ml-2">
-                    <h2 class="m-b-0 font-bold text-xl">523</h2>
-                    <p class="m-b-0 text-gray-700">Orders</p>
-                </div>
+    <!-- Overdue -->
+    <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg font-medium tracking-tight leading-6 truncate">Orders Status</div>
+            <span nz-dropdown [nzDropdownMenu]="menu">
+                <span nz-icon nzType="more" nzTheme="outline"></span>
+              </span>
+    
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item ><span>Today</span></li>
+                  <li nz-menu-item ><span>This Week</span></li>
+                  <li nz-menu-item><span>This Month</span></li>
+                </ul>
+              </nz-dropdown-menu>
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500">17</div>
+            <div class="text-lg font-medium text-red-600 dark:text-red-500">Received</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">From yesterday:</div>
+                <div class="ml-1.5 text-lg font-semibold">9</div>
             </div>
-        </nz-card>
+        </div>
     </div>
-    <div class="md:w-1/2 pr-4 pl-4 lg:w-1/4 pr-4 pl-4">
-        <nz-card>
-            <div class="flex items-start items-center">
-                <div class="rounded-full h-12 w-12 bg-gray-400 flex justify-center items-center text-white">
-                    <span nz-icon nzType="line-chart" nzTheme="fill" nzTheme="outline" class="text-2xl"></span>
-                </div>
-                
-                <div class="ml-2">
-                    <h2 class="m-b-0 font-bold text-xl">3</h2>
-                    <p class="m-b-0 text-gray-700">New Orders</p>
-                </div>
+    <!-- Issues -->
+    <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg font-medium tracking-tight leading-6 truncate">Order Status</div>
+            <!-- <div class="ml-2 -mt-2 -mr-3">
+                <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="issuesMenu">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_mini:ellipsis-vertical'"></mat-icon>
+                </button>
+                <mat-menu #issuesMenu="matMenu">
+                    <button mat-menu-item>Yesterday</button>
+                    <button mat-menu-item>2 days ago</button>
+                    <button mat-menu-item>3 days ago</button>
+                </mat-menu>
+            </div> -->
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">24</div>
+            <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Processing</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">Closed today:</div>
+                <div class="ml-1.5 text-lg font-semibold">19</div>
             </div>
-        </nz-card>
+        </div>
     </div>
-    <div class="md:w-1/2 pr-4 pl-4 lg:w-1/4 pr-4 pl-4">
-        <nz-card>
-            <div class="flex items-start items-center">
-                <div class="rounded-full h-12 w-12 bg-gray-400 flex justify-center items-center text-white">
-                    <span nz-icon nzType="user" nzTheme="fill" nzTheme="outline" class="text-2xl"></span>
-                </div>
-                
-                <div class="ml-2">
-                    <h2 class="m-b-0 font-bold text-xl">30</h2>
-                    <p class="m-b-0 text-gray-700">Customers</p>
-                </div>
+    <!-- Features -->
+    <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg font-medium tracking-tight leading-6 truncate">Order Status</div>
+            <span nz-dropdown [nzDropdownMenu]="menu">
+                <span nz-icon nzType="more" nzTheme="outline"></span>
+              </span>
+    
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item ><span>Today</span></li>
+                  <li nz-menu-item ><span>This Week</span></li>
+                  <li nz-menu-item><span>This Month</span></li>
+                </ul>
+              </nz-dropdown-menu>
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">38</div>
+            <div class="text-lg font-medium text-green-600 dark:text-green-500">Out for delivery</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">Implemented:</div>
+                <div class="ml-1.5 text-lg font-semibold">16</div>
             </div>
-        </nz-card>
+        </div>
     </div>
+    
+</div>
 
-  
+<div class="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-6 w-full mt-8 sm:mt-4">
+
+    <div class="flex flex-col flex-auto">
+        <div class="font-medium text-secondary">Best Selling</div>
+        <div class="flex flex-col flex-auto">
+            <!-- <apx-chart
+                class="flex-auto w-full h-80"
+                [chart]="chartSales.chart"
+                [colors]="chartSales.colors"
+                [dataLabels]="chartSales.dataLabels"
+                [grid]="chartSales.grid"
+                [labels]="chartSales.labels"
+                [legend]="chartSales.legend"
+                [plotOptions]="chartSales.plotOptions"
+                [states]="chartSales.states"
+                [stroke]="chartSales.stroke"
+                [tooltip]="chartSales.tooltip"
+                [xaxis]="chartSales.xaxis"
+                [yaxis]="chartSales.yaxis"></apx-chart> -->
+
+                <apx-chart
+                [series]="salesChartOptions?.series"
+                [chart]="salesChartOptions?.chart"
+                [xaxis]="salesChartOptions?.xaxis"
+                [title]="salesChartOptions?.title"
+              ></apx-chart>
+            
+        </div>
+    </div>
+   
+    
 </div>
 
 <div class="p-4">
@@ -98,3 +178,7 @@
         </div>
     </nz-card>
 </div>
+<!-- <div class="p-4">
+    <vef-barchat-best-selling-products></vef-barchat-best-selling-products>
+</div> -->
+

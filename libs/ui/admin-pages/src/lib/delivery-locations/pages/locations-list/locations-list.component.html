@@ -1,0 +1,51 @@
+<nz-card nzTitle="Delivery locastions list">
+    <div class="flex flex-wrap  mb-6">
+        <div class="lg:w-2/3 pr-4 pl-4">
+                   
+        </div>
+        <div class="lg:w-1/3 pr-4 pl-4 text-right">
+            <a nz-button nzType="primary" [routerLink]="'/locations/form'">
+                <i nz-icon nzType="plus-circle" theme="outline"></i>
+                <span>Add Location</span>
+            </a>
+        </div>
+    </div>
+    <nz-table #productsListTable [nzData]="locationsList" [nzShowPagination]="false">
+        <thead>
+            <tr>            
+                <th>Location</th>
+                <th>Delivery Cost</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productsListTable.data;  let i=index">
+               
+                <td>{{item?.name}}</td>
+                <td>{{item.deliveryCost | currency}}</td>
+                           
+                <td class="md:text-right">
+                    <a [routerLink]="'/locations/form/'+item.id" class="mr-2" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Edit" >
+                        <i nz-icon nzType="edit" theme="outline"></i>
+                    </a>
+                   
+                    <button nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete">
+                        <i nz-icon nzType="delete" theme="outline"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <div class="mt-4">
+        <nz-pagination
+          [nzPageSizeOptions]="[5, 10, 20, 50]"
+          [nzPageIndex]="currentPage"
+          [nzTotal]="totalItems"
+          nzShowSizeChanger
+          [nzPageSize]="size"
+          (nzPageSizeChange)="pageSizeChange($event)"
+          (nzPageIndexChange)="pageIndexChange($event)"
+        ></nz-pagination>
+      </div>
+</nz-card>

@@ -1,22 +1,70 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
 
 @Component({
   selector: 'vef-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardPageComponent implements OnInit {
-
-  constructor(private service : ApiService){}
+  chartSales: ApexOptions | any = {};
+  salesChartOptions!: ApexOptions | any;
+  
+  constructor(private service : ApiService, private cdr : ChangeDetectorRef){}
   ordersList :any[] = [] 
-
+  sales :any [] = [];
+  salesGraphsData :{labels: any[], data: any[]} = {labels: [], data: []}
+  
   ngOnInit(): void {
-
-      this.service.getFromUrl('/Order').subscribe({
+    this.getSales()
+    
+    this.service.getFromUrl('/Order').subscribe({
         next: (res) => {
           this.ordersList = res.data
         }
       })
+
+      this.salesChartOptions = {
+        series: [
+          {
+            name: "Sales",
+            data: this.salesGraphsData.data 
+          }
+        ],
+        
+        chart: {
+          height: 350,
+          type: "bar"
+        },
+        title: {
+          text: "Sales per product Chart"
+        },
+        xaxis: {
+          categories: this.salesGraphsData.labels
+        }
+      };
+
+
   }
+
+
+
+    getSales(){
+      this.service.getFromUrl('/Sales').subscribe({
+        next: (res) => {
+          this.sales = res.data;
+          this.sales.map((sale) => {
+            this.salesGraphsData.data.push(sale.totalUnitsSold)
+            this.salesGraphsData.labels.push(sale.product.name);
+          });
+          this.salesChartOptions.series.data = this.salesGraphsData.data
+          this.salesChartOptions.xaxis.categories = this.salesGraphsData.data
+          this.cdr.markForCheck()
+
+          console.log(this.salesGraphsData);
+        }
+      })
+    }
 }

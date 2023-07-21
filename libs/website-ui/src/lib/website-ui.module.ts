@@ -23,6 +23,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzAffixModule } from 'ng-zorro-antd/affix';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AllBouquetsInfiniteScrollComponent } from './components/all-bouquets-infinite-scroll/all-bouquets-infinite-scroll.component';
@@ -34,7 +37,10 @@ import { BuyingProcessPageComponent } from './pages/buying-process-page/buying-p
 import { ThankYouPageComponent } from './pages/thank-you-page/thank-you-page.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { OrderTrackingPageComponent } from './pages/order-tracking-page/order-tracking-page.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { FilterByCategoryComponent } from './pages/filter-by-category/filter-by-category.component';
 
 const routes: Route[] = [
   {
@@ -69,6 +75,24 @@ const routes: Route[] = [
     path: 'receipient-details',
     component: RecepientDetailsComponent,
   },
+  {
+    path: 'order/track',
+    component: OrderTrackingPageComponent,
+  },
+  {
+    path: 'category/:id',
+    component: FilterByCategoryComponent
+  },
+  {
+    path: 'page-not-found',
+    component: PageNotFoundComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'page-not-found',
+    pathMatch: 'full',
+  },
+ 
 ];
 
 @NgModule({
@@ -92,7 +116,10 @@ const routes: Route[] = [
     InfiniteScrollModule,
     NzAffixModule,
     NzResultModule,
-    NzButtonModule
+    NzButtonModule,
+    NzFormModule,
+    NzSpinModule,
+    NzSwitchModule
   ],
   declarations: [
     HomePageComponent,
@@ -108,6 +135,9 @@ const routes: Route[] = [
     SendersDetailsComponent,
     BuyingProcessPageComponent,
     ThankYouPageComponent,
+    OrderTrackingPageComponent,
+    PageNotFoundComponent,
+    FilterByCategoryComponent,
   ],
   providers: [ApiService, HttpClientModule, ShopService, NzNotificationService],
 })

@@ -12,6 +12,7 @@ export class OccassionsListComponent implements OnInit {
   page = 0;
   totalItems = 0;
   currentPage = 0;
+  tableLoading = false;
 
   constructor(private service: ApiService) {}
 
@@ -20,15 +21,20 @@ export class OccassionsListComponent implements OnInit {
   }
 
   getOcassions(size: number, page: number) {
+    this.tableLoading = true
     this.service
-      .getFromUrl( '/Occasion')
+      .getPaginated({size: this.size, page: this.page}, '/Occasion/paged')
       .subscribe({
         next: (res: any) => {
-          this.occasionsList = res.data;
+          this.occasionsList = res.data.items;
           this.totalItems = res.data.totalItemCount;
           this.currentPage = res.data.page;
           this.size = res.data.pageSize;
         },
+        error: () => {
+          this.tableLoading = false;
+        },
+        complete: () => this.tableLoading = false
       });
   }
 

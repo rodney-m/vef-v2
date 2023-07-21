@@ -4,6 +4,6 @@
   [nzSubTitle]="'Order number: ' + order?.reference + ' has been received, please check your email for further details.'"
 >
   <div nz-result-extra>
-    <button nz-button nzType="primary">Ok</button>
+    <button nz-button nzType="primary" (click)="close()">Ok</button>
   </div>
 </nz-result>

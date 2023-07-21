@@ -16,4 +16,5 @@ export class ThankYouPageComponent implements OnInit {
   close(){
     this.modalRef.close()
   }
+  
 }

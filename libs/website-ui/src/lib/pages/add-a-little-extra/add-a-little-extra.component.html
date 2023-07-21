@@ -1,6 +1,6 @@
 <section class="p-6">
   <div
-    class="container mx-auto bg-gray-50 m-2 mt-8 p-6 max-w-7xl flex flex-col items-center justify-center"
+    class="container mx-auto bg-gray-50 m-2 mt-8 p-6 max-w-7xl flex flex-col items-center justify-center border border-gray-100"
   >
     <h1 class="text-xl font-semibold sm:text-2xl text-center">
       Add a little extra
@@ -13,9 +13,9 @@
     <button
       (click)="openAddOnModal()"
       type="button"
-      class="block border-0 rounded bg-primary px-5 py-3 text-xs font-medium text-white hover:bg-lightPrimary text-center mt-5"
+      class="block rounded border border-primary px-5 py-3 text-xs font-medium text-primary hover:bg-primary hover:text-white text-center mt-5"
     >
-      Add Extras
+      {{addOns.length === 0 ? 'Add Extras' : 'Add More Extras'}}
     </button>
   </div>
   <section class="bg-white text-center">
@@ -68,15 +68,15 @@
 
           <div
             class="flex justify-center items-center mt-12"
-            *ngIf="addOns.length > 0"
+            
           >
             <nz-affix [nzOffsetBottom]="nzOffsetBottom">
               <button
                 (click)="continue()"
                 type="button"
-                class="drop-shadow-2xl rounded bg-gray-900 hover:bg-gray-500 px-5 py-3 text-xs font-medium text-white hover:bg-lightPrimary"
+                class="drop-shadow-2xl rounded bg-primary hover:bg-lightPrimary px-8 py-3 text-xs font-medium text-white hover:bg-lightPrimary"
               >
-                Continue
+               {{addOns.length > 0 ? 'Continue' : 'Skip' }} &nbsp; <span nz-icon nzType="right" nzTheme="outline"></span>
               </button>
             </nz-affix>
           </div>

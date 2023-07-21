@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '@vef/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { differenceInCalendarDays } from 'date-fns';
+
 
 @Component({
   selector: 'vef-recepient-details',
@@ -10,32 +13,53 @@ import { ApiService } from '@vef/core';
 export class RecepientDetailsComponent implements OnInit {
   recepientDetailsForm!: FormGroup;
   recepientDetails: any = {};
-  locations : any[] = []
+  locations: any[] = [];
   @Output() stepTwoNext: EventEmitter<any> = new EventEmitter();
-  constructor(private fb: FormBuilder, private service : ApiService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: ApiService,
+    private notification: NzNotificationService
+  ) {}
   ngOnInit(): void {
     this.recepientDetailsForm = this.fb.group({
       recipientName: ['', Validators.required],
-      recipientEmail: ['', [Validators.required, Validators.email]],
+      recipientEmail: [''],
       recipientPhone: ['', Validators.required],
       deliveryAddress: ['', Validators.required],
-      deliveryInstruction: ['', Validators.required],
+      deliveryInstruction: [''],
       deliveryDate: ['', Validators.required],
       location: ['', Validators.required],
     });
 
-    this.getLocations()
+    this.getLocations();
   }
+
+  disabledDate = (current: Date): boolean =>
+    // Can not select days before today and today
+    differenceInCalendarDays(current, Date.now()) < 0;
 
   continue() {
-    this.stepTwoNext.emit({...this.recepientDetailsForm.value});
+    if (this.recepientDetailsForm.invalid) {
+      this.notification.warning(
+        'Required fields',
+        'Fill in all required field marked with (*)',
+        { nzAnimate: true, nzDuration: 4000 }
+      );
+      return;
+    }
+    this.stepTwoNext.emit({ ...this.recepientDetailsForm.value });
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 
-  getLocations(){
+  getLocations() {
     this.service.getFromUrl('/Location').subscribe({
-      next:(res :any) => {
-        this.locations = res.data
-      }
-    })
+      next: (res: any) => {
+        this.locations = res.data;
+      },
+    });
   }
 }

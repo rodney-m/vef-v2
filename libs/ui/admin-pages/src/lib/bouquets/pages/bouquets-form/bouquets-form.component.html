@@ -57,7 +57,7 @@
       
                 
             </form>
-            <button nz-button nzType="primary"  (click)="handleUpload()">Submit</button>
+            <button nz-button nzType="primary" [nzLoading]="loading"  (click)="handleUpload()">Submit</button>
       
             <!-- <div *nzModalFooter>
               <button nz-button nzType="primary" [nzLoading]="loading" (click)="handleUpload()">Submit</button>

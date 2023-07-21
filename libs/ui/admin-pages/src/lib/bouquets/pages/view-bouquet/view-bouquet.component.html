@@ -1,8 +1,7 @@
-<div class="flex flex-wrap " *ngIf="bouquet">
+<!-- <div class="flex flex-wrap " *ngIf="bouquet">
     <div class="container mx-auto sm:px-4">
         <nz-card nzTitle="Product Details">
             <div class="flex items-start items-center">
-                <!-- <nz-avatar  [nzSize]="80" nzIcon="picture" [nzSrc]="bouquet?.images[0]?.imageUrl"></nz-avatar> -->
                 <div class="h-16 w-16 bg-gray-100 rounded-full flex-1">
 
                 </div>
@@ -20,4 +19,18 @@
             
     </div>
 
-</div>
+</div> -->
+
+<nz-tabset>
+    <nz-tab nzTitle="Overview">
+        <nz-card nzTitle="Product Overview">
+            <vef-bouquets-update [bouquet]="bouquet"></vef-bouquets-update>
+          </nz-card>        
+    </nz-tab>
+    <nz-tab nzTitle="Images">
+        <nz-card nzTitle="Product Images">
+            <vef-bouquet-images (refresh)="getData()" [bouquet]="bouquet"></vef-bouquet-images>
+        </nz-card>
+    </nz-tab>
+  </nz-tabset>
+

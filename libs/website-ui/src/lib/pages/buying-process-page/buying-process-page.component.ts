@@ -27,6 +27,7 @@ export class BuyingProcessPageComponent implements OnInit {
     recipientPhone: '',
     deliveryAddress: '',
     deliveryInstruction: '',
+    anonymousDelivery: false,
     deliveryDate: '',
     location: null,
     addons: [],
@@ -77,15 +78,16 @@ export class BuyingProcessPageComponent implements OnInit {
     this.orderItem.deliveryInstruction = data.deliveryInstruction;
     this.orderItem.deliveryDate = data.deliveryDate;
     this.orderItem.location = data.location;
-
+    
     this.next();
   }
-
+  
   stepThreeNext(orderDetail: any) {
     this.order.customerName = orderDetail['data'].customerName;
     this.order.customerEmail = orderDetail['data'].customerEmail;
     this.order.customerPhone = orderDetail['data'].customerPhone;
     this.order.customerAddress = orderDetail['data'].customerAddress;
+    this.orderItem.anonymousDelivery = orderDetail['data'].anonymousDelivery;
 
     this.addToCart();
     if (orderDetail.action === 'PAYMENT') {

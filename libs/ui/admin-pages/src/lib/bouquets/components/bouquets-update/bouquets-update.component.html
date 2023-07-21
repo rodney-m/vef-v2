@@ -1,0 +1,71 @@
+<div class="p-4">
+    <div >
+        <form nz-form nzLayout="vertical" [formGroup]="form">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="24" nzFor="email">Name</nz-form-label>
+              <nz-form-control [nzSpan]="24">
+                <input nz-input name="name" formControlName="name" type="text" id="name">
+              </nz-form-control>
+            </nz-form-item >
+            <nz-form-item>
+              <nz-form-label [nzSpan]="24" nzFor="email">Occassion</nz-form-label>
+              <nz-form-control [nzSpan]="24">
+                <nz-select formControlName="occasionId" nzShowSearch nzAllowClear nzPlaceHolder="Select an occassion" >
+                    <nz-option *ngFor="let occassion of occassions" [nzLabel]="occassion.type" [nzValue]="occassion.id"></nz-option>
+                  </nz-select>
+              </nz-form-control>
+            </nz-form-item >
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="price">Price USD</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <input nz-input name="price" formControlName="price" type="number" id="price">
+                </nz-form-control>
+              </nz-form-item >
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="price">Description</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                    <textarea nz-input placeholder="Description" formControlName="description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                </nz-form-control>
+              </nz-form-item >
+    
+              <div class="clearfix">
+                <!-- <nz-upload
+                  nzAccept="image/png, image/jpg, image/jpeg"
+                  nzListType="picture-card"
+                  [(nzFileList)]="fileList"
+                  [nzShowButton]="fileList.length < 3"
+                  [nzPreview]="handlePreview"
+                  [nzBeforeUpload]="beforeUpload"
+                >
+                  <div>
+                    <span nz-icon nzType="plus"></span>
+                    <div style="margin-top: 8px">Upload</div>
+                  </div>
+                </nz-upload> -->
+
+                <!-- <nz-modal
+                  [nzVisible]="previewVisible"
+                  [nzContent]="modalContent"
+                  [nzFooter]="null"
+                  (nzOnCancel)="previewVisible = false"
+                >
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal> -->
+              </div>
+    
+              
+          </form>
+          <button nz-button nzType="primary" (click)="update()">
+            <span nz-icon nzType="save"></span>
+            Update
+          </button>
+          <!-- <button nz-button nzType="primary"  (click)="handleUpload()">Submit</button> -->
+    
+          <!-- <div *nzModalFooter>
+            <button nz-button nzType="primary" [nzLoading]="loading" (click)="handleUpload()">Submit</button>
+            <button nz-button nzType="default" (click)="cancel()">Cancel</button>
+          </div> -->
+    </div>
+</div>

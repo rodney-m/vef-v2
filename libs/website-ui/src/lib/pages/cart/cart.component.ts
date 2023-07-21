@@ -53,10 +53,18 @@ export class CartComponent implements OnInit{
   }
 
   deleteItem(id: string | number){
-    const currentCart :any[] =  JSON.parse(this.shopService.getCart() ?? '');
+    const currentCart :any =  JSON.parse(this.shopService.getCart() ?? '');
 
-    const filteredCart = currentCart.filter((item) => item.id !== id)
-    this.shopService.addToCart(JSON.stringify(filteredCart));
+    const filteredCart = currentCart?.cart?.filter((item:any) => item.id !== id)
+    const newCart :any = currentCart;
+    newCart.cart = filteredCart
+    if(newCart.cart < 1){
+      this.shopService.clearCart();
+    } else{
+      
+      this.shopService.addToCart(JSON.stringify(newCart));
+    }
+
     this.notification.success('Deleted', 'Product removed from cart')
     this.getCartItems()
   }

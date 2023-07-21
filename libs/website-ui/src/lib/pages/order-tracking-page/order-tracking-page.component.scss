@@ -1,0 +1,30 @@
+.progress{
+    .first{
+        top: -30px;
+        left: 25%;
+        transform: translateX(-100%);
+    }
+    
+    .second{
+        top: -30px;
+        left: 50%;
+        transform: translateX(-100%);
+    }
+    .third{
+        top: -30px;
+        left: 75%;
+        transform: translateX(-100%);
+    }
+    .forth{
+        top: -30px;
+        left: 100%;
+        transform: translateX(-100%);
+    }
+
+    .progress-stage:before {
+        content: '\2022'; /* Unicode character for bullet */
+        color: #971c26;
+        margin-right: 10px;
+      }
+}
+

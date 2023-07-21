@@ -13,7 +13,7 @@
                     <svg class="w-5 h-5 text-gray-500 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                 </div>
                 <input [(ngModel)]="searchText" name="search" (keyup)="onChange($event)" type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary " placeholder="Search Flowers" required>
-                <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-primary hover:bg-lightPrimary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                <button (click)="search()" type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-primary hover:bg-lightPrimary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
             </div>
         </form>
       </div>
@@ -26,7 +26,7 @@
           <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
             <header>
               <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
-                {{ !searched ? 'All products': 'Results for' +searchText}}
+                {{ !searched ? 'All products': 'Results for ' +searchText}}
                 
               </h2>
             </header>
@@ -37,11 +37,11 @@
             <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()" [scrollWindow]="true">
               
               <li *ngFor="let product of items">
-                <a [routerLink]="'bouquet/'+product.id" class="group block overflow-hidden">
+                <a [routerLink]="'bouquet/'+product.id" class="group block overflow-hidden ">
                   <img
                     [src]="product?.images[0]?.imageUrl"
                     alt=""
-                    class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105"
+                    class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 bg-gray-100"
                   />
         
                   <div class="relative bg-white pt-3">
@@ -59,9 +59,10 @@
                   </div>
                 </a>
               </li>
-        
               
             </ul>
+            <nz-spin nzSimple class="text-center mb-4" *ngIf="isLoading"></nz-spin>
+            <p class="mb-4 text-center" *ngIf="noMoreData">No more data...</p>
           </div>
         </section>
       </div>

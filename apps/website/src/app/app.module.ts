@@ -16,8 +16,11 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { ApiService, ShopService } from '@vef/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { FormsModule } from '@angular/forms';
 
 const icons: IconDefinition[] = [PlusCircleOutline];
+
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ const icons: IconDefinition[] = [PlusCircleOutline];
     NgxUiLoaderModule,
     NzIconModule.forRoot(icons),
     HttpClientModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    FormsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, ApiService, HttpClientModule, ShopService],
   bootstrap: [AppComponent],

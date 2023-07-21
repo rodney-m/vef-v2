@@ -27,8 +27,24 @@ export class SendersDetailsComponent implements OnInit {
       customerName: ['', [Validators.required]],
       customerEmail: ['', [Validators.required, Validators.email]],
       customerPhone: ['', [Validators.required]],
-      customerAddress: ['', [Validators.required]],
+      customerAddress: [''],
+      anonymousDelivery: [false],
     });
+
+    const cart : any = JSON.parse(this.shopService.getCart() ?? '')
+    if(cart){
+      this.prefillDetails(cart)
+    }
+  }
+
+  prefillDetails(cart: any){
+    
+    this.senderDetailsForm.patchValue({
+      customerName : cart?.customerName,
+      customerEmail: cart?.customerEmail,
+      customerPhone: cart?.customerPhone,
+      customerAddress: cart?.customerAddress
+    })
   }
 
   // continue(){
@@ -36,9 +52,17 @@ export class SendersDetailsComponent implements OnInit {
   // }
 
   addAnotherOne(){
+    if(this.senderDetailsForm.invalid){
+      this.notification.warning('Required fields','Fill in all required field marked with (*)', {nzAnimate : true, nzDuration : 4000});
+      return;
+    }
     this.stepThreeNext.emit({data: this.senderDetailsForm.value, action: Action.addAnother})
   }
   proceedToPayment(){
+    if(this.senderDetailsForm.invalid){
+      this.notification.warning('Required fields','Fill in all required field marked with (*)', {nzAnimate : true, nzDuration : 4000});
+      return;
+    }
     this.stepThreeNext.emit({data: this.senderDetailsForm.value, action: Action.payment})
   }
 

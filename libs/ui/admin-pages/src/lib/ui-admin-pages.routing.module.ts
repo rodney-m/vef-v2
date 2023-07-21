@@ -7,6 +7,11 @@ import { ViewBouquetComponent } from './bouquets/pages/view-bouquet/view-bouquet
 import { ExtrasListComponent } from './extras/pages/extras-list/extras-list.component';
 import { ExtrasFormComponent } from './extras/pages/extras-form/extras-form.component';
 import { OccassionsListComponent } from './occasions/pages/occassions-list/occassions-list.component';
+import { OccasionFormComponent } from './occasions/pages/occasion-form/occasion-form.component';
+import { OrdersListComponent } from './orders/pages/orders-list/orders-list.component';
+import { ViewOrderComponent } from './orders/pages/view-order/view-order.component';
+import { LocationsListComponent } from './delivery-locations/pages/locations-list/locations-list.component';
+import { LocationsFormComponent } from './delivery-locations/components/locations-form/locations-form.component';
 
 
 const routes :Route[] =[
@@ -34,6 +39,34 @@ const routes :Route[] =[
   {
     path: 'occasions',
     component: OccassionsListComponent
+  },
+  {
+    path: 'occasions/form',
+    component: OccasionFormComponent
+  },
+  {
+    path: 'occasions/:id',
+    component: OccasionFormComponent
+  },
+  {
+    path: 'orders',
+    component: OrdersListComponent
+  },
+  {
+    path: 'orders/:id',
+    component: ViewOrderComponent
+  },
+  {
+    path: 'locations',
+    component: LocationsListComponent
+  },
+  {
+    path: 'locations/form',
+    component: LocationsFormComponent
+  },
+  {
+    path: 'locations/form/:id',
+    component: LocationsFormComponent
   },
   {
     path: '',

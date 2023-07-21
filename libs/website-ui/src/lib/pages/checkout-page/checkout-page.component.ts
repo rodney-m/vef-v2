@@ -7,6 +7,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ThankYouPageComponent } from '../thank-you-page/thank-you-page.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'vef-checkout-page',
@@ -140,7 +141,8 @@ export class CheckoutPageComponent implements OnInit {
     private router: Router,
     private cd: ChangeDetectorRef,
     private ngZone: NgZone,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private location : Location
   ) {}
 
   orderObject = {
@@ -158,6 +160,10 @@ export class CheckoutPageComponent implements OnInit {
         
   }
 
+  back(){
+    this.location.back()
+  }
+
   changePaymentMethod(e: any) {
     this.ngZone.run(() => {
       this.paymentMethod = e.target.value;
@@ -173,7 +179,7 @@ export class CheckoutPageComponent implements OnInit {
       customerPhone: ['', Validators.required],
       deliveryAddress: ['', Validators.required],
       deliveryDate: ['', Validators.required],
-      paymentMethod: ['', Validators.required],
+      paymentMethod: [1, Validators.required],
     });
   }
 
@@ -267,6 +273,8 @@ export class CheckoutPageComponent implements OnInit {
     paymentObject.cart.map((orderItem: any) => {
       orderItem.locationId = orderItem.location.id;
       delete orderItem.product;
+      orderItem.productId = Number(orderItem.productId);
+      orderItem.quantity = Number(orderItem.quantity);
       delete orderItem.location;
 
       orderItem.addons = orderItem.addons.map((item: any) => {
@@ -277,7 +285,7 @@ export class CheckoutPageComponent implements OnInit {
       });
     });
 
-    this.finalizeOrder({ ...paymentObject, paymentMethod: this.paymentMethod });
+    this.finalizeOrder({ ...paymentObject, paymentMethod: Number(this.paymentMethod) });
 
     // // Finalize Object
     // this

@@ -18,6 +18,7 @@ export class BouquetsListComponent implements OnInit {
   page = 0;
   totalItems = 0;
   currentPage = 0;
+  loading = false;
 
   constructor(private service: ApiService) {}
 
@@ -27,23 +28,43 @@ export class BouquetsListComponent implements OnInit {
   }
 
   getProducts(size: number, page: number) {
+    this.loading = true;
     this.service
       .getPaginated({ size: size, page: page }, '/Product/paged')
       .subscribe({
         next: (res: any) => {
-          this.productsList = res.data.items;
+          this.productsList = this.transcateDescription(res.data.items);
+          // this.productsList = res.data.items;
           this.totalItems = res.data.totalItemCount;
           this.currentPage = res.data.page;
           this.size = res.data.pageSize;
+          this.loading = false;
         },
+        complete: () => {
+          this.loading = false
+        }
       });
   }
   getOccasions() {
     this.service.getFromUrl('/Product/paged').subscribe({
       next: (res: any) => {
         this.occasionsList = res.data.items;
+        
       },
     });
+  }
+
+  transcateDescription(data: any[]) {
+    const transformedText = data.map((product) => {
+      product.shortDescription =
+        product.description?.length > 100
+          ? `${product.description.substring(0, 100)}...`
+          : product?.description;
+      return {
+        ...product,
+      };
+    });
+    return transformedText;
   }
 
   pageIndexChange(index: number) {

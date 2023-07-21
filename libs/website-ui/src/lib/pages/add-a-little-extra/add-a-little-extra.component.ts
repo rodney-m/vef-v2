@@ -8,11 +8,11 @@ import { AddOnsModalComponent } from '../../components/add-ons-modal/add-ons-mod
   styleUrls: ['./add-a-little-extra.component.scss'],
 })
 export class AddALittleExtraComponent {
-  addOns : any[] = []
+  addOns: any[] = [];
   nzOffsetBottom = 10;
 
-  @Output() stepOneNext : EventEmitter<any> = new EventEmitter()
-  constructor(private modal : NzModalService){}
+  @Output() stepOneNext: EventEmitter<any> = new EventEmitter();
+  constructor(private modal: NzModalService) {}
 
   openAddOnModal() {
     const addOnModal = this.modal.create({
@@ -22,15 +22,18 @@ export class AddALittleExtraComponent {
     });
 
     addOnModal.afterClose.subscribe((data) => {
-      
-      if(data)
-        this.addOns = [...this.addOns, data];
+      if (data) this.addOns = [...this.addOns, data];
 
-        console.log(this.addOns)
+      console.log(this.addOns);
     });
   }
 
-  continue(){
-    this.stepOneNext.emit({addons: this.addOns})
+  continue() {
+    this.stepOneNext.emit({ addons: this.addOns });
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 }

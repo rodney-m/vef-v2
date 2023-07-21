@@ -2,7 +2,7 @@ export interface PageRequest {
   page: number;
   size?: number;
   query?: string;
-  search?: string;
+  searchParam?: string;
   sort?: string;
   [prop: string]: any;
 }

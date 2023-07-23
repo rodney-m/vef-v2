@@ -12,6 +12,7 @@ import { OrdersListComponent } from './orders/pages/orders-list/orders-list.comp
 import { ViewOrderComponent } from './orders/pages/view-order/view-order.component';
 import { LocationsListComponent } from './delivery-locations/pages/locations-list/locations-list.component';
 import { LocationsFormComponent } from './delivery-locations/components/locations-form/locations-form.component';
+import { SalesPageComponent } from './sales/pages/sales-page/sales-page.component';
 
 
 const routes :Route[] =[
@@ -67,6 +68,10 @@ const routes :Route[] =[
   {
     path: 'locations/form/:id',
     component: LocationsFormComponent
+  },
+  {
+    path: 'sales',
+    component: SalesPageComponent
   },
   {
     path: '',

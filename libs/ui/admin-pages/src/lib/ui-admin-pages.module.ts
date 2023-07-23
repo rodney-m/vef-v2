@@ -20,7 +20,15 @@ import { BarchatBestSellingProductsComponent } from './dashboard/components/barc
 import { BouquetImagesComponent } from './bouquets/components/bouquet-images/bouquet-images.component';
 import { BouquetsUpdateComponent } from './bouquets/components/bouquets-update/bouquets-update.component';
 import { UploadImagesComponent } from './bouquets/components/upload-images/upload-images.component';
-import {  NgApexchartsModule } from 'ng-apexcharts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { DashboardStatCardComponent } from './dashboard/components/dashboard-stat-card/dashboard-stat-card.component';
+import { SalesDailyChartComponent } from './dashboard/components/sales-daily-chart/sales-daily-chart.component';
+import { SalesMonthlyChartComponent } from './dashboard/components/sales-monthly-chart/sales-monthly-chart.component';
+import { SalesWeeklyChartComponent } from './dashboard/components/sales-weekly-chart/sales-weekly-chart.component';
+import { TopSellingCategoriesChartComponent } from './dashboard/components/top-selling-categories-chart/top-selling-categories-chart.component';
+import { SalesPageComponent } from './sales/pages/sales-page/sales-page.component';
+import { TopSellingProductsOverallComponent } from './sales/components/top-selling-products-overall/top-selling-products-overall.component';
+import { TopSellingCategoriesComponent } from './sales/components/top-selling-categories/top-selling-categories.component';
 
 @NgModule({
   imports: [
@@ -28,7 +36,7 @@ import {  NgApexchartsModule } from 'ng-apexcharts';
     UiAdminPagesRoutingModule,
     NgZorroComponentsModule,
     NgChartsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ],
   declarations: [
     DashboardPageComponent,
@@ -47,6 +55,14 @@ import {  NgApexchartsModule } from 'ng-apexcharts';
     BouquetImagesComponent,
     BouquetsUpdateComponent,
     UploadImagesComponent,
+    DashboardStatCardComponent,
+    SalesDailyChartComponent,
+    SalesMonthlyChartComponent,
+    SalesWeeklyChartComponent,
+    TopSellingCategoriesChartComponent,
+    SalesPageComponent,
+    TopSellingProductsOverallComponent,
+    TopSellingCategoriesComponent,
   ],
   providers: [ApiService, NzModalService, FileService],
 })

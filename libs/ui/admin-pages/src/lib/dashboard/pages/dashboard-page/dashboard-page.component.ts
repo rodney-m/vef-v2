@@ -6,7 +6,7 @@ import { ApexOptions, NgApexchartsModule } from 'ng-apexcharts';
   selector: 'vef-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardPageComponent implements OnInit {
   chartSales: ApexOptions | any = {};
@@ -15,10 +15,12 @@ export class DashboardPageComponent implements OnInit {
   constructor(private service : ApiService, private cdr : ChangeDetectorRef){}
   ordersList :any[] = [] 
   sales :any [] = [];
-  salesGraphsData :{labels: any[], data: any[]} = {labels: [], data: []}
+  salesGraphsData :{labels: any[], data: any[]} = {labels: [], data: []};
+  statusesStats! :any;
   
   ngOnInit(): void {
-    this.getSales()
+    this.getSales();
+    this.getStatusesStats()
     
     this.service.getFromUrl('/Order').subscribe({
         next: (res) => {
@@ -47,6 +49,14 @@ export class DashboardPageComponent implements OnInit {
       };
 
 
+  }
+
+  getStatusesStats(){
+    this.service.getFromUrl(`/Order/status/stats`).subscribe({
+      next: (res) => {
+        this.statusesStats = res.data;
+      }
+    })
   }
 
 

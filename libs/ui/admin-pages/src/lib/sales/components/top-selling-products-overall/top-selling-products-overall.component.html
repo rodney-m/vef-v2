@@ -1,0 +1,22 @@
+<nz-table #productsListTable [nzData]="sales" nzShowPagination >
+    <thead>
+        <tr>
+        
+            <th>Product</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Total Sold</th>
+            <th>Total Revenue</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of productsListTable.data;  let i=index">
+           <td> {{item?.product?.name}} </td>
+           <td> {{item?.product?.price}} </td>
+           <td> {{item?.product?.occasion?.type}} </td>
+           <td> {{item?.totalUnitsSold}} </td>
+           <td> {{item?.totalRevenue | currency}} </td>
+            
+        </tr>
+    </tbody>
+</nz-table>

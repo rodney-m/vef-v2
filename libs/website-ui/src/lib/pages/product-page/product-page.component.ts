@@ -12,6 +12,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 export class ProductPageComponent implements OnInit {
   bouquet !: any; 
   quantity = 1;
+  selectedOption = 'black';
   constructor(
     private service : ApiService, 
     private activatedRoute : ActivatedRoute,
@@ -27,7 +28,7 @@ export class ProductPageComponent implements OnInit {
   }
 
   getProductDetails(id:  string | number){
-    this.service.getFromUrl(`/Product/${id}`).subscribe({
+    this.service.getFromUrl(`/Bouquet/${id}`).subscribe({
       next: (res) => {
         this.bouquet = res.data;
       },
@@ -37,8 +38,12 @@ export class ProductPageComponent implements OnInit {
     })
   }
 
+  selectOption(option: string) {
+    this.selectedOption = option;
+  }
+
   buy(){
-    this.router.navigate(['/buy'], {queryParams: {product: this.bouquet.id, quantity: this.quantity}})
+    this.router.navigate(['/buy'], {queryParams: {product: this.bouquet.id, quantity: this.quantity, tinOption : this.selectedOption}})
   }
 
   addToCart() {    

@@ -31,6 +31,8 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzImageModule,
     NzResultModule,
     NzCardModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
+    NzRateModule,
+    NzRadioModule
   ],
   exports: [
     NzPaginationModule,
@@ -101,7 +105,9 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     NzImageModule,
     NzResultModule,
     NzCardModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
+    NzRateModule,
+    NzRadioModule
   ],
   providers: [NzMessageService]
 })

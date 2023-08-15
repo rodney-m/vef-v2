@@ -12,6 +12,7 @@ export class OrdersListComponent implements OnInit {
   page = 0;
   totalItems = 0;
   currentPage = 0;
+  loading = false;
 
   constructor(private service  :ApiService){}
 
@@ -20,6 +21,7 @@ export class OrdersListComponent implements OnInit {
   }
 
   getOrders(size : number, page : number){
+    this.loading = true
     this.service
       .getPaginated({ size: size, page: page }, '/Order/paged')
       .subscribe({
@@ -28,7 +30,12 @@ export class OrdersListComponent implements OnInit {
           this.totalItems = res.data.totalItemCount;
           this.currentPage = res.data.page;
           this.size = res.data.pageSize;
+          this.loading = false
         },
+        error: () => {
+          this.loading = false
+        },
+        complete: ()=> this.loading = false
       });
   }
 

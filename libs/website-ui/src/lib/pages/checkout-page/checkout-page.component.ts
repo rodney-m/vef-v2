@@ -272,9 +272,10 @@ export class CheckoutPageComponent implements OnInit {
 
     paymentObject.cart.map((orderItem: any) => {
       orderItem.locationId = orderItem.location.id;
-      delete orderItem.product;
-      orderItem.productId = Number(orderItem.productId);
+      orderItem.bouquetId = Number(orderItem.productId);
       orderItem.quantity = Number(orderItem.quantity);
+      delete orderItem.product;
+      delete orderItem.productId;
       delete orderItem.location;
 
       orderItem.addons = orderItem.addons.map((item: any) => {

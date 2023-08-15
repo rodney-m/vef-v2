@@ -12,6 +12,7 @@ export class ExtrasListComponent implements OnInit {
   page = 0;
   totalItems = 0;
   currentPage = 0;
+  loading = false;
 
   constructor(private service: ApiService) {}
 
@@ -20,15 +21,23 @@ export class ExtrasListComponent implements OnInit {
   }
 
   getExtras(size: number, page: number) {
+    this.loading = true;
     this.service
-      .getPaginated({ size: size, page: page }, '/AddOn/paged')
-      .subscribe({
-        next: (res: any) => {
-          this.extrasList = res.data.items;
-          this.totalItems = res.data.totalItemCount;
-          this.currentPage = res.data.page;
-          this.size = res.data.pageSize;
+    .getPaginated({ size: size, page: page }, '/AddOn/paged')
+    .subscribe({
+      next: (res: any) => {
+        this.extrasList = res.data.items;
+        this.totalItems = res.data.totalItemCount;
+        this.currentPage = res.data.page;
+        this.size = res.data.pageSize;
+        this.loading = false;
         },
+        error: () => {
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
+        }
       });
   }
 

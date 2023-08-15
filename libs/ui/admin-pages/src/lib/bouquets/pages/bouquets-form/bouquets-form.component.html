@@ -28,8 +28,25 @@
                       <textarea nz-input placeholder="Description" formControlName="description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
                   </nz-form-control>
                 </nz-form-item >
-      
+              <nz-form-item>
+                  <nz-form-label [nzSpan]="24" nzFor="price">Does the product require a lead time ?</nz-form-label>
+                  <nz-form-control [nzSpan]="24">
+                    <nz-switch formControlName="leadTimeRequired"></nz-switch>
+                  </nz-form-control>
+                </nz-form-item >
+                
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="24" nzFor="price">Tin option</nz-form-label>
+                  <nz-form-control [nzSpan]="24">
+                    <nz-select formControlName="tinOptions" nzMode="multiple" nzPlaceHolder="Please select">
+                      <nz-option  nzLabel="Black" nzValue="black"></nz-option>
+                      <nz-option  nzLabel="White" nzValue="white"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item >
+                
                 <div class="clearfix">
+                  <nz-form-label [nzSpan]="24" nzFor="price">Bouquet Image</nz-form-label>
                   <nz-upload
                     nzAccept="image/png, image/jpg, image/jpeg"
                     nzListType="picture-card"

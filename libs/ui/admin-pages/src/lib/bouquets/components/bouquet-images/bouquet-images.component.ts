@@ -43,7 +43,7 @@ export class BouquetImagesComponent implements OnInit {
 
   confirmDelete(image : any){
     this.uiLoader.start()
-    this.service.delete(`/Product/${image?.productId}/images/${image?.id}`).subscribe({
+    this.service.delete(`/Bouquet/${image?.bouquetId}/images/${image?.id}`).subscribe({
       next: () => {
         this.notification.success('Deleted', 'Image has been successfully deleted');
         this.refresh.emit();

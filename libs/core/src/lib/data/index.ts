@@ -1,2 +1,2 @@
-export * from './API'
-export * from './orderStatuses'
+export * from './API';
+export * from './orderStatuses';

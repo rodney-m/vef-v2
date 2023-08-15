@@ -26,7 +26,6 @@ import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
-
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AllBouquetsInfiniteScrollComponent } from './components/all-bouquets-infinite-scroll/all-bouquets-infinite-scroll.component';
 import { ProductsFilteringPageComponent } from './pages/products-filtering-page/products-filtering-page.component';
@@ -41,6 +40,12 @@ import { OrderTrackingPageComponent } from './pages/order-tracking-page/order-tr
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { FilterByCategoryComponent } from './pages/filter-by-category/filter-by-category.component';
+import { ReviewProductPageComponent } from './pages/review-product-page/review-product-page.component';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+
+
 
 const routes: Route[] = [
   {
@@ -81,7 +86,11 @@ const routes: Route[] = [
   },
   {
     path: 'category/:id',
-    component: FilterByCategoryComponent
+    component: FilterByCategoryComponent,
+  },
+  {
+    path: 'review',
+    component: ReviewProductPageComponent,
   },
   {
     path: 'page-not-found',
@@ -92,7 +101,6 @@ const routes: Route[] = [
     redirectTo: 'page-not-found',
     pathMatch: 'full',
   },
- 
 ];
 
 @NgModule({
@@ -119,7 +127,10 @@ const routes: Route[] = [
     NzButtonModule,
     NzFormModule,
     NzSpinModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzAlertModule,
+    NzRateModule,
+    NzToolTipModule
   ],
   declarations: [
     HomePageComponent,
@@ -138,6 +149,7 @@ const routes: Route[] = [
     OrderTrackingPageComponent,
     PageNotFoundComponent,
     FilterByCategoryComponent,
+    ReviewProductPageComponent,
   ],
   providers: [ApiService, HttpClientModule, ShopService, NzNotificationService],
 })

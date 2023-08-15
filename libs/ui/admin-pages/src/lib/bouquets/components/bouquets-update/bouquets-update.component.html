@@ -27,37 +27,28 @@
                     <textarea nz-input placeholder="Description" formControlName="description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
                 </nz-form-control>
               </nz-form-item >
-    
-              <div class="clearfix">
-                <!-- <nz-upload
-                  nzAccept="image/png, image/jpg, image/jpeg"
-                  nzListType="picture-card"
-                  [(nzFileList)]="fileList"
-                  [nzShowButton]="fileList.length < 3"
-                  [nzPreview]="handlePreview"
-                  [nzBeforeUpload]="beforeUpload"
-                >
-                  <div>
-                    <span nz-icon nzType="plus"></span>
-                    <div style="margin-top: 8px">Upload</div>
-                  </div>
-                </nz-upload> -->
+            <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="price">Does the product require a lead time?</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <nz-switch formControlName="leadTimeRequired"></nz-switch>
+                </nz-form-control>
+              </nz-form-item >
 
-                <!-- <nz-modal
-                  [nzVisible]="previewVisible"
-                  [nzContent]="modalContent"
-                  [nzFooter]="null"
-                  (nzOnCancel)="previewVisible = false"
-                >
-                  <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                  </ng-template>
-                </nz-modal> -->
-              </div>
+              <nz-form-item>
+                <nz-form-label [nzSpan]="24" nzFor="price">Tin option</nz-form-label>
+                <nz-form-control [nzSpan]="24">
+                  <nz-select formControlName="tinOptions" nzMode="multiple" nzPlaceHolder="Please select">
+                    <nz-option  nzLabel="Black" nzValue="black"></nz-option>
+                    <nz-option  nzLabel="White" nzValue="white"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item >
+    
+             
     
               
           </form>
-          <button nz-button nzType="primary" (click)="update()">
+          <button [nzLoading]="loading" nz-button nzType="primary" (click)="update()">
             <span nz-icon nzType="save"></span>
             Update
           </button>

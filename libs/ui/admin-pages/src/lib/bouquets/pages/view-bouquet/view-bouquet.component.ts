@@ -39,7 +39,7 @@ export class ViewBouquetComponent implements OnInit {
 
   getData() {
     const id = this.activatedRoute.snapshot.params['id']
-    this.service.getFromUrl(`/Product/${id}`).subscribe({
+    this.service.getFromUrl(`/Bouquet/${id}`).subscribe({
       next: (res) => {
         this.bouquet = res.data
         this.prefillValues(this.bouquet);

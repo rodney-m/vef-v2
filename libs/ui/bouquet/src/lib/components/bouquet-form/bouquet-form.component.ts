@@ -104,7 +104,7 @@ export class BouquetFormComponent implements OnInit {
   submit() {
     
     this.loading = true;
-    this.service.postToUrl('/Product', {...this.form.value, imageUrls: [this.imageUrl] }).subscribe({
+    this.service.postToUrl('/Bouquet', {...this.form.value, imageUrls: [this.imageUrl] }).subscribe({
       next: (res) => {
         console.log(res)
         this.loading = false

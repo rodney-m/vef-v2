@@ -14,7 +14,7 @@
         
       <ul class="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
         <li *ngFor="let image of bouquet?.images">
-          <a  href="#" class="block overflow-hidden group bg-gray-50">
+          <a  class="block overflow-hidden group bg-gray-50">
             <img nz-image 
               [nzSrc]="image?.imageUrl" nzPlaceholder="" [nzFallback]="'assets/images/placeholder.png'"
               alt=""

@@ -1,4 +1,4 @@
-<nz-table #productsListTable [nzData]="sales" nzShowPagination >
+<nz-table #productsListTable [nzData]="sales" nzShowPagination [nzLoading]="loading" >
     <thead>
         <tr>
         
@@ -11,9 +11,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of productsListTable.data;  let i=index">
-           <td> {{item?.product?.name}} </td>
-           <td> {{item?.product?.price}} </td>
-           <td> {{item?.product?.occasion?.type}} </td>
+           <td> {{item?.bouquet?.name}} </td>
+           <td> {{item?.bouquet?.price}} </td>
+           <td> {{item?.bouquet?.occasion?.type}} </td>
            <td> {{item?.totalUnitsSold}} </td>
            <td> {{item?.totalRevenue | currency}} </td>
             

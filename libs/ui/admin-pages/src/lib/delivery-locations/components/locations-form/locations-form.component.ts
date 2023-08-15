@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@vef/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Location } from '@angular/common';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 @Component({
   selector: 'vef-locations-form',
   templateUrl: './locations-form.component.html',
@@ -19,7 +20,8 @@ export class LocationsFormComponent implements OnInit {
     private fb : FormBuilder,
     private notification : NzNotificationService,
     private location : Location,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private uiLoader : NgxUiLoaderService
     ){}
   ngOnInit(): void {
       this.form = this.fb.group({
@@ -35,16 +37,21 @@ export class LocationsFormComponent implements OnInit {
     const locationId = Number(id);
     
 
+    this.uiLoader.start()
     this.service.getFromUrl('/Location/'+locationId).subscribe({
       next: (res : any) => { 
+        this.uiLoader.stop()
         this.selectedLocation = res.data;
         this.form.patchValue({name: this.selectedLocation.name})
         this.form.patchValue({deliveryCost: this.selectedLocation.deliveryCost})
       },
       error: () => {
+        this.uiLoader.stop()
         this.notification.error('Error', 'Failed to get location detail');
         setTimeout(() => {this.location.back()}, 1500);
-      }
+        
+      },
+      complete :()=> this.uiLoader.stop()
     })
   }
   submit(){

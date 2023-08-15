@@ -13,7 +13,8 @@ import { Location } from '@angular/common';
 export class BouquetsUpdateComponent implements OnInit {
   @Input() bouquet!:any;
   form!: FormGroup;
-  occassions: any[] = []
+  occassions: any[] = [];
+  loading = false;
 
 
   constructor(
@@ -32,6 +33,8 @@ export class BouquetsUpdateComponent implements OnInit {
       name: ['', Validators.required],
       price: [0, Validators.required],
       description: [''],
+      leadTimeRequired: [false],
+      tinOptions: [[]],
     });     
     
     this.getProductDetails()
@@ -39,7 +42,7 @@ export class BouquetsUpdateComponent implements OnInit {
 
   getProductDetails(){
     const id = this.activatedRoute.snapshot.params['id']
-    this.service.getFromUrl(`/Product/${id}`).subscribe({
+    this.service.getFromUrl(`/Bouquet/${id}`).subscribe({
       next: (res) => {
         this.bouquet = res.data
         this.prefillValues(this.bouquet)
@@ -53,19 +56,22 @@ export class BouquetsUpdateComponent implements OnInit {
       images.push(image.imageUrl)
     })
 
+    this.loading = true;
    
-    this.service.updateToUrl('/Product', {
+    this.service.updateToUrl('/Bouquet', {
       ...this.form.value,
       imageUrls : images,
       id: this.bouquet.id
     }).subscribe({
       next: () => {
         this.notification.success('Success','Bouquet updated');
-        this.getProductDetails();
+        this.location.back()
       },
       error: (err) => {
-        this.notification.error('Error', err?.error?.message? err?.error?.message : 'Failed to update product')
-      }
+        this.notification.error('Error', err?.error?.message? err?.error?.message : 'Failed to update product');
+        this.loading = false;
+      },
+      complete: () => this.loading = false
     })
   }
 
@@ -75,7 +81,13 @@ export class BouquetsUpdateComponent implements OnInit {
     this.form.patchValue({price: bouquet?.price});
     this.form.patchValue({description: bouquet?.description});
     this.form.patchValue({occasionId: bouquet?.occasion?.id});
-
+    this.form.patchValue({leadTimeRequired: bouquet?.leadTimeRequired});
+    
+    const options = bouquet.tinOptions.map((item : any) => {
+      return item.option
+    });
+    
+    this.form.patchValue({tinOptions: options});
     console.log(bouquet?.occasion?.id);
   }
 

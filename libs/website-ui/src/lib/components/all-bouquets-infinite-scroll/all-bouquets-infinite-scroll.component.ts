@@ -18,7 +18,7 @@ export class AllBouquetsInfiniteScrollComponent implements OnInit {
   loadData= () => {
     this.toggleLoading();
 
-    this.service.getPaginated({size: this.itemsPerPage, page: this.currentPage}, '/Product/paged').subscribe({
+    this.service.getPaginated({size: this.itemsPerPage, page: this.currentPage}, '/Bouquet/paged').subscribe({
       next: (res : any) => {
         this.items = res.data.items
       },
@@ -31,7 +31,7 @@ export class AllBouquetsInfiniteScrollComponent implements OnInit {
 
   appendData(): void{
     this.toggleLoading();
-    this.service.getPaginated({size: this.itemsPerPage, page: this.currentPage}, '/Product/paged').subscribe({
+    this.service.getPaginated({size: this.itemsPerPage, page: this.currentPage}, '/Bouquet/paged').subscribe({
       next: (res: any) =>{
         this.items = [...this.items, ...res.data.items]
       },

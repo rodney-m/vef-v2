@@ -20,6 +20,7 @@ export class BuyingProcessPageComponent implements OnInit {
   orderItems : any []  = [];
   orderItem = {    
     productId: 0,
+    tinOption: '',
     product: null,
     quantity: 0,
     recipientName: '',
@@ -52,10 +53,12 @@ export class BuyingProcessPageComponent implements OnInit {
       this.activatedRoute.snapshot.queryParams['product'];
     this.orderItem.quantity =
       this.activatedRoute.snapshot.queryParams['quantity'];
+    this.orderItem.tinOption =
+      this.activatedRoute.snapshot.queryParams['tinOption'];
 
     this.service
       .getFromUrl(
-        `/Product/${this.activatedRoute.snapshot.queryParams['product']}`
+        `/Bouquet/${this.activatedRoute.snapshot.queryParams['product']}`
       )
       .subscribe({
         next: (res) => {

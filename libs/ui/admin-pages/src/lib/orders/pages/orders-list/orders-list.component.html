@@ -3,7 +3,7 @@
         
     </div>
     <div class="mt-4">
-        <nz-table #ordersListTable [nzData]="ordersList"  [nzShowPagination]="false" class="no-border-last">
+        <nz-table #ordersListTable [nzData]="ordersList" [nzLoading]="loading"  [nzShowPagination]="false" class="no-border-last">
             <thead>
                 <tr>
                     <th>Order Ref</th>

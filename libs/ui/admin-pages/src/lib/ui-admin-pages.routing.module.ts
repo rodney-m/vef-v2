@@ -13,7 +13,11 @@ import { ViewOrderComponent } from './orders/pages/view-order/view-order.compone
 import { LocationsListComponent } from './delivery-locations/pages/locations-list/locations-list.component';
 import { LocationsFormComponent } from './delivery-locations/components/locations-form/locations-form.component';
 import { SalesPageComponent } from './sales/pages/sales-page/sales-page.component';
-
+import { ExpensesBouquetsListComponent } from './expenses/expenses-bouquets-list/expenses-bouquets-list.component';
+import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.component';
+import { ExpensesOverviewComponent } from './expenses/expenses-overview/expenses-overview.component';
+import { TestimonialsListComponent } from './testimonials/pages/testimonials-list/testimonials-list.component';
+import { TestimonialsFormComponent } from './testimonials/pages/testimonials-form/testimonials-form.component';
 
 const routes :Route[] =[
   
@@ -72,6 +76,30 @@ const routes :Route[] =[
   {
     path: 'sales',
     component: SalesPageComponent
+  },
+  {
+    path: 'expenses',
+    component: ExpensesBouquetsListComponent
+  },
+  {
+    path: 'expenses/overview',
+    component: ExpensesOverviewComponent
+  },
+  {
+    path: 'expenses/form/:id',
+    component: ExpensesFormComponent
+  },
+  {
+    path: 'testimonials',
+    component: TestimonialsListComponent
+  },
+  {
+    path: 'testimonials/form',
+    component: TestimonialsFormComponent
+  },
+  {
+    path: 'testimonials/form/:id',
+    component: TestimonialsFormComponent
   },
   {
     path: '',

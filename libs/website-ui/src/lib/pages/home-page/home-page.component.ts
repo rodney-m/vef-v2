@@ -47,7 +47,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getBouquetCategories(){
-    this.service.getFromUrl('/Product/occasion/grouped').subscribe({
+    this.service.getFromUrl('/Bouquet/occasion/grouped').subscribe({
       next: (res) => {
         this.bouquetCategories = res.data;
         this.loading=false

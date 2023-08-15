@@ -52,7 +52,7 @@ export class FilterByCategoryComponent implements OnInit {
     this.uiLoader.start();
     this.service
       .getFromUrl(
-        `/Product/occasion/${this.form.controls['filter'].value}/paged`
+        `/Bouquet/occasion/${this.form.controls['filter'].value}/paged`
       )
       .subscribe({
         next: (res: any) => {
@@ -77,7 +77,7 @@ export class FilterByCategoryComponent implements OnInit {
     this.service
       .getPaginated(
         { size: this.size, page: this.page },
-        `/Product/occasion/${this.form.controls['filter'].value}/paged`
+        `/Bouquet/occasion/${this.form.controls['filter'].value}/paged`
       )
       .subscribe({
         next: (res: any) => {

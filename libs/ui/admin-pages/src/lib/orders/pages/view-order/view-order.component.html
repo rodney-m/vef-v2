@@ -63,26 +63,28 @@
             <nz-tag [nzColor]="'#2db7f5'" *ngIf="orderItem?.status === 2">Processing</nz-tag>
             <nz-tag [nzColor]="'#108ee9'" *ngIf="orderItem?.status === 3">Dispatched</nz-tag>
             <nz-tag [nzColor]="'#971c26'" *ngIf="orderItem?.status === 4">Delivered</nz-tag>
+            <nz-tag [nzColor]="'#971c26'" *ngIf="orderItem?.status === 4">Cancelled</nz-tag>
+            <nz-tag [nzColor]="'red'" *ngIf="orderItem?.status === 6">Rejected</nz-tag>
           </p>
         </div>
-        <div>
+        <!-- <div *ngIf="orderItem?.status === ">
           <span class="text-gray-500 text-xs">Change status :</span>
           <nz-select 
-            (ngModelChange)="changeOrderStatus($event)"
+            (change)="changeOrderStatus(statusSelect)"
             nzPlaceHolder="Select Status"
             nzSize="small"
             [nzBorderless]="true"
             #statusSelect
           >
-            <nz-option nzLabel="Received" [nzValue]="1"></nz-option>
-            <nz-option nzLabel="Processing" [nzValue]="2"></nz-option>
-            <nz-option nzLabel="Dispatched" [nzValue]="3"></nz-option>
-            <nz-option nzLabel="Delivered" [nzValue]="4"></nz-option>
+            <nz-option *ngFor="let status of statuses" [nzLabel]="status.key" [nzValue]="status.value"></nz-option>
           </nz-select>
+          <div class="my-3" *ngIf="getValue(statusSelect) === 6">
+            <textarea nz-input [(ngModel)]="rejectionReason"  placeholder="Rejection Reason" nzAutosize></textarea>
+          </div>
           <button nz-button [nzLoading]="statusChangeLoading" nzType="primary" (click)="updateStatus({element :statusSelect, orderItem : orderItem?.id})">
             Save
           </button>
-        </div>
+        </div> -->
       </div>
       <div>         
           <p class="font-bold text-primary" *ngIf="orderItem?.anonymousDelivery">Send As anonymous 🙈</p>
@@ -104,6 +106,12 @@
           >
             <p class="text-gray-600">Quantity :</p>
             <p class="text-gray-600">{{ orderItem?.quantity }}</p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Tin Option :</p>
+            <p class="text-gray-600">{{orderItem?.tinOption}}</p>
           </div>
           <div
             class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
@@ -136,7 +144,7 @@
       </div>
 
       <hr class="my-4" />
-      <h3 class="font-semibold">Delivered to</h3>
+      <h3 class="font-semibold">Delivere to</h3>
       <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
         <p class="text-gray-600">Name :</p>
         <p class="text-gray-600">{{ orderItem?.recipientName }}</p>

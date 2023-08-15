@@ -74,7 +74,7 @@ export class UploadImagesComponent implements OnInit {
   }
 
   updateImage(imageUrl : string){
-    this.service.updateToUrl(`/Product/${this.bouquet.id}/images?imageUrl=${imageUrl}`, '').subscribe({
+    this.service.updateToUrl(`/Bouquet/${this.bouquet.id}/images?imageUrl=${imageUrl}`, '').subscribe({
       next: () => {
           this.notification.success('Success', 'Image uploaded');
           this.modalRef.close(true);      },

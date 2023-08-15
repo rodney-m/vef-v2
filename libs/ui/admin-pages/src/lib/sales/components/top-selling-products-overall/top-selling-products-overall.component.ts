@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { error } from 'console';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { ApiService } from '@vef/core';
 })
 export class TopSellingProductsOverallComponent implements OnInit {
   sales : any[] = [];
+  loading =false;
 
   constructor(private service : ApiService){}
 
@@ -17,13 +19,20 @@ export class TopSellingProductsOverallComponent implements OnInit {
   }
 
   getSales() {
+    this.loading = true;
     this.service
-      .getFromUrl('/Sales')
-      .subscribe({
-        next: (res: any) => {
-          this.sales = res?.data
+    .getFromUrl('/Sales')
+    .subscribe({
+      next: (res: any) => {
+        this.sales = res?.data
+        this.loading = false;
         },
-      });
+        error: () => {
+          this.loading = false
+        },
+        complete: ()=> this.loading =false
+      },
+      );
   }
 
   

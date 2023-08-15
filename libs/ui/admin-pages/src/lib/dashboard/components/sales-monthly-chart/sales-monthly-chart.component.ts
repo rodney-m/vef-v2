@@ -47,7 +47,7 @@ export class SalesMonthlyChartComponent implements OnInit {
 
         this.graphData = res.data.map((xData : any) => {
           return {
-            x: xData.product.name,
+            x: xData.bouquet.name,
             y: xData.totalUnitsSold
           }
         });

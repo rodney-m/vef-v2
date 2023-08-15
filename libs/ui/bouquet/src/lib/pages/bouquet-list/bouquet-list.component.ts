@@ -31,7 +31,7 @@ export class BouquetListComponent implements OnInit {
   getBouquets(){
     this.tableLoading = true;
 
-    this.service.getFromUrl('/Product').subscribe({
+    this.service.getFromUrl('/Bouquet').subscribe({
       next: (res) => {
         this.bouquets = res.data;
         this.tableLoading = false;

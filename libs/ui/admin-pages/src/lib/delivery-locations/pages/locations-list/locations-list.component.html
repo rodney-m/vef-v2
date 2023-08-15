@@ -10,7 +10,7 @@
             </a>
         </div>
     </div>
-    <nz-table #productsListTable [nzData]="locationsList" [nzShowPagination]="false">
+    <nz-table #productsListTable [nzData]="locationsList" [nzShowPagination]="false" [nzLoading]="loading">
         <thead>
             <tr>            
                 <th>Location</th>

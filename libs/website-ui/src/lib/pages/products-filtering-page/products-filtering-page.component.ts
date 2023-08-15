@@ -43,7 +43,7 @@ export class ProductsFilteringPageComponent implements OnInit {
     this.toggleLoading();
 
     this.service
-      .getPaginated({ size: this.size, page: this.page }, '/Product/paged')
+      .getPaginated({ size: this.size, page: this.page }, '/Bouquet/paged')
       .subscribe({
         next: (res: any) => {
           this.items = res.data.items;
@@ -60,7 +60,7 @@ export class ProductsFilteringPageComponent implements OnInit {
 
     if (this.currentAction === Action.all) {
       this.service
-        .getPaginated({ size: this.size, page: this.page }, '/Product/paged')
+        .getPaginated({ size: this.size, page: this.page }, '/Bouquet/paged')
         .subscribe({
           next: (res: any) => {
             this.items = [...this.items, ...res.data.items];
@@ -74,7 +74,7 @@ export class ProductsFilteringPageComponent implements OnInit {
       this.service
         .getPaginated(
           { size: this.size, page: this.page, search: this.searchText },
-          `/Product/search/paged?searchParam=${this.searchText}`
+          `/Bouquet/search/paged?searchParam=${this.searchText}`
         )
         .subscribe({
           next: (res: any) => {
@@ -121,7 +121,7 @@ export class ProductsFilteringPageComponent implements OnInit {
     this.service
       .getPaginated(
         { size: this.size, page: 0, searchParam: this.searchText },
-        `/Product/search/paged`
+        `/Bouquet/search/paged`
       )
       .subscribe({
         next: (res: any) => {

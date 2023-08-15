@@ -67,7 +67,7 @@ export class DashboardPageComponent implements OnInit {
           this.sales = res.data;
           this.sales.map((sale) => {
             this.salesGraphsData.data.push(sale.totalUnitsSold)
-            this.salesGraphsData.labels.push(sale.product.name);
+            this.salesGraphsData.labels.push(sale.bouquet.name);
           });
           this.salesChartOptions.series.data = this.salesGraphsData.data
           this.salesChartOptions.xaxis.categories = this.salesGraphsData.data

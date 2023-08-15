@@ -23,7 +23,7 @@ export class OccassionsListComponent implements OnInit {
   getOcassions(size: number, page: number) {
     this.tableLoading = true
     this.service
-      .getPaginated({size: this.size, page: this.page}, '/Occasion/paged')
+      .getPaginated({size, page}, '/Occasion/paged')
       .subscribe({
         next: (res: any) => {
           this.occasionsList = res.data.items;

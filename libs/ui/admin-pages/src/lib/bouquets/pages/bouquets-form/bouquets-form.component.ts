@@ -55,6 +55,7 @@ export class BouquetsFormComponent implements OnInit {
       name: ['', Validators.required],
       price: [0, Validators.required],
       description: [''],
+      leadTimeRequired: [false],
     });
 
     this.getOccassions()
@@ -88,10 +89,7 @@ export class BouquetsFormComponent implements OnInit {
         clearInterval(uploadInterval)      
         this.submit(imageUrls) 
       }
-    }, 1000)
-
-
-   
+    }, 1000);   
   }
 
   getOccassions(){
@@ -102,13 +100,13 @@ export class BouquetsFormComponent implements OnInit {
       error: (err: any) => {
         console.log(err);
       }
-    })
+    });
   }
 
   submit(images :any[]) {
     
     // this.loading = true;
-    this.service.postToUrl('/Product', {...this.form.value, imageUrls: images }).subscribe({
+    this.service.postToUrl('/Bouquet', {...this.form.value, imageUrls: images }).subscribe({
       next: (res) => {
         console.log(res)
         this.loading = false

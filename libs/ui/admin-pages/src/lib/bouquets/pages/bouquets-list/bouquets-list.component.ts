@@ -30,7 +30,7 @@ export class BouquetsListComponent implements OnInit {
   getProducts(size: number, page: number) {
     this.loading = true;
     this.service
-      .getPaginated({ size: size, page: page }, '/Product/paged')
+      .getPaginated({ size: size, page: page }, '/Bouquet/paged')
       .subscribe({
         next: (res: any) => {
           this.productsList = this.transcateDescription(res.data.items);
@@ -46,7 +46,7 @@ export class BouquetsListComponent implements OnInit {
       });
   }
   getOccasions() {
-    this.service.getFromUrl('/Product/paged').subscribe({
+    this.service.getFromUrl('/Bouquet/paged').subscribe({
       next: (res: any) => {
         this.occasionsList = res.data.items;
         

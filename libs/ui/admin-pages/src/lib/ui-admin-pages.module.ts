@@ -29,6 +29,15 @@ import { TopSellingCategoriesChartComponent } from './dashboard/components/top-s
 import { SalesPageComponent } from './sales/pages/sales-page/sales-page.component';
 import { TopSellingProductsOverallComponent } from './sales/components/top-selling-products-overall/top-selling-products-overall.component';
 import { TopSellingCategoriesComponent } from './sales/components/top-selling-categories/top-selling-categories.component';
+import { ExpensesBouquetsListComponent } from './expenses/expenses-bouquets-list/expenses-bouquets-list.component';
+import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.component';
+import { ExpensesOverviewComponent } from './expenses/expenses-overview/expenses-overview.component';
+import { OveralExpensesComponent } from './expenses/overal-expenses/overal-expenses.component';
+import { DailyExpensesComponent } from './expenses/daily-expenses/daily-expenses.component';
+import { WeeklyExpensesComponent } from './expenses/weekly-expenses/weekly-expenses.component';
+import { MonthlyExpensesComponent } from './expenses/monthly-expenses/monthly-expenses.component';
+import { TestimonialsListComponent } from './testimonials/pages/testimonials-list/testimonials-list.component';
+import { TestimonialsFormComponent } from './testimonials/pages/testimonials-form/testimonials-form.component';
 
 @NgModule({
   imports: [
@@ -63,6 +72,16 @@ import { TopSellingCategoriesComponent } from './sales/components/top-selling-ca
     SalesPageComponent,
     TopSellingProductsOverallComponent,
     TopSellingCategoriesComponent,
+    ExpensesBouquetsListComponent,
+    ExpensesFormComponent,
+
+    ExpensesOverviewComponent,
+    OveralExpensesComponent,
+    DailyExpensesComponent,
+    WeeklyExpensesComponent,
+    MonthlyExpensesComponent,
+    TestimonialsListComponent,
+    TestimonialsFormComponent,
   ],
   providers: [ApiService, NzModalService, FileService],
 })

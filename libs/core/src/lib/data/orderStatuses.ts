@@ -3,5 +3,6 @@ export enum OrderStatus{
     PROCESSING= 2,
     DISPATCHED =3,
     DELIVERED = 4,
-    CANCELLED = 5
+    CANCELLED = 5,
+    REJECTED = 6
 }

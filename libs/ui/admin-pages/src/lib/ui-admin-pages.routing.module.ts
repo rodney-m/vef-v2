@@ -18,6 +18,7 @@ import { ExpensesFormComponent } from './expenses/expenses-form/expenses-form.co
 import { ExpensesOverviewComponent } from './expenses/expenses-overview/expenses-overview.component';
 import { TestimonialsListComponent } from './testimonials/pages/testimonials-list/testimonials-list.component';
 import { TestimonialsFormComponent } from './testimonials/pages/testimonials-form/testimonials-form.component';
+import { ViewExtraComponent } from './extras/pages/view-extra/view-extra.component';
 
 const routes :Route[] =[
   
@@ -40,6 +41,10 @@ const routes :Route[] =[
   {
     path: 'extras/form',
     component: ExtrasFormComponent
+  },
+  {
+    path: 'extras/:id',
+    component: ViewExtraComponent
   },
   {
     path: 'occasions',

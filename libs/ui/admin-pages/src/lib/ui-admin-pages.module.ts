@@ -38,6 +38,7 @@ import { WeeklyExpensesComponent } from './expenses/weekly-expenses/weekly-expen
 import { MonthlyExpensesComponent } from './expenses/monthly-expenses/monthly-expenses.component';
 import { TestimonialsListComponent } from './testimonials/pages/testimonials-list/testimonials-list.component';
 import { TestimonialsFormComponent } from './testimonials/pages/testimonials-form/testimonials-form.component';
+import { ViewExtraComponent } from './extras/pages/view-extra/view-extra.component';
 
 @NgModule({
   imports: [
@@ -82,6 +83,7 @@ import { TestimonialsFormComponent } from './testimonials/pages/testimonials-for
     MonthlyExpensesComponent,
     TestimonialsListComponent,
     TestimonialsFormComponent,
+    ViewExtraComponent,
   ],
   providers: [ApiService, NzModalService, FileService],
 })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService, FileService } from '@vef/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -17,7 +17,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   templateUrl: './extras-form.component.html',
   styleUrls: ['./extras-form.component.scss'],
 })
-export class ExtrasFormComponent {
+export class ExtrasFormComponent implements OnInit {
   loading = false;
   form!: FormGroup;
 
@@ -110,6 +110,6 @@ export class ExtrasFormComponent {
   }
 
   cancel() {
-    
+    this.location.back()
   }
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService, FileService } from '@vef/core';
 import { Location } from '@angular/common';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class ViewBouquetComponent implements OnInit {
   bouquet!:any;
+  bouquetId!:number;
   form!: FormGroup;
   occassions: any[] = []
 
@@ -24,9 +26,11 @@ export class ViewBouquetComponent implements OnInit {
     private fileService : FileService,
     private location : Location,
     private fb: FormBuilder,
+    private uiLoader : NgxUiLoaderService
     ){}
 
   ngOnInit(): void {
+    this.bouquetId = this.activatedRoute.snapshot.params['id']
     this.getOccassions();
     this.form = this.fb.group({
       occasionId: [null, Validators.required],
@@ -38,12 +42,18 @@ export class ViewBouquetComponent implements OnInit {
   }
 
   getData() {
+    this.uiLoader.start();
     const id = this.activatedRoute.snapshot.params['id']
     this.service.getFromUrl(`/Bouquet/${id}`).subscribe({
       next: (res) => {
         this.bouquet = res.data
         this.prefillValues(this.bouquet);
-      }
+      },
+      error: (err)=> {
+        this.notification.error('Error', err?.error?.message ? err?.error?.message:  'Failed to get bouquet info', {nzAnimate: true, nzDuration: 4000})
+        this.uiLoader.stop()
+      },
+      complete: () => this.uiLoader.stop()
     });
   }
 

@@ -1,32 +1,44 @@
 <div class="md:flex gap-4 mt-4">
   <nz-card class="rounded md:w-1/2" nzTitle="Update Extra Details">
     <form nz-form nzLayout="vertical" [formGroup]="form">
-        <nz-form-item>
-          <nz-form-label [nzSpan]="24" nzFor="email">Name</nz-form-label>
-          <nz-form-control [nzSpan]="24">
-            <input nz-input name="name" formControlName="name" type="text" id="name">
-          </nz-form-control>
-        </nz-form-item >
-        <nz-form-item>
-            <nz-form-label [nzSpan]="24" nzFor="price">Price USD</nz-form-label>
-            <nz-form-control [nzSpan]="24">
-              <input nz-input name="price" formControlName="price" type="number" id="price">
-            </nz-form-control>
-          </nz-form-item >
-        <nz-form-item>
-            <nz-form-label [nzSpan]="24" nzFor="price">Is in stock</nz-form-label>
-            <nz-form-control [nzSpan]="24">
-                <nz-switch formControlName="isInStock"></nz-switch>
-            </nz-form-control>
-          </nz-form-item >
-        <!-- <nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="email">Name</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <input
+            nz-input
+            name="name"
+            formControlName="name"
+            type="text"
+            id="name"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="price">Price USD</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <input
+            nz-input
+            name="price"
+            formControlName="price"
+            type="number"
+            id="price"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="price">Is in stock</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <nz-switch formControlName="isInStock"></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+      <!-- <nz-form-item>
             <nz-form-label [nzSpan]="24" nzFor="price">Description</nz-form-label>
             <nz-form-control [nzSpan]="24">
                 <textarea nz-input placeholder="Description" formControlName="description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
             </nz-form-control>
           </nz-form-item > -->
 
-          <!-- <div class="clearfix">
+      <!-- <div class="clearfix">
             <nz-upload
               nzAccept="image/png, image/jpg, image/jpeg"
               nzListType="picture-card"
@@ -52,9 +64,62 @@
             </nz-modal>
           </div> -->
 
-          
-          <button nz-button nzType="primary" [nzLoading]="loading" (click)="submit()">Submit</button>
-      </form> </nz-card>
+      <button
+        nz-button
+        nzType="primary"
+        [nzLoading]="loading"
+        (click)="submit()"
+      >
+        Update
+      </button>
+    </form>
+  </nz-card>
 
-  <nz-card class="rounded md:w-1/2" nzTitle="Update Extra Image">Image </nz-card>
+  <nz-card class="rounded md:w-1/2" nzTitle="Update Extra Image">
+    <a *ngIf="selectedItem.imageUrl !== ''" class="block overflow-hidden group">
+      <img
+        nz-image
+        [nzSrc]="selectedItem.imageUrl"
+        nzPlaceholder=""
+        [nzFallback]="'assets/images/placeholder.png'"
+        alt=""
+        class="h-[150px] object-cover transition duration-500 group-hover:scale-105"
+      />
+    </a>
+
+   
+
+      <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="Update Extra Image" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+            <div class="clearfix">
+                <nz-upload
+                  nzAccept="image/png, image/jpg, image/jpeg"
+                  nzListType="picture-card"
+                  [(nzFileList)]="fileList"
+                  [nzShowButton]="fileList.length < 1"
+                  [nzPreview]="handlePreview"
+                  [nzBeforeUpload]="beforeUpload"
+                >
+                  <div>
+                    <span nz-icon nzType="plus"></span>
+                    <div style="margin-top: 8px">Upload</div>
+                  </div>
+                </nz-upload>
+                <nz-modal
+                  [nzVisible]="previewVisible"
+                  [nzContent]="modalContent"
+                  [nzFooter]="null"
+                  (nzOnCancel)="previewVisible = false"
+                >
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal>
+              </div>
+        </ng-container>
+      </nz-modal>
+  </nz-card>
+
+  
 </div>

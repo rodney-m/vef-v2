@@ -126,6 +126,6 @@ export class BouquetsFormComponent implements OnInit {
   }
 
   cancel() {
-   
+   this.location.back();
   }
 }

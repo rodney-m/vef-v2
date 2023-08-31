@@ -39,6 +39,8 @@ import { MonthlyExpensesComponent } from './expenses/monthly-expenses/monthly-ex
 import { TestimonialsListComponent } from './testimonials/pages/testimonials-list/testimonials-list.component';
 import { TestimonialsFormComponent } from './testimonials/pages/testimonials-form/testimonials-form.component';
 import { ViewExtraComponent } from './extras/pages/view-extra/view-extra.component';
+import { BouquetExpensesListComponent } from './bouquets/components/bouquet-expenses-list/bouquet-expenses-list.component';
+import { AddEditBouquetExpenseComponent } from './bouquets/components/add-edit-bouquet-expense/add-edit-bouquet-expense.component';
 
 @NgModule({
   imports: [
@@ -84,6 +86,8 @@ import { ViewExtraComponent } from './extras/pages/view-extra/view-extra.compone
     TestimonialsListComponent,
     TestimonialsFormComponent,
     ViewExtraComponent,
+    BouquetExpensesListComponent,
+    AddEditBouquetExpenseComponent,
   ],
   providers: [ApiService, NzModalService, FileService],
 })

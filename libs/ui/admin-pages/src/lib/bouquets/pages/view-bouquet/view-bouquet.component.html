@@ -1,13 +1,18 @@
 
 <nz-tabset>
     <nz-tab nzTitle="Overview">
-        <nz-card nzTitle="Product Overview">
+        <nz-card nzTitle="Bouquet Overview">
             <vef-bouquets-update [bouquet]="bouquet"></vef-bouquets-update>
           </nz-card>        
     </nz-tab>
     <nz-tab nzTitle="Images">
-        <nz-card nzTitle="Product Images">
+        <nz-card nzTitle="Bouquet Images">
             <vef-bouquet-images (refresh)="getData()" [bouquet]="bouquet"></vef-bouquet-images>
+        </nz-card>
+    </nz-tab>
+    <nz-tab nzTitle="Expenses">
+        <nz-card nzTitle="Bouquet Expenses">
+            <vef-bouquet-expenses-list [bouquetId]="bouquetId"></vef-bouquet-expenses-list>
         </nz-card>
     </nz-tab>
   </nz-tabset>

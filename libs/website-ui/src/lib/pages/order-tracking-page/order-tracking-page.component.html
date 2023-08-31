@@ -1,0 +1,142 @@
+<div class="bg-gray-100 p-4">
+  <div class="w-7xl mx-auto bg-white p-6 rounded">
+    <h1 class="text-3xl font-bold text-center">
+      Thank you for ordering with us
+    </h1>
+    <p class="text-center">Use your order reference to track your order</p>
+
+    <form class="max-w-2xl mx-auto mt-6" [formGroup]="trackingForm">
+      <label
+        for="default-search"
+        class="mb-2 text-sm font-medium text-gray-900 sr-only"
+        >Search</label
+      >
+      <div class="relative">
+        <input
+          type="search"
+          id="default-search"
+          class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary"
+          placeholder="Order reference"
+          formControlName="reference"
+          required
+        />
+        <button
+          (click)="track()"
+          class="text-white absolute right-2.5 bottom-2.5 bg-primary hover:bg-lightPrimary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+        >
+          Track
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="w-7xl mx-auto bg-white p-6 rounded mt-6" *ngIf="order">
+    <h1 class="text-2xl font-bold">Order Ref # : {{ order?.reference }}</h1>
+    <p class="text-gray-500 mb-4">
+      Date created : {{ order?.dateOrdered | date : 'medium' }}
+    </p>
+    <p class="text-gray-500 mb-4">Customer Name : {{ order?.customerName }}</p>
+
+    <hr class="my-4" />
+    <div
+      class="border border-gray-100 rounded p-4 mt-6"
+      *ngFor="let orderItem of order?.items; index as i"
+    >
+      <h3 class="font-semibold text-lg text-primary mb-8">Order Item #{{ i + 1 }}</h3>
+
+      <!-- <div class="bg-gray-300 h-4 rounded-xl relative progress">
+        <p class="font-bold absolute first progress-stage">Received</p>
+        <p class="font-bold absolute second progress-stage">Processing</p>
+        <p class="font-bold absolute third progress-stage">Dispatched</p>
+        <p class="font-bold absolute forth progress-stage progress-outer">Delivered</p>
+        <div class="h-full bg-primary rounded-xl progress-inner" [style.width.%]="(orderItem?.status / 4) * 100"></div>
+      </div> -->
+
+      <div class="mt-4">
+        <div>
+          <p class="text-xl">
+            <span nz-icon style="color:green" *ngIf="orderItem?.status >= 1" nzType="check" nzTheme="outline"></span>
+            Order Received</p>
+          <p [class]="'text-xl' + (orderItem?.status < 2 ? 'text-gray-400' : '')">
+            <span nz-icon style="color:green" *ngIf="orderItem?.status >= 2" nzType="check" nzTheme="outline"></span>
+            <span nz-icon nzType="close" *ngIf="orderItem?.status < 2" nzTheme="outline"></span>
+            Order is being Processed</p>
+          <p [class]="'text-xl' + (orderItem?.status < 3 ? 'text-gray-400' : '')">
+            <span nz-icon style="color:green" *ngIf="orderItem?.status >= 3" nzType="check" nzTheme="outline"></span>
+            <span nz-icon nzType="close" *ngIf="orderItem?.status < 3" nzTheme="outline"></span>
+            Order out for Delivery</p>
+          <p [class]="'text-xl' + (orderItem?.status < 4 ? 'text-gray-400' : '')">
+            <span nz-icon style="color:green" *ngIf="orderItem?.status === 4" nzType="check" nzTheme="outline"></span>
+            <span nz-icon nzType="close" nzTheme="outline" *ngIf="orderItem?.status < 4"></span>
+            Delivered</p>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+      <div class="md:flex gap-4">
+        <div class="md:w-1/2 border rounded-md p-4 border-gray-100">
+          <h3 class="font-semibold">Bouquet</h3>
+
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Bouquet :</p>
+            <p class="text-gray-600">{{ orderItem?.product?.name }}</p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Quantity :</p>
+            <p class="text-gray-600">{{ orderItem?.quantity }}</p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Delivery Date</p>
+            <p class="text-gray-600">
+              {{ orderItem?.deliveryDate | date : 'mediumDate' }}
+            </p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Delivery Instruction :</p>
+            <p class="text-gray-600">{{ orderItem?.deliveryInstruction }}</p>
+          </div>
+        </div>
+        <div class="md:w-1/2 border rounded-md p-4 border-gray-100">
+          <h3 class="font-semibold">Extras</h3>
+
+          <p class="mt-2 text-center" *ngIf="orderItem?.addons.length === 0">
+            No extras were added to this order
+          </p>
+          <div *ngIf="orderItem?.addons.length !== 0" class="mt-2">
+            <p *ngFor="let extra of orderItem?.addons; index as index">
+              <strong>#{{ index + 1 }} </strong> - {{ extra?.addon?.name }} X
+              {{ extra?.quantity }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+      <h3 class="font-semibold">Deliver to</h3>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Name :</p>
+        <p class="text-gray-600">{{ orderItem?.recipientName }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Email :</p>
+        <p class="text-gray-600">{{ orderItem?.recipientEmail }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Phone :</p>
+        <p class="text-gray-600">{{ orderItem?.recipientPhone }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Address :</p>
+        <p class="text-gray-600">{{ orderItem?.deliveryAddress }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,16 +24,16 @@
             "output": "/assets/"
           }
         ],
-        "styles": ["apps/website/src/styles.scss", "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"],
+        "styles": ["node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/website/src/styles.less", "apps/website/src/swiper.css"],
         "scripts": []
       },
       "configurations": {
-        "production": {
+        "production": { 
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumWarning": "3mb",
+              "maximumError": "5mb"
             },
             {
               "type": "anyComponentStyle",

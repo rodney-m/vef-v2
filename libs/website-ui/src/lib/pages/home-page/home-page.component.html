@@ -1,0 +1,153 @@
+<swiper
+  [slidesPerView]="1"
+  [spaceBetween]="30"
+  [loop]="true"
+  [navigation]="true"
+  [pagination]="{
+    clickable: true
+  }"
+  class="mySwiper"
+  [autoplay]="{
+    delay: 10000,
+    disableOnInteraction: false
+  }"
+>
+  <ng-template swiperSlide *ngFor="let item of carouselContent" class="">
+    <section
+      [style]="{
+        background:
+          'linear-gradient(to right, rgba(0,0,0.7), rgba(0,0,0,.5)),url(' +
+          item.image +
+          ')',
+          backgroundPosition: 'center'
+      }"
+      class="cover relative overflow-hidden md:flex items-center flex-row-reverse md:h-96 bg-amber-50 bg-center bg-no-repeat bg-cover bg-gray-900"
+    >
+     
+      <div
+        id="hero-image"
+        class="hidden md:block lg:w-1/4 xl:w-2/4 flex items-center justify-center"
+      >
+        <div class="card rounded h-56 w-56 bg-amber-50 shadow mx-auto">
+          <img
+            [src]="item?.image"
+            class="h-full w-full object-cover overflow-hidden"
+            alt=""
+          />
+        </div>
+      </div>
+      <div id="hero" class="lg:w-3/4 xl:w-2/4 relative z-10 h-full">
+        <div class="h-full flex flex-col items-start justify-center p-10">
+          <h1
+            class="text-2xl md:text-3xl xl:text-4xl text-white font-semibold leading-tight"
+          >
+            {{ item?.heading }}
+          </h1>
+
+          <p class="mt-4 text-gray-200 text-lg">{{ item?.paragraph }}</p>
+
+          <a
+            routerLink="/all-bouquets"
+            class="px-8 py-4 bg-primary text-white rounded inline-block mt-8 font-semibold"
+            >{{ item?.cta }}.</a
+          >
+        </div>
+      </div>
+    </section>
+  </ng-template>
+</swiper>
+
+<div *ngIf="!loading">
+  <section *ngFor="let category of bouquetCategories">
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <header>
+        <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
+          {{ category?.occasionType }}
+        </h2>
+      </header>
+
+      <div class="mt-8 flex items-center justify-end">
+        <div>
+          <a [routerLink]="'/category/'+category.occasionId" class="text-gray-600">View All</a>
+        </div>
+      </div>
+
+      <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <li *ngFor="let product of category?.bouquets">
+          <a
+            [routerLink]="'bouquet/' + product.id"
+            class="group block overflow-hidden"
+          >
+            <img
+              [src]="product?.images[0]?.imageUrl"
+              alt=""
+              class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 bg-gray-100"
+            />
+
+            <div class="relative bg-white pt-3">
+              <h3
+                class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+              >
+                {{ product?.name }}
+              </h3>
+
+              <p class="mt-2">
+                <span class="sr-only"> Regular Price </span>
+
+                <span class="tracking-wider text-gray-900">
+                  {{ product?.price | currency }}
+                </span>
+              </p>
+            </div>
+            <strong
+            class="rounded-full border  bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide {{product?.leadTimeRequired ? 'border-primary text-primary' : 'border-green-500 text-green-500'}}"
+          >
+            {{product?.leadTimeRequired ? 'Requires a lead time' : 'Readily available'}}
+          </strong>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+<div *ngIf="loading">
+  <section>
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <header>
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{'width': '250px', }"
+          appearance="line"
+        ></ngx-skeleton-loader>
+      </header>
+
+      <div class="mt-8 flex items-center justify-end">
+        <div>
+          <ngx-skeleton-loader
+          count="1"
+          [theme]="{'width': '100px'}"
+          appearance="line"
+        ></ngx-skeleton-loader>
+        </div>
+      </div>
+
+      <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <li *ngFor="let x of [1, 1, 1, 1]">
+          <div>
+            <ngx-skeleton-loader
+              [theme]="{ height: '350px' }"
+            ></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              [theme]="{ width: '35%', display: 'block' }"
+            ></ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              [theme]="{ width: '30%', display: 'block' }"
+            ></ngx-skeleton-loader>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<vef-all-bouquets-infinite-scroll></vef-all-bouquets-infinite-scroll>

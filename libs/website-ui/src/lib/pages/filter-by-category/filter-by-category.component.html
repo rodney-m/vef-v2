@@ -1,0 +1,65 @@
+<section class="bg-gray-900 text-white">
+  <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="playfair text-white text-2xl font-extrabold sm:text-5xl">
+        Filter by category
+      </h1>
+      <form [formGroup]="form">
+          <select formControlName="filter" id="countries" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary">
+            <option selected>Choose a category</option>
+            <option *ngFor="let cat of categories" [value]="cat?.id">{{cat?.type}}</option>
+        </select>
+        <button type="submit" class="text-white bg-primary hover:bg-lightPrimary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mt-4">Search</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<div class="search-results" >
+    <div >
+        <section>
+          <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+            <header>
+              <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
+                {{ category?.name}}
+                
+              </h2>
+            </header>
+        
+            
+        
+            
+            <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500" (scrolled)="onScroll()" [scrollWindow]="true">
+              
+              <li *ngFor="let product of items">
+                <a [routerLink]="'/bouquet/'+product.id" class="group block overflow-hidden ">
+                  <img
+                    [src]="product?.images[0]?.imageUrl"
+                    alt=""
+                    class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 bg-gray-100"
+                  />
+        
+                  <div class="relative bg-white pt-3">
+                    <h3
+                      class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                    >
+                      {{product?.name}}
+                    </h3>
+        
+                    <p class="mt-2">
+                      <span class="sr-only"> Regular Price </span>
+        
+                      <span class="tracking-wider text-gray-900"> {{product?.price | currency}} </span>
+                    </p>
+                  </div>
+                </a>
+              </li>
+              
+            </ul>
+            <nz-spin nzSimple class="text-center mb-4" *ngIf="isLoading"></nz-spin>
+            <p class="mb-4 text-center" *ngIf="noMoreData">No more data...</p>
+          </div>
+        </section>
+      </div>
+</div>

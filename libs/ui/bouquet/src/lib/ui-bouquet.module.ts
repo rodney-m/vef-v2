@@ -14,16 +14,22 @@ import {
   NzNotificationService,
 } from 'ng-zorro-antd/notification';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from '@vef/core';
+import { ApiService, FileService } from '@vef/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BouquetFormComponent } from './components/bouquet-form/bouquet-form.component';
+import { AddOrEditBouquetPageComponent } from './pages/AddOrEditBouquetPage/add-or-edit-bouquet-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: BouquetListComponent,
+  },
+  {
+    path: 'form',
+    component: AddOrEditBouquetPageComponent,
   },
 ];
 
@@ -32,6 +38,9 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+
     NzTableModule,
     NzModalModule,
     NzInputModule,
@@ -40,8 +49,13 @@ const routes: Routes = [
     NzButtonModule,
     NzNotificationModule,
     NzTagModule,
+    NzUploadModule,
   ],
-  declarations: [BouquetListComponent, BouquetFormComponent],
-  providers: [NzNotificationService, HttpClientModule, ApiService],
+  declarations: [
+    BouquetListComponent,
+    BouquetFormComponent,
+    AddOrEditBouquetPageComponent,
+  ],
+  providers: [NzNotificationService, HttpClientModule, ApiService, FileService],
 })
 export class UiBouquetModule {}

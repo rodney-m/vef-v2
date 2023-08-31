@@ -1,0 +1,66 @@
+<nz-card nzTitle="Add / Edit Testimonials">
+  <div>
+    <form nz-form nzLayout="vertical" [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="24" nzFor="email">Customer Name</nz-form-label>
+        <nz-form-control [nzSpan]="24">
+          <input
+            nz-input
+            name="customerName"
+            formControlName="customerName"
+            type="text"
+            id="customerName"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzFor="comment"
+          >Comment</nz-form-label
+        >
+        <nz-form-control>
+          <textarea
+            nz-input
+            formControlName="comment"
+            placeholder=""
+            nzAutosize
+          ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzFor="source"
+          >Source</nz-form-label
+        >
+        <nz-form-control>
+            <nz-select nzAllowClear nzPlaceHolder="Select the source" formControlName="source">
+                <nz-option nzLabel="facebook" nzValue="Facebook"></nz-option>
+                <nz-option nzLabel="instagram" nzValue="Instagram"></nz-option>
+                <nz-option nzLabel="twitter" nzValue="Twitter"></nz-option>
+              </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+    <button
+      nz-button
+      nzType="primary"
+      *ngIf="!editMode"
+      [nzLoading]="loading"
+      (click)="submit()"
+    >
+      Submit
+    </button>
+    <button
+      nz-button
+      nzType="primary"
+      *ngIf="editMode"
+      [nzLoading]="loading"
+      (click)="update()"
+    >
+      Update
+    </button>
+    <!-- <div *nzModalFooter>
+            <button nz-button nzType="primary" [nzLoading]="loading" (click)="submit()">Submit</button>
+            <button nz-button nzType="default" (click)="cancel()">Cancel</button>
+          </div> -->
+  </div>
+</nz-card>

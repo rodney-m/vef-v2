@@ -1,0 +1,43 @@
+
+<div
+  class="mt-12 relative flex  min-w-0 break-words w-full mb-6 border-0 space-x-6 p-6"  
+>
+  <div class="shadow rounded bg-white p-6 w-2/3">
+    <form nz-form nzLayout="vertical" [formGroup]="form">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="24" nzFor="email">Name</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <input nz-input name="occassion" formControlName="type" type="text" id="occassion">
+          </nz-form-control>
+        </nz-form-item >
+        <nz-form-item>
+          <nz-form-label [nzSpan]="24" nzFor="email">Occassion</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select an occassion" >
+                <nz-option *ngFor="let occassion of occassions" [nzLabel]="occassion.type" [nzValue]="occassion.id"></nz-option>
+              </nz-select>
+          </nz-form-control>
+        </nz-form-item >
+        <nz-form-item>
+            <nz-form-label [nzSpan]="24" nzFor="price">Price USD</nz-form-label>
+            <nz-form-control [nzSpan]="24">
+              <input nz-input name="price" formControlName="type" type="number" id="price">
+            </nz-form-control>
+          </nz-form-item >
+        <nz-form-item>
+            <nz-form-label [nzSpan]="24" nzFor="price">Description</nz-form-label>
+            <nz-form-control [nzSpan]="24">
+                <textarea nz-input placeholder="Description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+            </nz-form-control>
+          </nz-form-item >
+
+          <button nz-button nzType="primary" [nzLoading]="loading" (click)="submit()">Submit</button>
+
+
+          
+      </form>
+  </div>
+  <div class="shadow rounded bg-white p-24 w-1/3">
+    
+  </div>
+</div>

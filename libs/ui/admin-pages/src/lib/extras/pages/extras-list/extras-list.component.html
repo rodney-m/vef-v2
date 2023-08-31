@@ -1,0 +1,62 @@
+<nz-card nzTitle="Extras List">
+    <div class="flex flex-wrap  mb-6">
+        <div class="lg:w-2/3 pr-4 pl-4">
+                   
+        </div>
+        <div class="lg:w-1/3 pr-4 pl-4 text-right">
+            <a nz-button nzType="primary" [routerLink]="'/extras/form'">
+                <i nz-icon nzType="plus-circle" theme="outline"></i>
+                <span>Add Extra</span>
+            </a>
+        </div>
+    </div>
+    <nz-table #productsListTable [nzData]="extrasList" [nzShowPagination]="false" [nzLoading]="loading">
+        <thead>
+            <tr>
+            
+                <th>Product</th>
+                <th>Price</th>
+                <th>Is in stock</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productsListTable.data;  let i=index">
+               
+                <td>
+                    <div class="flex items-center">
+                        <nz-avatar nzShape="square" [nzSize]="60" nzIcon="picture" [nzSrc]="item?.imageUrl"></nz-avatar>
+                        <span class="m-l-10">{{item.name}}</span>
+                    </div>
+                </td>
+                <td>{{item.price | currency}}</td>
+                <td>
+                    <nz-tag [nzColor]="'#108ee9'" *ngIf="item?.isInStock">In Stock</nz-tag>
+                    <nz-tag [nzColor]="'#f50'" *ngIf="!item?.isInStock">Out Of Stock</nz-tag>
+                </td>
+             
+                <td class="md:text-right">
+                 
+                    <a [routerLink]="item.id" class="mr-2" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="View" >
+                        <i nz-icon nzType="eye" theme="outline"></i>
+                    </a>
+                    <!-- <button nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete">
+                        <i nz-icon nzType="delete" theme="outline"></i>
+                    </button> -->
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <div class="mt-4">
+        <nz-pagination
+          [nzPageSizeOptions]="[5, 10, 20, 50]"
+          [nzPageIndex]="currentPage"
+          [nzTotal]="totalItems"
+          nzShowSizeChanger
+          [nzPageSize]="size"
+          (nzPageSizeChange)="pageSizeChange($event)"
+          (nzPageIndexChange)="pageIndexChange($event)"
+        ></nz-pagination>
+      </div>
+</nz-card>

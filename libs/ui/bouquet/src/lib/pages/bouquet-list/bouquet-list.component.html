@@ -1,7 +1,7 @@
 <div
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0"
+  class="mt-12 relative flex flex-col min-w-0 break-words w-full mb-6 shadow rounded-lg bg-gray-100 border-0"
 >
-  <div class="rounded-t bg-white mb-0 px-6 py-6">
+  <div class="rounded-t mb-0 px-6 py-6">
     <div class="text-center flex justify-between">
       <h6 class="text-gray-700 text-xl font-bold">Bouquets</h6>
       <button
@@ -26,14 +26,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of basicTable.data">
-            <td>{{data.name}}</td>
-            <td>{{data.price}}</td>
+            <td>{{data?.name}}</td>
+            <td>{{data?.price | currency : 'USD $'}}</td>
             <td>
-                <nz-tag [nzColor]="'#f50'">{{data.occasion.type}}</nz-tag>
+                <nz-tag [nzColor]="'#f50'">{{data?.occasion?.type}}</nz-tag>
                </td>
-            <td>{{data.description}}</td>
-            <td>{{data.image}}
-                <div class="h-26 w-24 shadow-sm rounded p-2"><img [src]="data.image" class="object-cover" alt=""></div>
+            <td>{{data?.description}}</td>
+            <td>
+                <div class="h-26 w-24 shadow-sm rounded p-2"><img [src]="data.images[0]?.imageUrl" class="object-cover" alt=""></div>
             </td>
            
           </tr>

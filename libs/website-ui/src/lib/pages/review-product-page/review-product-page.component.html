@@ -1,0 +1,173 @@
+
+
+<section class="relative">
+
+    <div class="container mx-auto">
+        <section *ngIf="!bouquet">
+        <div class="relative mx-auto max-w-screen-xl px-4 py-8">
+          <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
+              
+              <ngx-skeleton-loader
+                [theme]='{
+                "objectFit": "cover",
+                "width": "100%",
+                "height" : "100%",
+                "borderRadius": "0.75rem",
+              }'
+                class="aspect-square w-full rounded-xl object-cover"
+              ></ngx-skeleton-loader>
+    
+              <!-- <div class="grid grid-cols-2 gap-4 lg:mt-4">
+                <img
+                  alt="Les Paul"
+                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  class="aspect-square w-full rounded-xl object-cover"
+                />
+      
+                <img
+                  alt="Les Paul"
+                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  class="aspect-square w-full rounded-xl object-cover"
+                />
+      
+                <img
+                  alt="Les Paul"
+                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  class="aspect-square w-full rounded-xl object-cover"
+                />
+      
+                <img
+                  alt="Les Paul"
+                  src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                  class="aspect-square w-full rounded-xl object-cover"
+                />
+              </div> -->
+            </div>
+    
+            <div >
+              
+    
+              <ngx-skeleton-loader
+                  [theme]="{ width: '100px', 'border-radius' : '20px' }"
+                ></ngx-skeleton-loader>
+    
+              <div class="mt-8 flex justify-between">
+                <div class="max-w-[35ch] space-y-2">
+                  
+                    <ngx-skeleton-loader
+                    [theme]="{ 'height': '30px', 'width': '100px'}"
+                  ></ngx-skeleton-loader>
+    
+                  
+                </div>
+    
+                
+                
+                <ngx-skeleton-loader
+                    [theme]="{ 'height': '18px', 'width': '100px'}"
+                  ></ngx-skeleton-loader>
+              </div>
+    
+              <div class="mt-4">
+                <div class="prose max-w-none">
+                    <ngx-skeleton-loader
+                    [theme]="{ 'height': '14px', 'width': '100%'}"
+                  ></ngx-skeleton-loader>
+                    <ngx-skeleton-loader
+                    [theme]="{ 'height': '14px', 'width': '100%'}"
+                  ></ngx-skeleton-loader>
+                    <ngx-skeleton-loader
+                    [theme]="{ 'height': '14px', 'width': '25%'}"
+                  ></ngx-skeleton-loader>
+                </div>
+              </div>
+    
+              <form class="mt-8">
+                <div class="mt-8 flex gap-4">
+                  <div>
+                    <label for="quantity" class="sr-only">Qty</label>
+    
+                    
+                    <ngx-skeleton-loader
+                    [theme]="{ 'height': '30px', 'width': '30px'}"
+                  ></ngx-skeleton-loader>
+                  </div>
+    
+                  <ngx-skeleton-loader
+                    [theme]="{ 'height': '50px', 'width': '100px'}"
+                  ></ngx-skeleton-loader>
+    
+                
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section *ngIf="bouquet">
+        <nz-alert class="m-4" nzType="success" [nzMessage]="'Thank you for buying ' + bouquet?.name + ' we hope you loved it and we cannot wait to hear from you about it. Please leave a rating for the product below'"></nz-alert> 
+
+          <div class="relative mx-auto max-w-screen-xl px-4 py-8">
+            <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+              <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
+                <img
+                  alt="bouquet Image"
+                  [src]="bouquet?.images[0]?.imageUrl"
+                  class="aspect-square w-full rounded-xl object-cover bg-gray-100"
+                />
+              </div>
+          
+              <div class="">
+                <strong
+                  class="rounded-full border border-primary bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-primary"
+                >
+                  {{ bouquet?.occasion?.type }}
+                </strong>
+          
+                <div class="mt-8 flex justify-between">
+                
+          
+                  <p class="text-lg font-bold">
+                    {{ bouquet?.price | currency : '$ ' }}
+                  </p>
+                 
+                </div>
+          
+                <div class="mt-4">
+                  <div class="prose max-w-none">
+                    <p>
+                        On a scale of 1 to 5 rate your experience with
+                      {{ bouquet?.name }} below
+                    </p>
+                    <div class="flex items-center">                        
+                        <nz-rate (ngModelChange)="rate($event)" [ngModel]="1"></nz-rate>
+                        <nz-spin *ngIf="loading" nzSimple></nz-spin> 
+                      </div>
+                  </div>
+                </div>
+          
+                <form class="mt-8">
+                  <div class="mt-8 flex gap-4">
+                    <div>
+                      <label for="quantity" class="sr-only">Qty</label>
+          
+                      
+                    </div>
+                    
+          
+                   
+                  </div>
+                </form>
+              </div>
+            </div>
+  
+            
+          </div>
+          
+      </section>
+  
+      
+    </div>
+  </section>
+  

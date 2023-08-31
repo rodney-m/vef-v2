@@ -1,151 +1,54 @@
-<nav
-  class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
->
-  <div
-    class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
+<div class="wrapper">
+  <ul
+    nz-menu
+    nzMode="inline"
+    nzTheme="light"
+    [nzInlineCollapsed]="isCollapsed"
+    class="min-h-screen"
   >
-    <!-- Toggler -->
-    <button
-      class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-      type="button"
-      (click)="toggleCollapseShow('bg-white m-2 py-3 px-6')"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-    <!-- Brand -->
-    <a
-      [routerLink]="['/']"
-      class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-    >
-      <span class="block sm:hidden"> Tailwind Angular </span>
-      <span class="hidden sm:block"> Notus Angular </span>
-    </a>
-    <!-- User -->
-    <ul class="md:hidden items-center flex flex-wrap list-none">
-      <li class="inline-block relative">
-        <!-- <vef-notification-dropdown class="block"></vef-notification-dropdown> -->
-      </li>
-      <li class="inline-block relative">
-        <!-- <vef-user-dropdown class="block"></vef-user-dropdown> -->
-      </li>
-    </ul>
-    <!-- Collapse -->
-    <div
-      class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded"
-      [ngClass]="collapseShow"
-    >
-      <!-- Collapse header -->
-      <div
-        class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200"
-      >
-        <div class="flex flex-wrap">
-          <div class="w-6/12">
-            <a
-              [routerLink]="['/']"
-              class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            >
-              Notus Angular
-            </a>
-          </div>
-          <div class="w-6/12 flex justify-end">
-            <button
-              type="button"
-              class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-              (click)="toggleCollapseShow('hidden')"
-            >
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    
-
-      <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6
-        class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
-      >
-      Bouquets
-      </h6>
-      <!-- Navigation -->
-
-      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
-        <li class="items-center">
-          <a
-            [routerLink]="['/admin/dashboard']"
-            class="text-xs uppercase py-3 font-bold block"
-            routerLinkActive
-            #adminDashboard="routerLinkActive"
-            [ngClass]="
-              adminDashboard.isActive
-                ? 'text-red-600 hover:text-red-700'
-                : 'text-blueGray-700 hover:text-blueGray-500'
-            "
-          >
-            <i
-              class="fas fa-tv mr-2 text-sm"
-              [ngClass]="
-                adminDashboard.isActive ? 'opacity-75' : 'text-blueGray-300'
-              "
-            ></i>
-            Dashboard
-          </a>
-        </li>
-
-        <li class="items-center">
-          <a
-            [routerLink]="['/bouquets']"
-            class="text-xs uppercase py-3 font-bold block"
-            routerLinkActive
-            #adminSettings="routerLinkActive"
-            [ngClass]="
-              adminSettings.isActive
-                ? 'text-red-600 hover:text-red-700'
-                : 'text-blueGray-700 hover:text-blueGray-500'
-            "
-          >
-            <i
-              class="fas fa-gift mr-2 text-sm"
-              [ngClass]="
-                adminSettings.isActive ? 'opacity-75' : 'text-blueGray-300'
-              "
-            ></i>
-            Bouquets
-          </a>
-        </li>
-
-        <li class="items-center">
-          <a
-            [routerLink]="['/occassions']"
-            class="text-xs uppercase py-3 font-bold block"
-            routerLinkActive
-            #adminTables="routerLinkActive"
-            [ngClass]="
-              adminTables.isActive
-                ? 'text-red-600 hover:text-red-700'
-                : 'text-blueGray-700 hover:text-blueGray-500'
-            "
-          >
-            <i
-              class="fas fa-calendar-days mr-2 text-sm"
-              [ngClass]="
-                adminTables.isActive ? 'opacity-75' : 'text-blueGray-300'
-              "
-            ></i>
-            Occasions
-          </a>
-        </li>
-
-       
+    <li nz-menu-item routerLink="/">
+      <i nz-icon nzType="dot-chart"></i>
+      <span>Dashboard</span>
+    </li>
+    <!-- <li nz-submenu nzTitle="User Management" nzIcon="team">
+      <ul>
+        <li routerLink="/users" nz-menu-item>Users</li>
+        <li routerLink="/users/roles" nz-menu-item>Roles</li>
       </ul>
+    </li> -->
 
-      <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
-  
-      
-      
-      
-    </div>
-  </div>
-</nav>
+    
+    <li nz-submenu nzTitle="Bouquets" nzIcon="unordered-list">
+      <ul>
+        <li routerLink="/bouquets" nz-menu-item>All Bouquets</li>
+        <li routerLink="/expenses" nz-menu-item>Expenses</li>
+        <li routerLink="/expenses/overview" nz-menu-item>Expenses Overview</li>
+      </ul>
+    </li>
+    <li nz-menu-item routerLink="/extras">
+      <i nz-icon nzType="gift"></i>
+      <span>Extras</span>
+    </li> 
+    <li nz-menu-item routerLink="/locations">
+      <i nz-icon nzType="pushpin"></i>
+      <span>Locations</span>
+    </li> 
+    <li nz-menu-item routerLink="/occasions">
+      <i nz-icon nzType="appstore"></i>
+      <span>Occasions</span>
+    </li> 
+    <li nz-menu-item routerLink="/orders">
+      <i nz-icon nzType="shopping-cart"></i>
+      <span>Orders</span>
+    </li> 
+    <li nz-menu-item routerLink="/sales">
+      <i nz-icon nzType="line-chart"></i>
+      <span>Sales</span>
+    </li> 
+
+    <li nz-menu-item routerLink="/testimonials">
+      <i nz-icon nzType="wechat"></i>
+      <span>Testimonials</span>
+    </li>
+  </ul>
+</div>

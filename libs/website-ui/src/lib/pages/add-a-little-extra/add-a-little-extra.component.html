@@ -1,0 +1,87 @@
+<section class="p-6">
+  <div
+    class="container mx-auto bg-gray-50 m-2 mt-8 p-6 max-w-7xl flex flex-col items-center justify-center border border-gray-100"
+  >
+    <h1 class="text-xl font-semibold sm:text-2xl text-center">
+      Add a little extra
+    </h1>
+    <p>
+      Complete your order with a lovely little extra to make your gift feel even
+      more special. Simply click “add extras to view the full list”
+    </p>
+
+    <button
+      (click)="openAddOnModal()"
+      type="button"
+      class="block rounded border border-primary px-5 py-3 text-xs font-medium text-primary hover:bg-primary hover:text-white text-center mt-5"
+    >
+      {{addOns.length === 0 ? 'Add Extras' : 'Add More Extras'}}
+    </button>
+  </div>
+  <section class="bg-white text-center">
+    <div class="container px-6 py-8 max-w-7xl mx-auto">
+      <div class="">
+        <div class="mt-6">
+          <div
+            *ngIf="addOns.length > 0"
+            class="flex items-center justify-between text-sm tracking-widest uppercase"
+          >
+            <p class="text-gray-500">{{ addOns.length }} Item(s)</p>
+          </div>
+
+          <div>
+            <ul  class="space-y-4">
+              <li
+                class="flex items-center gap-4 bg-gray-50 p-2"
+                *ngFor="let addOn of addOns"
+              >
+                <img [src]="addOn.imageUrl" alt="" class="h-16 w-16 rounded object-cover" />
+            
+                <div>
+                  <h3 class="text-sm text-gray-900">{{ addOn.name }}</h3>
+            
+                  <dl class="mt-0.5 space-y-px text-[14px] text-gray-600">
+                    <div>
+                      <dt class="inline">{{ addOn?.price | currency }}</dt>
+                    </div>
+                  </dl>
+                </div>
+            
+                <div class="flex flex-1 items-center justify-end gap-2">
+                  <form>
+                    <label for="Line1Qty" class="sr-only"> Quantity </label>
+            
+                    <input
+                      type="number"
+                      [(ngModel)]="addOn.quantity"
+                      min="1"
+                      value="1"
+                      name="Line1Qty"
+                      class="h-8 w-12 rounded border border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 "
+                    />
+                  </form>         
+                  
+                </div>
+              </li>
+            </ul>
+        </div>
+
+          <div
+            class="flex justify-center items-center mt-12"
+            
+          >
+            <nz-affix [nzOffsetBottom]="nzOffsetBottom">
+              <button
+                (click)="continue()"
+                type="button"
+                class="drop-shadow-2xl rounded bg-primary hover:bg-lightPrimary px-8 py-3 text-xs font-medium text-white hover:bg-lightPrimary"
+              >
+               {{addOns.length > 0 ? 'Continue' : 'Skip' }} &nbsp; <span nz-icon nzType="right" nzTheme="outline"></span>
+              </button>
+            </nz-affix>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

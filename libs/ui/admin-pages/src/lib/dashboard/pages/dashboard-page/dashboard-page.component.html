@@ -1,0 +1,58 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0 p-4">
+    <vef-dashboard-stat-card  [count]="statusesStats?.RECEIVED || 0" [status]="'Received'"></vef-dashboard-stat-card>
+    <vef-dashboard-stat-card  [count]="statusesStats?.PROCESSING || 0" [status]="'Processing'"></vef-dashboard-stat-card>
+    <vef-dashboard-stat-card  [count]="statusesStats?.DISPATCHED || 0" [status]="'Dispatched'"></vef-dashboard-stat-card>
+    <vef-dashboard-stat-card  [count]="statusesStats?.DELIVERED || 0" [status]="'Delivered'"></vef-dashboard-stat-card>
+    <vef-dashboard-stat-card  [count]="statusesStats?.CANCELLED || 0" [status]="'Cancelled'"></vef-dashboard-stat-card>
+    
+</div>
+
+<div class="space-y-4">
+    <vef-sales-monthly-chart></vef-sales-monthly-chart>
+    <vef-sales-weekly-chart></vef-sales-weekly-chart>
+    <vef-sales-daily-chart></vef-sales-daily-chart>
+    <vef-top-selling-categories-chart></vef-top-selling-categories-chart>
+</div>
+
+<!-- <div class="p-4">
+    <nz-card>
+        <div class="flex justify-between items-center">
+            <h5>Recent Orders</h5>
+            <div>
+                <a nz-button nzType="default" nzSize="small">View All</a>
+            </div>
+        </div>
+        <div class="mt-4">
+            <nz-table #ordersListTable [nzData]="ordersList"  [nzShowPagination]="false" class="no-border-last">
+                <thead>
+                    <tr>
+                        <th>Order Ref</th>
+                        <th>Customer</th>
+                        <th>Contact</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of ordersListTable.data">
+                        <td>{{item?.reference}}</td>
+                        <td>
+                            <div class="flex items-center justify-start">
+                                <nz-avatar [nzSize]="30" nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                                <h6 class="m-l-10 m-b-0">{{item?.customerName}}</h6>
+                            </div>
+                        </td>
+                        <td>{{item?.customerPhone}}</td>
+                        <td>{{item?.dateOrdered | date : 'mediumDate'}}</td>
+                        <td>${{item?.payment?.amount | number:'3.2-5'}}</td>
+                       
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </nz-card>
+</div> -->
+<!-- <div class="p-4">
+    <vef-barchat-best-selling-products></vef-barchat-best-selling-products>
+</div> -->
+

@@ -1,0 +1,166 @@
+<div class="p-4" *ngIf="order">
+  <h1 class="text-2xl font-bold">Order Details</h1>
+
+  <nz-card>
+    <div class="md:flex">
+      <div class="md:w-1/2 p-4">
+        <h2 class="font-medium">Order Ref : {{ order?.reference }}</h2>
+        <p class="text-gray-500 text-xs">
+          Order created : {{ order?.dateOrdered | date : 'medium' }}
+        </p>
+      </div>
+      <div class="md:w-1/2 p-4"></div>
+    </div>
+  </nz-card>
+
+  <div class="md:flex gap-4 mt-4">
+    <nz-card class="rounded md:w-1/2">
+      <h3 class="font-semibold">Customer Details</h3>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Name :</p>
+        <p class="text-gray-600">{{ order?.customerName }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Email :</p>
+        <p class="text-gray-600">{{ order?.customerEmail }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Phone Number :</p>
+        <p class="text-gray-600">{{ order?.customerPhone }}</p>
+      </div>
+    </nz-card>
+    <nz-card class="rounded md:w-1/2">
+      <h3 class="font-semibold">Order Summary</h3>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Date Ordered :</p>
+        <p class="text-gray-600">{{ order?.dateOrdered | date : 'short' }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Payment Method:</p>
+        <p class="text-gray-600">
+          <nz-tag [nzColor]="'#108ee9'" *ngIf="order.paymentMethod === 1"
+            >Cash Drop Off</nz-tag
+          >
+          <nz-tag [nzColor]="'#108ee9'" *ngIf="order.paymentMethod === 2"
+            >Cash Pick UP</nz-tag
+          >
+          <nz-tag [nzColor]="'#108ee9'" *ngIf="order.paymentMethod === 3"
+            >Online</nz-tag
+          >
+        </p>
+      </div>
+    </nz-card>
+  </div>
+
+  <div class="mt-4" *ngFor="let orderItem of order?.items; index as i">
+    <nz-card>
+      <div class="md:flex">
+        <div class="flex-1">
+          <h3 class="font-semibold text-lg">Order Item #{{ i + 1 }}</h3>
+          <p class="text-gray-500 text-xs">
+            Order status :
+            <nz-tag [nzColor]="'#87d068'" *ngIf="orderItem?.status === 1">Received</nz-tag>
+            <nz-tag [nzColor]="'#2db7f5'" *ngIf="orderItem?.status === 2">Processing</nz-tag>
+            <nz-tag [nzColor]="'#108ee9'" *ngIf="orderItem?.status === 3">Dispatched</nz-tag>
+            <nz-tag [nzColor]="'#971c26'" *ngIf="orderItem?.status === 4">Delivered</nz-tag>
+            <nz-tag [nzColor]="'#971c26'" *ngIf="orderItem?.status === 4">Cancelled</nz-tag>
+            <nz-tag [nzColor]="'red'" *ngIf="orderItem?.status === 6">Rejected</nz-tag>
+          </p>
+        </div>
+        <!-- <div *ngIf="orderItem?.status === ">
+          <span class="text-gray-500 text-xs">Change status :</span>
+          <nz-select 
+            (change)="changeOrderStatus(statusSelect)"
+            nzPlaceHolder="Select Status"
+            nzSize="small"
+            [nzBorderless]="true"
+            #statusSelect
+          >
+            <nz-option *ngFor="let status of statuses" [nzLabel]="status.key" [nzValue]="status.value"></nz-option>
+          </nz-select>
+          <div class="my-3" *ngIf="getValue(statusSelect) === 6">
+            <textarea nz-input [(ngModel)]="rejectionReason"  placeholder="Rejection Reason" nzAutosize></textarea>
+          </div>
+          <button nz-button [nzLoading]="statusChangeLoading" nzType="primary" (click)="updateStatus({element :statusSelect, orderItem : orderItem?.id})">
+            Save
+          </button>
+        </div> -->
+      </div>
+      <div>         
+          <p class="font-bold text-primary" *ngIf="orderItem?.anonymousDelivery">Send As anonymous 🙈</p>
+      </div>
+
+      <hr class="mb-4" />
+      <div class="md:flex gap-4">
+        <div class="md:w-1/2 border rounded-md p-4 border-gray-100">
+          <h3 class="font-semibold">Bouquet</h3>
+
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Bouquet :</p>
+            <p class="text-gray-600">{{ orderItem?.product?.name }}</p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Quantity :</p>
+            <p class="text-gray-600">{{ orderItem?.quantity }}</p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Tin Option :</p>
+            <p class="text-gray-600">{{orderItem?.tinOption}}</p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Delivery Date</p>
+            <p class="text-gray-600">
+              {{ orderItem?.deliveryDate | date : 'mediumDate' }}
+            </p>
+          </div>
+          <div
+            class="border-b border-gray-100 flex flex-wrap justify-between mt-2"
+          >
+            <p class="text-gray-600">Delivery Instruction :</p>
+            <p class="text-gray-600">{{ orderItem?.deliveryInstruction }}</p>
+          </div>
+        </div>
+        <div class="md:w-1/2 border rounded-md p-4 border-gray-100">
+          <h3 class="font-semibold">Extras</h3>
+
+          <p class="mt-2 text-center" *ngIf="orderItem?.addons.length === 0">
+            No extras were added to this order
+          </p>
+          <div *ngIf="orderItem?.addons.length !== 0" class="mt-2">
+            <p *ngFor="let extra of orderItem?.addons; index as index">
+              <strong>#{{ index + 1 }} </strong> - {{ extra?.addon?.name }} X
+              {{ extra?.quantity }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+      <h3 class="font-semibold">Delivere to</h3>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Name :</p>
+        <p class="text-gray-600">{{ orderItem?.recipientName }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Email :</p>
+        <p class="text-gray-600">{{ orderItem?.recipientEmail }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Phone :</p>
+        <p class="text-gray-600">{{ orderItem?.recipientPhone }}</p>
+      </div>
+      <div class="border-b border-gray-100 flex flex-wrap justify-between mt-2">
+        <p class="text-gray-600">Address :</p>
+        <p class="text-gray-600">{{ orderItem?.deliveryAddress }}</p>
+      </div>
+    </nz-card>
+  </div>
+</div>

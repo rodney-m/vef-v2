@@ -1,0 +1,80 @@
+<div class="search-results">
+  <div>
+    <section>
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <header>
+          <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
+            All Bouquets
+          </h2>
+        </header>
+
+        <ul
+          *ngIf="!isLoading"
+          class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="500"
+          (scrolled)="onScroll()"
+          [scrollWindow]="true"
+        >
+          <li *ngFor="let product of items">
+            <a
+              [routerLink]="'bouquet/' + product.id"
+              class="group block overflow-hidden"
+            >
+              <img
+                [src]="product?.images[0]?.imageUrl"
+                alt=""
+                class="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 bg-gray-100"
+              />
+
+              <div class="relative bg-white pt-3">
+                <h3
+                  class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                >
+                  {{ product?.name }}
+                </h3>
+
+                <p class="mt-2">
+                  <span class="sr-only"> Regular Price </span>
+
+                  <span class="tracking-wider text-gray-900">
+                    {{ product?.price | currency }}
+                  </span>
+                </p>
+              </div>
+              <strong
+                class="rounded-full border  bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide {{product?.leadTimeRequired ? 'border-primary text-primary' : 'border-green-500 text-green-500'}} "
+              >
+                {{
+                  product?.leadTimeRequired
+                    ? 'Requires a lead time'
+                    : 'Readily available'
+                }}
+              </strong>
+            </a>
+          </li>
+        </ul>
+
+        <ul
+          *ngIf="isLoading"
+          class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          <li *ngFor="let x of [1, 1, 1, 1]">
+            <div>
+              <ngx-skeleton-loader
+                [theme]="{ height: '350px' }"
+              ></ngx-skeleton-loader>
+              <ngx-skeleton-loader
+                [theme]="{ width: '35%', display: 'block' }"
+              ></ngx-skeleton-loader>
+              <ngx-skeleton-loader
+                [theme]="{ width: '30%', display: 'block' }"
+              ></ngx-skeleton-loader>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>

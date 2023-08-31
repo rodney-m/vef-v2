@@ -1,0 +1,25 @@
+<div>
+    <form nz-form nzLayout="vertical" [formGroup]="form">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="24" nzFor="email">Expense</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <nz-select formControlName="expenseId" nzShowSearch nzAllowClear nzPlaceHolder="Select expense" >
+                <nz-option *ngFor="let expense of expenses" [nzLabel]="expense.name" [nzValue]="expense.id"></nz-option>
+              </nz-select>
+          </nz-form-control>
+        </nz-form-item >
+        <nz-form-item>
+            <nz-form-label [nzSpan]="24" nzFor="price">Cost USD</nz-form-label>
+            <nz-form-control [nzSpan]="24">
+              <input nz-input name="cost" formControlName="cost" type="number" id="price">
+            </nz-form-control>
+          </nz-form-item >
+          
+      </form>
+
+    </div>
+    <div *nzModalFooter>
+      <button nz-button nzType="primary" *ngIf="!editMode" [nzLoading]="loading" (click)="save()">Submit</button>
+      <button nz-button nzType="primary" *ngIf="editMode" [nzLoading]="loading" (click)="update()">Update</button>
+      <button nz-button nzType="default" (click)="cancel()">Cancel</button>
+    </div>

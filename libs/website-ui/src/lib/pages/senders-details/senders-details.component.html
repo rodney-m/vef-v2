@@ -1,0 +1,75 @@
+<section class="p-6">
+    <div
+      class="container mx-auto bg-gray-50 m-2 mt-8 p-6 max-w-7xl flex flex-col items-center justify-center"
+    >
+      <h1 class="text-xl font-semibold sm:text-2xl text-center">
+        Sender's Details
+      </h1>
+      <p>
+        Complete the form below with your details
+      </p>
+    
+      
+    </div>
+
+    <section class="max-w-2xl mx-auto mt-8">
+        <form class="space-y-6" [formGroup]="senderDetailsForm">
+          
+
+            <div class="">
+             
+        <nz-form-label  nzFor="customerName" nzRequired>Full Name</nz-form-label>
+
+              <input nz-input formControlName="customerName" placeholder="" class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
+  
+            </div>
+  
+            <div class="">              
+        <nz-form-label  nzFor="customerEmail" nzRequired>Email</nz-form-label>
+              
+              <input formControlName="customerEmail" nz-input class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
+               
+            </div>
+  
+            <div class="">
+              <nz-form-label  nzFor="customerPhone" nzRequired>Phone</nz-form-label>
+              <input formControlName="customerPhone" nz-input class="mt-1 w-full rounded-md p-2 border border-gray-200 shadow-sm sm:text-sm"/>
+  
+            </div>
+  
+            
+  
+            <div class="">
+
+                
+              <div class="mt-1 -space-y-px rounded-md bg-white shadow-sm">
+               
+  
+                <div>
+              <label  for="anonymousDelivery" >Deliver as anonymous &nbsp; 
+                <nz-switch formControlName="anonymousDelivery" name="anonymousDelivery"></nz-switch>
+              </label>       
+  
+                </div>
+              </div>
+            </div>
+           
+  
+            <div class="md:flex gap-6">
+              <button (click)="proceedToPayment()"
+                class="block w-full rounded-md bg-primary p-2.5 text-sm text-white transition hover:bg-lightPrimary"
+              >
+                Proceed to payment
+              </button>
+              <button (click)="addAnotherOne()"
+                class="block w-full rounded-md border border-primary p-2.5 text-sm text-primary bg-white transition hover:bg-gray-100"
+              >
+                Add another one
+              </button>
+            </div>
+          </form>
+    </section>
+    
+
+
+</section>

@@ -1,0 +1,52 @@
+<nz-card nzTitle="Orders">
+    <div class="flex justify-between items-center">
+        
+    </div>
+    <div class="mt-4">
+        <nz-table #ordersListTable [nzData]="ordersList" [nzLoading]="loading"  [nzShowPagination]="false" class="no-border-last">
+            <thead>
+                <tr>
+                    <th>Order Ref</th>
+                    <th>Customer</th>
+                    <th>Contact</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of ordersListTable.data">
+                    <td>{{item?.reference}}</td>
+                    <td>
+                        <div class="flex items-center justify-start">
+                            <nz-avatar [nzSize]="30" nzIcon="user" [nzSrc]="item.avatar"></nz-avatar>
+                            <h6 class="m-l-10 m-b-0">{{item?.customerName}}</h6>
+                        </div>
+                    </td>
+                    <td>{{item?.customerPhone}}</td>
+                    <td>{{item?.dateOrdered | date : 'mediumDate'}}</td>
+                    <td>${{item?.payment?.amount | number:'3.2-5'}}</td>
+                    <td>
+                        <a [routerLink]="item.id"  nz-button nzType="primary" nzShape="round">
+                            <span nz-icon nzType="eye"></span>
+                            View
+                        </a>
+                    </td>
+                   
+                </tr>
+            </tbody>
+        </nz-table>
+
+        <div class="mt-4">
+            <nz-pagination
+              [nzPageSizeOptions]="[5, 10, 20, 50]"
+              [nzPageIndex]="currentPage"
+              [nzTotal]="totalItems"
+              nzShowSizeChanger
+              [nzPageSize]="size"
+              (nzPageSizeChange)="pageSizeChange($event)"
+              (nzPageIndexChange)="pageIndexChange($event)"
+            ></nz-pagination>
+          </div>
+    </div>
+</nz-card>

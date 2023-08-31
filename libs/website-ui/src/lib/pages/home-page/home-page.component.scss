@@ -1,0 +1,25 @@
+.card-1{
+    background-image: url('/assets/images/showcase-roses-1.jpg')
+}
+.card-2{
+    background-image: url('/assets/images/showcase-roses-2.jpg')
+}
+.card-3{
+    background-image: url('/assets/images/showcase-roses-3.jpg')
+}
+
+.card-wrapper{
+    background-size: 150%;
+    transition: background-size 800ms;
+}
+
+.card-wrapper:hover{
+    background-size: 160%;
+}
+
+#hero{
+    h1{
+    font-family: 'Playfair Display';
+    }
+}
+

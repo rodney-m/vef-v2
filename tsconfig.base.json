@@ -16,10 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@vef/core": ["libs/core/src/index.ts"],
+      "@vef/ui/add-on": ["libs/ui/add-on/src/index.ts"],
+      "@vef/ui/admin-pages": ["libs/ui/admin-pages/src/index.ts"],
       "@vef/ui/authentication": ["libs/ui/authentication/src/index.ts"],
       "@vef/ui/bouquet": ["libs/ui/bouquet/src/index.ts"],
       "@vef/ui/layout": ["libs/ui/layout/src/index.ts"],
-      "@vef/ui/occassions": ["libs/ui/occassions/src/index.ts"]
+      "@vef/ui/occassions": ["libs/ui/occassions/src/index.ts"],
+      "@vef/website-ui": ["libs/website-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

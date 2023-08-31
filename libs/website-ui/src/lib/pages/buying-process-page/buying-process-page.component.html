@@ -1,0 +1,7 @@
+
+<div [ngSwitch]="index">
+    <vef-add-a-little-extra (stepOneNext)="stepOneNext($event)" *ngSwitchCase="1"></vef-add-a-little-extra>
+    <vef-recepient-details (stepTwoNext)="stepTwoNext($event)" *ngSwitchCase="2"></vef-recepient-details>
+    <vef-senders-details *ngSwitchCase="3" (stepThreeNext)="stepThreeNext($event)"></vef-senders-details>
+    <div *ngSwitchDefault></div>
+</div>

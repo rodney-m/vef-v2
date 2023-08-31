@@ -1,0 +1,72 @@
+<nz-card nzTitle="Testimonials">
+  <div class="flex flex-wrap mb-6">
+    <div class="lg:w-1/3 pr-4 pl-4 text-right">
+      <a nz-button nzType="primary" [routerLink]="'form'">
+        <i nz-icon nzType="plus-circle" theme="outline"></i>
+        <span>Add Testimonial</span>
+      </a>
+    </div>
+  </div>
+  <nz-table
+    [nzLoading]="tableLoading"
+    #productsListTable
+    [nzData]="occasionsList"
+    [nzShowPagination]="false"
+  >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Comment</th>
+        <th>Source</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productsListTable.data; let i = index">
+        <td>{{ item.customerName }}</td>
+        <td>{{ item.comment }}</td>
+        <td>{{ item.source }}</td>
+
+        <td class="md:text-right">
+          <a
+            class="mr-2"
+            [routerLink]="'form/'+item.id"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip
+            nzTooltipTitle="Edit"
+          >
+            <i nz-icon nzType="edit" theme="outline"></i>
+          </a>
+          <button
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this testimonial?"
+            nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="confirmDelete(item.id)"
+            nzTheme="outline"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip
+            nzTooltipTitle="Delete"
+          >
+            <i nz-icon nzType="delete" theme="outline"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <div class="mt-4">
+    <nz-pagination
+      [nzPageSizeOptions]="[5, 10, 20, 50]"
+      [nzPageIndex]="currentPage"
+      [nzTotal]="totalItems"
+      nzShowSizeChanger
+      [nzPageSize]="size"
+      (nzPageSizeChange)="pageSizeChange($event)"
+      (nzPageIndexChange)="pageIndexChange($event)"
+    ></nz-pagination>
+  </div>
+</nz-card>

@@ -1,0 +1,46 @@
+<nz-card nzTitle="Occasions / Categories List">
+    <div class="flex flex-wrap  mb-6">
+        
+        <div class="lg:w-1/3 pr-4 pl-4 text-right">
+            <a nz-button nzType="primary" [routerLink]="'/occasions/form'">
+                <i nz-icon nzType="plus-circle" theme="outline"></i>
+                <span>Add Occasion</span>
+            </a>
+        </div>
+    </div>
+    <nz-table [nzLoading]="tableLoading" #productsListTable [nzData]="occasionsList" [nzShowPagination]="false">
+        <thead>
+            <tr>
+            
+                <th>Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productsListTable.data;  let i=index">
+               <td>{{item.type}}</td>
+               
+                <td class="md:text-right">
+                    <a class="mr-2" [routerLink]="item.id" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Edit" >
+                        <i nz-icon nzType="edit" theme="outline"></i>
+                    </a>                 
+                    <!-- <button nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete">
+                        <i nz-icon nzType="delete" theme="outline"></i>
+                    </button> -->
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+    <div class="mt-4">
+        <nz-pagination
+          [nzPageSizeOptions]="[5, 10, 20, 50]"
+          [nzPageIndex]="currentPage"
+          [nzTotal]="totalItems"
+          nzShowSizeChanger
+          [nzPageSize]="size"
+          (nzPageSizeChange)="pageSizeChange($event)"
+          (nzPageIndexChange)="pageIndexChange($event)"
+        ></nz-pagination>
+      </div>
+</nz-card>

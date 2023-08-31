@@ -1,1 +1,6 @@
-<vef-nx-welcome></vef-nx-welcome> <router-outlet></router-outlet>
+<vef-navbar></vef-navbar>
+<div style="min-height: 80vh;">
+    <router-outlet (activate)="onActivate()"></router-outlet>
+</div>
+<vef-footer></vef-footer>
+<ngx-ui-loader></ngx-ui-loader>

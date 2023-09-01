@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ExpensesFormComponent } from '../expenses-form/expenses-form.component';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'vef-expenses-bouquets-list',
@@ -13,22 +16,53 @@ export class ExpensesBouquetsListComponent implements OnInit {
   currentPage = 0;
   loading = false;
   
-  productsList: any[] = [];
+  expenses: any[] = [];
 
-  constructor(private service: ApiService) {}
+  constructor(
+    private service: ApiService, 
+    private modal : NzModalService,
+    private notification : NzNotificationService
+    ) {}
 
   ngOnInit(): void {
-      this.getProducts(this.size, this.page);
+      this.getExpenses(this.size, this.page);
+  }
+
+  editExpense(expense : any){
+    const addModal = this.modal.create({
+      nzContent : ExpensesFormComponent,
+      nzTitle : 'Edit Bouquet Expense',
+      nzComponentParams : {expense }
+    })
+
+    addModal.afterClose.subscribe((addedExpense) => {
+      if (addedExpense){
+        this.getExpenses(this.size, this.page);
+      }
+    })
+  }
+
+  openModal(){
+    const addModal = this.modal.create({
+      nzContent : ExpensesFormComponent,
+      nzTitle : 'Add Bouquet Expense',
+    })
+
+    addModal.afterClose.subscribe((addedExpense) => {
+      if (addedExpense){
+        this.getExpenses(this.size, this.page)
+      }
+    })
   }
 
   
-  getProducts(size: number, page: number) {
+  getExpenses(size: number, page: number) {
     this.loading = true;
     this.service
-      .getPaginated({ size: size, page: page }, '/Bouquet/paged')
+      .getPaginated({ size: size, page: page }, '/Expense/paged')
       .subscribe({
         next: (res: any) => {
-          this.productsList = this.transcateDescription(res.data.items);
+          this.expenses = res.data.items;
           this.totalItems = res.data.totalItemCount;
           this.currentPage = res.data.page;
           this.size = res.data.pageSize;
@@ -40,23 +74,28 @@ export class ExpensesBouquetsListComponent implements OnInit {
       });
   }
 
-  transcateDescription(data: any[]) {
-    const transformedText = data.map((product) => {
-      product.shortDescription =
-        product.description?.length > 100
-          ? `${product.description.substring(0, 100)}...`
-          : product?.description;
-      return {
-        ...product,
-      };
-    });
-    return transformedText;
+  confirmDelete(id: number){
+    this.loading = true;
+    this.service.delete(`/Expense/${id}`).subscribe({
+      next: () => {
+        this.loading = false;
+        this.getExpenses(this.size, this.page)
+        this.notification.success('Success', 'Expense deleted', {nzAnimate:true, nzDuration: 4000});
+      },
+      error: (err) => {
+        this.loading = false;
+        this.notification.error('Error', err?.error?.message ? err?.error?.message:  'Failed to delete expense', {nzAnimate: true, nzDuration: 4000});         
+      }
+    })
   }
 
+
+
+
   pageIndexChange(index: number) {
-    this.getProducts(this.size, index--);
+    this.getExpenses(this.size, index--);
   }
   pageSizeChange(size: number) {
-    this.getProducts(size, this.page);
+    this.getExpenses(size, this.page);
   }
 }

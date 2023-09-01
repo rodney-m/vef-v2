@@ -1,127 +1,18 @@
-<div class="p-4">
-  <nz-card>
-    <div *ngIf="selectedBouquet">
-      <h2 class="font-medium">{{selectedBouquet?.name}}</h2>
-            <p class="text-gray-500 text-xs">
-                {{selectedBouquet?.price | currency}}
-            </p>
-          </div>
-
-    <nz-divider nzDashed [nzText]="text">
-      <ng-template #text>
-        <span nz-icon nzType="plus"></span>
-        Add Expenses
-      </ng-template>
-    </nz-divider>
-
-    <form [formGroup]="expensesForm" >
-      <div formArrayName="expenses">
-        <div
-          nz-row
-          nzGutter="8"
-          *ngFor="let child of expensesFormControls.controls; let i = index"
-          formGroupName="{{ i }}"
-        >
-          <div nz-col nzSpan="7">
-            <nz-form-item>
-              <nz-form-label nzRequired nzFor="name">Expense</nz-form-label>
-              <nz-form-control>
-                <input
-                  nz-input
-                  type="text"
-                  formControlName="name"
-                  id="name"
-                />
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="7">
-            <nz-form-item>
-              <nz-form-label nzRequired nzFor="description">Description</nz-form-label>
-              <nz-form-control>
-                <textarea nz-input  formControlName="description" placeholder="" nzAutosize></textarea>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="7">
-            <nz-form-item>
-              <nz-form-label nzRequired nzFor="name">Cost</nz-form-label>
-              <nz-form-control>
-                <input
-                  nz-input
-                  type="number"
-                  formControlName="cost"
-                  id="cost"
-                />
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div nz-col nzSpan="3" class="remove-control">
-            <button
-            *ngIf="!toUpdateControl(i)"
-            nz-tooltip nzTooltipTitle="Save"
-            class="mr-2"
-              nz-button
-              nzType="primary"
-              nzSize="small"
-              style="background-color: green; border: 0;"
-              (click)="save(i)"
-            nz-tooltip nzTooltipTitle="Save"
-            >
-              <span nz-icon nzType="save"></span>
-            </button>
-
-            <button
-            *ngIf="toUpdateControl(i)"
-              nz-button
-              nzType="primary"
-              nzSize="small"
-              nz-tooltip nzTooltipTitle="Edit"
-              class="mr-2"
-              style="background-color: #ccc; border: 0;"
-              (click)="updateExpense(i)"
-            >
-              <span nz-icon nzType="edit"></span>
-            </button>
-
-            <button
-              nz-button
-              nz-tooltip nzTooltipTitle="Delete"
-              nzType="primary"
-              nzSize="small"
-              nzDanger
-              class="mr-2"
-              (click)="removeExpense(i)"
-            >
-              <span nz-icon nzType="delete"></span>
-            </button>
-          </div>
-        </div>
-
-        <button
-        nz-button
-        nzType="default"
-        nzSize="small"
-        (click)="addExpense()"
-      >
-        <span nz-icon nzType="plus"></span>
-        add expense
-      </button>
-      </div>
+<div>
+  <form nz-form nzLayout="vertical" [formGroup]="form">
+   
+      <nz-form-item>
+          <nz-form-label [nzSpan]="24" nzFor="name">Name</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <input nz-input name="name" formControlName="name" type="text" id="name">
+          </nz-form-control>
+        </nz-form-item >
+        
     </form>
 
-    <!-- <div class="mt-5">
-        <button
-            nz-button
-            nzType="primary"
-            (click)="submit()"
-            [nzLoading]="loading"
-          >
-            <span nz-icon nzType="save"></span>
-            Submit
-          </button>
-    </div> -->
-
-
-  </nz-card>
-</div>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="primary" *ngIf="!editMode" [nzLoading]="loading" (click)="save()">Submit</button>
+    <button nz-button nzType="primary" *ngIf="editMode" [nzLoading]="loading" (click)="update()">Update</button>
+    <button nz-button nzType="default" (click)="cancel()">Cancel</button>
+  </div>

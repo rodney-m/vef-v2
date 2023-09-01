@@ -53,6 +53,21 @@ export class ViewOrderComponent implements OnInit {
     return element.value
   }
 
+  approve(orderItem : number){
+    this.statusChangeLoading = true;
+    this.service.updateToUrl(`/Order/orderItem/${orderItem}/status?status=1`,{}).subscribe({
+      next: () => {
+        this.notification.success('Success', 'Status updated successfully', {nzAnimate: true, nzDuration: 4000});
+        this.getOrderDetail(this.order.id)
+      },
+      error: (err) => {
+        this.notification.error('Error', err?.error?.message ? err?.error?.message:  'Failed to update status', {nzAnimate: true, nzDuration: 4000})
+        this.statusChangeLoading = false;
+      },
+      complete: ()=> this.statusChangeLoading = false
+    })
+  }
+
   updateStatus(data: any){
 
     const status = data.element.value

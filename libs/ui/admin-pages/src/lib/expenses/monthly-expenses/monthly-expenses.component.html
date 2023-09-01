@@ -10,6 +10,9 @@
           <th>Bouquet</th>
           <th>Price</th>
           <th>Total Sold</th>
+          <th>Bouquet Sales Revenue</th>
+          <th>Delivery Costs</th>
+          <th>Add Ons Revenue Costs</th>
           <th>Total Revenue</th>
           <th>Total Expenses</th>
           <th>Profit</th>
@@ -20,6 +23,9 @@
           <td>{{ item?.bouquet?.name }}</td>
           <td>{{ item?.bouquet?.price | currency }}</td>
           <td>{{ item?.totalUnitsSold }}</td>
+          <td>{{ item?.bouquetSalesRevenue }}</td>
+          <td>{{ item?.deliveryCosts }}</td>
+          <td>{{ item?.addonRevenue | currency }}</td>
           <td>{{ item?.totalRevenue | currency }}</td>
           <td>{{ item?.totalExpenses | currency }}</td>
           <td>{{ item?.totalProfit | currency }}</td>

@@ -1,47 +1,66 @@
-<nz-card>
-    <div class="p-4">
-        <nz-table #productsListTable [nzData]="productsList" [nzShowPagination]="false" [nzLoading]="loading">
-            <thead>
-                <tr>
-                
-                    <th>Product</th>
-                    <th>Description</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of productsListTable.data;  let i=index">
-                   
-                    <td>
-                        <div class="flex items-center">
-                            <nz-avatar nzShape="square" [nzSize]="60" nzIcon="picture" [nzSrc]="item?.images[0]?.imageUrl"></nz-avatar>
-                            <span class="m-l-10">{{item.name}}</span>
-                        </div>
-                    </td>
-                    <td>{{item.shortDescription}}</td>
-                   
-                 
-                    <td class="md:text-right">
-                        <!-- <a [routerLink]="'form/'+item.id" class="mr-2" nz-button nzType="default"  nz-tooltip nzTooltipTitle="add" >
-                            <i nz-icon nzType="plus" theme="outline"></i> &nbsp; Add
-                        </a> -->
-                        <a [routerLink]="'form/'+item.id" class="mr-2" nz-button nzType="default"  nz-tooltip nzTooltipTitle="View" >
-                            <i nz-icon nzType="folder" theme="outline"></i> &nbsp; Open
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </nz-table>
-    </div>
-    <div class="mt-4">
-        <nz-pagination
-          [nzPageSizeOptions]="[5, 10, 20, 50]"
-          [nzPageIndex]="currentPage"
-          [nzTotal]="totalItems"
-          nzShowSizeChanger
-          [nzPageSize]="size"
-          (nzPageSizeChange)="pageSizeChange($event)"
-          (nzPageIndexChange)="pageIndexChange($event)"
-        ></nz-pagination>
-      </div>
+<nz-card nzTitle="Expenses List">
+    <button class="mb-4" nz-button nzType="primary" (click)="openModal()">
+        <span nz-icon nzType="plus"></span>
+        Add Expense
+      </button>
+  <div>
+    <nz-table
+      #productsListTable
+      [nzData]="expenses"
+      [nzShowPagination]="false"
+      [nzLoading]="loading"
+      [nzFrontPagination]="false"
+    >
+      <thead>
+        <tr>
+          <th>Expense</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productsListTable.data; let i = index">
+          <td>{{ item.name }}  </td>
+
+          <td>
+            <a
+            (click)="editExpense(item)"
+            class="mr-2"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip
+            nzTooltipTitle="Edit"
+          >
+            <i nz-icon nzType="edit" theme="outline"></i>
+          </a>
+
+          <button
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this testimonial?"
+            nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="confirmDelete(item.id)"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip
+            nzTooltipTitle="Delete"
+          >
+            <i nz-icon nzType="delete" theme="outline"></i>
+          </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="mt-4">
+    <nz-pagination
+      [nzPageSizeOptions]="[5, 10, 20, 50]"
+      [nzPageIndex]="currentPage"
+      [nzTotal]="totalItems"
+      nzShowSizeChanger
+      [nzPageSize]="size"
+      (nzPageSizeChange)="pageSizeChange($event)"
+      (nzPageIndexChange)="pageIndexChange($event)"
+    ></nz-pagination>
+  </div>
 </nz-card>

@@ -44,8 +44,7 @@ import { ReviewProductPageComponent } from './pages/review-product-page/review-p
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-
-
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 
 const routes: Route[] = [
   {
@@ -130,7 +129,7 @@ const routes: Route[] = [
     NzSwitchModule,
     NzAlertModule,
     NzRateModule,
-    NzToolTipModule
+    NzToolTipModule,
   ],
   declarations: [
     HomePageComponent,
@@ -150,6 +149,7 @@ const routes: Route[] = [
     PageNotFoundComponent,
     FilterByCategoryComponent,
     ReviewProductPageComponent,
+    TestimonialsComponent,
   ],
   providers: [ApiService, HttpClientModule, ShopService, NzNotificationService],
 })

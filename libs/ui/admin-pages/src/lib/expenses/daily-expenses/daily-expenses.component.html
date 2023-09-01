@@ -1,42 +1,47 @@
 <div class="p-2">
-    <nz-table
-      [nzLoading]="tableLoading"
-      #productsListTable
-      [nzData]="sales"
-      [nzShowPagination]="false"
-    >
-      <thead>
-        <tr>
-          <th>Bouquet</th>
-          <th>Price</th>
-          <th>Total Sold</th>
-          <th>Total Revenue</th>
-          <th>Total Expenses</th>
-          <th>Profit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of productsListTable.data; let i = index">
-          <td>{{ item?.bouquet?.name }}</td>
-          <td>{{ item?.bouquet?.price | currency }}</td>
-          <td>{{ item?.totalUnitsSold }}</td>
-          <td>{{ item?.totalRevenue | currency }}</td>
-          <td>{{ item?.totalExpenses | currency }}</td>
-          <td>{{ item?.totalProfit | currency }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  
-    <div class="mt-4">
-      <nz-pagination
-        [nzPageSizeOptions]="[5, 10, 20, 50]"
-        [nzPageIndex]="currentPage"
-        [nzTotal]="totalItems"
-        nzShowSizeChanger
-        [nzPageSize]="size"
-        (nzPageSizeChange)="pageSizeChange($event)"
-        (nzPageIndexChange)="pageIndexChange($event)"
-      ></nz-pagination>
-    </div>
+  <nz-table
+    [nzLoading]="tableLoading"
+    #productsListTable
+    [nzData]="sales"
+    [nzShowPagination]="false"
+  >
+    <thead>
+      <tr>
+        <th>Bouquet</th>
+        <th>Price</th>
+        <th>Total Sold</th>
+        <th>Bouquet Sales Revenue</th>
+        <th>Delivery Costs</th>
+        <th>Add Ons Revenue Costs</th>
+        <th>Total Revenue</th>
+        <th>Total Expenses</th>
+        <th>Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productsListTable.data; let i = index">
+        <td>{{ item?.bouquet?.name }}</td>
+        <td>{{ item?.bouquet?.price | currency }}</td>
+        <td>{{ item?.totalUnitsSold }}</td>
+        <td>{{ item?.bouquetSalesRevenue }}</td>
+        <td>{{ item?.deliveryCosts }}</td>
+        <td>{{ item?.addonRevenue | currency }}</td>
+        <td>{{ item?.totalRevenue | currency }}</td>
+        <td>{{ item?.totalExpenses | currency }}</td>
+        <td>{{ item?.totalProfit | currency }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <div class="mt-4">
+    <nz-pagination
+      [nzPageSizeOptions]="[5, 10, 20, 50]"
+      [nzPageIndex]="currentPage"
+      [nzTotal]="totalItems"
+      nzShowSizeChanger
+      [nzPageSize]="size"
+      (nzPageSizeChange)="pageSizeChange($event)"
+      (nzPageIndexChange)="pageIndexChange($event)"
+    ></nz-pagination>
   </div>
-  
+</div>

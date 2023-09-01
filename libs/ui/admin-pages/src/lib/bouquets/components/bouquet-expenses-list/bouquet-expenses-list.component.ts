@@ -37,6 +37,14 @@ export class BouquetExpensesListComponent implements OnInit {
       }
     })
   }
+
+  get totalExpenses(){
+    let total = 0
+    this.expenses.map((expense) => {
+      total = total + expense.cost
+    })
+    return  total
+  }
   confirmDelete(id: number){
     this.loading = true;
     this.service.delete(`/Expense/bouquet/expense/${id}`).subscribe({

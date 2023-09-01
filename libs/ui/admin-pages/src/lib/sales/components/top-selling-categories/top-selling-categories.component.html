@@ -4,14 +4,20 @@
             <th>Category</th>
             <th>Total Sold</th>
             <th>Total Revenue</th>
+            <th>Total Expenses</th>
+            <th>Total Add on Revenue</th>
+            <th>Total totalProfit</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of productsListTable.data;  let i=index">
            
-           <td> {{item?.occasion?.type}} </td>
+           <td> {{item?.bouquet?.occasion?.type}} </td>
            <td> {{item?.totalUnitsSold}} </td>
            <td> {{item?.totalRevenue | currency}} </td>
+           <td> {{item?.totalExpenses | currency}} </td>
+           <td> {{item?.addonRevenue | currency}} </td>
+           <td> {{item?.totalProfit | currency}} </td>
             
         </tr>
     </tbody>

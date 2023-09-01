@@ -18,16 +18,17 @@
     </li> -->
 
     
-    <li nz-submenu nzTitle="Bouquets" nzIcon="unordered-list">
-      <ul>
-        <li routerLink="/bouquets" nz-menu-item>All Bouquets</li>
-        <li routerLink="/expenses" nz-menu-item>Expenses</li>
-        <li routerLink="/expenses/overview" nz-menu-item>Expenses Overview</li>
-      </ul>
+    <li nz-menu-item routerLink="/bouquets">
+     <i nz-icon nzType="gift"></i>
+      <span>Bouquets</span>
     </li>
     <li nz-menu-item routerLink="/extras">
       <i nz-icon nzType="gift"></i>
       <span>Extras</span>
+    </li> 
+    <li nz-menu-item routerLink="/expenses">
+      <i nz-icon nzType="dollar"></i>
+      <span>Expenses</span>
     </li> 
     <li nz-menu-item routerLink="/locations">
       <i nz-icon nzType="pushpin"></i>

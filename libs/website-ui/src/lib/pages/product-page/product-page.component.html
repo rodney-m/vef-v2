@@ -111,9 +111,14 @@
             <div class="grid grid-cols-2 gap-4 md:grid-cols-1">
               <img
                 alt="bouquet Image"
-                [src]="bouquet?.images[0]?.imageUrl"
+                [src]="bouquet?.images[currentProductImageIndex]?.imageUrl"
                 class="aspect-square w-full rounded-xl object-cover bg-gray-100"
               />
+              <div class="text-center">
+                <span class="mx-3 cursor-pointer" (click)="changeImage(false)"><i class="fa-solid fa-left-long fa-xl"></i></span>
+                <strong> {{ currentProductImageIndex+ 1 }}</strong> of <strong>{{bouquet?.images.length}}</strong>
+                <span class="mx-3 cursor-pointer" (click)="changeImage(true)"><i class="fa-solid fa-right-long fa-xl"></i></span>
+              </div>
             </div>
         
             <div class="">

@@ -12,6 +12,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 export class ProductPageComponent implements OnInit {
   bouquet !: any; 
   quantity = 1;
+  currentProductImageIndex = 0;
   selectedOption = 'black';
   constructor(
     private service : ApiService, 
@@ -26,6 +27,23 @@ export class ProductPageComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['id']
       this.getProductDetails(id);
   }
+
+  
+  changeImage(changeDirection : boolean){
+    if(this.currentProductImageIndex === this.bouquet?.images.length -1 && changeDirection){
+      this.currentProductImageIndex = 0
+    } else if (this.currentProductImageIndex === 0 && !changeDirection){
+      this.currentProductImageIndex = this.bouquet?.images.length -1
+    } else {
+      if (changeDirection){
+        this.currentProductImageIndex++
+      } else {
+        this.currentProductImageIndex--
+
+      }
+    }
+  }
+
 
   getProductDetails(id:  string | number){
     this.service.getFromUrl(`/Bouquet/${id}`).subscribe({

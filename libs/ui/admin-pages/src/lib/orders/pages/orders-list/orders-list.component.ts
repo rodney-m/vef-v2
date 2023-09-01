@@ -13,6 +13,7 @@ export class OrdersListComponent implements OnInit {
   totalItems = 0;
   currentPage = 0;
   loading = false;
+  searchText = '';
 
   constructor(private service  :ApiService){}
 
@@ -20,10 +21,35 @@ export class OrdersListComponent implements OnInit {
       this.getOrders(this.size, this.page)
   }
 
+  changeInput(e : any){
+      if (e.target.value === ''){
+        this.size = 10 ;
+        this.page = 0 ;
+        this.getOrders(this.size, this.page)
+      }
+  }
+
+  filter(){
+    this.loading = true
+    this.service
+      .getFromUrl(`/Order/search?query=${this.searchText}`)
+      .subscribe({
+        next: (res: any) => {
+          this.ordersList = res.data;
+          this.loading = false
+          this.size = 1000
+        },
+        error: () => {
+          this.loading = false
+        },
+        complete: ()=> this.loading = false
+      });
+  }
+
   getOrders(size : number, page : number){
     this.loading = true
     this.service
-      .getPaginated({ size: size, page: page }, '/Order/paged')
+      .getPaginated({ size: size, page: page, searchParam: this.searchText }, '/Order/paged')
       .subscribe({
         next: (res: any) => {
           this.ordersList = res.data.items;

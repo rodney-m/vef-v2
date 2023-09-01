@@ -59,6 +59,7 @@
           <h3 class="font-semibold text-lg">Order Item #{{ i + 1 }}</h3>
           <p class="text-gray-500 text-xs">
             Order status :
+            <nz-tag [nzColor]="'#ffbf00'" *ngIf="orderItem?.status === 0">Pending Approval</nz-tag>
             <nz-tag [nzColor]="'#87d068'" *ngIf="orderItem?.status === 1">Received</nz-tag>
             <nz-tag [nzColor]="'#2db7f5'" *ngIf="orderItem?.status === 2">Processing</nz-tag>
             <nz-tag [nzColor]="'#108ee9'" *ngIf="orderItem?.status === 3">Dispatched</nz-tag>
@@ -67,7 +68,7 @@
             <nz-tag [nzColor]="'red'" *ngIf="orderItem?.status === 6">Rejected</nz-tag>
           </p>
         </div>
-        <!-- <div *ngIf="orderItem?.status === ">
+        <div  *ngIf="orderItem?.status !== 0">
           <span class="text-gray-500 text-xs">Change status :</span>
           <nz-select 
             (change)="changeOrderStatus(statusSelect)"
@@ -84,7 +85,13 @@
           <button nz-button [nzLoading]="statusChangeLoading" nzType="primary" (click)="updateStatus({element :statusSelect, orderItem : orderItem?.id})">
             Save
           </button>
-        </div> -->
+        </div>
+
+        <div *ngIf="orderItem?.status === 0">
+          <button nz-button [nzLoading]="statusChangeLoading" nzType="primary" (click)="approve(orderItem?.id)">
+            Approve Order
+          </button>
+        </div>
       </div>
       <div>         
           <p class="font-bold text-primary" *ngIf="orderItem?.anonymousDelivery">Send As anonymous 🙈</p>

@@ -1,36 +1,61 @@
 <div>
-    <button class="mb-4" nz-button nzType="primary" (click)="openModal()">
-        <span nz-icon nzType="plus"></span>
-        Add Expense
-      </button>
-    <nz-table #productsListTable [nzData]="expenses" [nzShowPagination]="false" [nzLoading]="loading">
-        <thead>
-            <tr>            
-                <th>Expense</th>
-                <th>Cost</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of productsListTable.data;  let i=index">
-               
-                <td>{{item?.expense?.name}}</td>
-                <td>{{item.cost | currency}}</td>
-                           
-                <td class="md:text-right">
-                    <a (click)="editExpense(item)" class="mr-2" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Edit" >
-                        <i nz-icon nzType="edit" theme="outline"></i>
-                    </a>
-                   
-                    <button  
-                    nz-popconfirm
-                    nzPopconfirmTitle="Are you sure delete this testimonial?"
-                    nzPopconfirmPlacement="bottom"
-                    (nzOnConfirm)="confirmDelete(item.id)" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete">
-                        <i nz-icon nzType="delete" theme="outline"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </nz-table>
+  <button class="mb-4" nz-button nzType="primary" (click)="openModal()">
+    <span nz-icon nzType="plus"></span>
+    Add Expense
+  </button>
+  <nz-table
+    #productsListTable
+    [nzData]="expenses"
+    [nzFooter]="footerTemplate"
+    [nzShowPagination]="false"
+    [nzLoading]="loading"
+  >
+    <thead>
+      <tr>
+        <th>Expense</th>
+        <th>Cost</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productsListTable.data; let i = index">
+        <td>{{ item?.expense?.name }}</td>
+        <td>{{ item.cost | currency }}</td>
+
+        <td class="md:text-right">
+          <a
+            (click)="editExpense(item)"
+            class="mr-2"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip
+            nzTooltipTitle="Edit"
+          >
+            <i nz-icon nzType="edit" theme="outline"></i>
+          </a>
+
+          <button
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this testimonial?"
+            nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="confirmDelete(item.id)"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+            nz-tooltip
+            nzTooltipTitle="Delete"
+          >
+            <i nz-icon nzType="delete" theme="outline"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <ng-template #footerTemplate>
+    <div>
+        <span class="text-xl"><strong >Total Expenses</strong> : {{totalExpenses | currency}}</span>
+    </div>
+  </ng-template>
 </div>

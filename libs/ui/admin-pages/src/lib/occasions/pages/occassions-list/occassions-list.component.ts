@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'vef-occassions-list',
@@ -14,10 +15,24 @@ export class OccassionsListComponent implements OnInit {
   currentPage = 0;
   tableLoading = false;
 
-  constructor(private service: ApiService) {}
+  constructor(private service: ApiService, private notification : NzNotificationService) {}
 
   ngOnInit(): void {
       this.getOcassions(this.size, this.page)
+  }
+
+  confirmDelete(id: number){
+    console.log(id);
+    this.tableLoading = true;
+
+    this.service.delete(`/Occasion/${id}`).subscribe({
+      next: () => {
+        this.notification.success('Success', 'Deleted');
+
+        this.getOcassions(this.size, this.page);
+      },
+   
+    })
   }
 
   getOcassions(size: number, page: number) {

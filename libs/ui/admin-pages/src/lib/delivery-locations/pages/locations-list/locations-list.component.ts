@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'vef-locations-list',
@@ -14,7 +15,7 @@ export class LocationsListComponent implements OnInit {
   currentPage = 0;
   loading = false;
 
-  constructor(private service: ApiService) {}
+  constructor(private service: ApiService, private notification : NzNotificationService) {}
 
   ngOnInit(): void {
     this.getLocations(this.size, this.page);
@@ -37,6 +38,20 @@ export class LocationsListComponent implements OnInit {
         },
         complete: ()=> this.loading =false
       });
+  }
+
+  confirmDelete(id: number){
+    console.log(id);
+    this.loading = true;
+
+    this.service.delete(`/Location/${id}`).subscribe({
+      next: () => {
+        this.notification.success('Success', 'Location deleted');
+
+        this.getLocations(this.size, this.page);
+      },
+   
+    })
   }
 
   pageIndexChange(index: number) {

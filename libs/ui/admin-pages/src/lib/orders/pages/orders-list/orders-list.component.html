@@ -40,7 +40,7 @@
                     <td>{{item?.reference}}</td>
                     <td>{{item?.customerName}}</td>
                     <td>{{item?.customerPhone}}</td>
-                    <td>{{item?.dateOrdered | date : 'mediumDate'}}</td>
+                    <td>{{item?.dateOrdered | date : 'medium'}}</td>
                     <td>${{item?.payment?.amount | number:'3.2-5'}}</td>
                     <td>
                         <a [routerLink]="item.id"  nz-button nzType="primary" nzShape="round">

@@ -40,6 +40,7 @@ export class TestimonialsListComponent implements OnInit {
   }
 
   confirmDelete(id : number){
+    this.tableLoading =true;
     this.service
       .delete('/Customer/testimonials/'+id)
       .subscribe({

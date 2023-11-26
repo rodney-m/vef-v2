@@ -54,7 +54,7 @@
 
       <div class="mt-4">
         <div>
-          <p class="text-xl">
+          <!-- <p class="text-xl">
             <span nz-icon style="color:green" *ngIf="orderItem?.status >= 1" nzType="check" nzTheme="outline"></span>
             Order Received</p>
           <p [class]="'text-xl' + (orderItem?.status < 2 ? 'text-gray-400' : '')">
@@ -68,7 +68,18 @@
           <p [class]="'text-xl' + (orderItem?.status < 4 ? 'text-gray-400' : '')">
             <span nz-icon style="color:green" *ngIf="orderItem?.status === 4" nzType="check" nzTheme="outline"></span>
             <span nz-icon nzType="close" nzTheme="outline" *ngIf="orderItem?.status < 4"></span>
-            Delivered</p>
+            Delivered</p> -->
+
+            <p *ngFor="let order of orderItem?.statusLogs"> <strong><small>{{order?.logTime | date : 'medium'}}</small></strong>  - {{
+              order?.status === 0 ? 'Order Pending approval' :
+              order?.status === 1 ? 'Order Received' :
+              order?.status === 2 ? 'Order is being processed' :
+              order?.status === 3 ? 'Order is out for delivery' :
+              order?.status === 4 ? 'Order Delivered' :
+              order?.status === 5 ? 'Order cancelled' :
+              order?.status === 6 ? 'Order rejected, resason -'+ order?.reason :
+              ''
+            }} </p>
         </div>
       </div>
 

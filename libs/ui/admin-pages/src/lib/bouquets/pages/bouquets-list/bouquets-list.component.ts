@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'vef-bouquets-list',
@@ -20,7 +21,7 @@ export class BouquetsListComponent implements OnInit {
   currentPage = 0;
   loading = false;
 
-  constructor(private service: ApiService) {}
+  constructor(private service: ApiService, private notification : NzNotificationService) {}
 
   ngOnInit(): void {
     this.getProducts(this.size, this.page);
@@ -72,6 +73,20 @@ export class BouquetsListComponent implements OnInit {
   }
   pageSizeChange(size: number) {
     this.getProducts(size, this.page);
+  }
+
+  confirmDelete(id: number){
+    console.log(id);
+    this.loading = true;
+
+    this.service.delete(`/Bouquet/${id}`).subscribe({
+      next: () => {
+        this.notification.success('Success', 'Bouquet deleted');
+
+        this.getProducts(this.size, this.page);
+      },
+   
+    })
   }
 
   search(): void {

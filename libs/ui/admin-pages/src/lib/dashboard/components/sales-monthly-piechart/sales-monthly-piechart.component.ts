@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ApexChart,
+  ApexNonAxisChartSeries,
+  ApexTitleSubtitle,
+  NgApexchartsModule,
+} from 'ng-apexcharts';
 import { ApiService } from '@vef/core';
-import { ApexNonAxisChartSeries, ApexChart, ApexTitleSubtitle } from 'ng-apexcharts';
 
 @Component({
-  selector: 'vef-sales-monthly-chart',
-  templateUrl: './sales-monthly-chart.component.html',
-  styleUrls: ['./sales-monthly-chart.component.scss'],
+  selector: 'vef-sales-monthly-piechart',
+  standalone: false,
+  templateUrl: './sales-monthly-piechart.component.html',
+  styleUrls: ['./sales-monthly-piechart.component.scss'],
 })
-export class SalesMonthlyChartComponent implements OnInit {
+export class SalesMonthlyPiechartComponent implements OnInit {
   chartSeries: ApexNonAxisChartSeries = [];
   chartDetails: ApexChart = {
     type: 'donut',

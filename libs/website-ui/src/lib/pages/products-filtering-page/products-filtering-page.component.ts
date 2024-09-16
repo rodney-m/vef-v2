@@ -10,7 +10,7 @@ import { ApiService } from '@vef/core';
 export class ProductsFilteringPageComponent implements OnInit {
   searchText = '';
   size = 8;
-  page = 0;
+  page = 1;
   currentAction = Action.all;
 
   searched = false;
@@ -112,6 +112,7 @@ export class ProductsFilteringPageComponent implements OnInit {
       this.page = 0;
       this.getAllProducts()
       this.currentAction = Action.all
+      this.searched = false;
     }
   }
 

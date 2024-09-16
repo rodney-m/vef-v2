@@ -11,7 +11,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class ExpensesBouquetsListComponent implements OnInit {
   size = 12;
-  page = 0;
+  page = 1;
   totalItems = 0;
   currentPage = 0;
   loading = false;

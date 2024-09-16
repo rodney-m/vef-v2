@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@vef/core';
-import * as apex from 'ng-apexcharts';
+import { ApexNonAxisChartSeries, ApexChart, ApexTitleSubtitle } from 'ng-apexcharts';
+
 
 
 
@@ -11,64 +12,36 @@ import * as apex from 'ng-apexcharts';
   // changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class SalesDailyChartComponent implements OnInit {
-  series! : apex.ApexAxisChartSeries;
-  chart!: apex.ApexChart;
-  title! : apex.ApexTitleSubtitle;
-  graphData : {x: string, y: number}[] = [];
+  chartSeries: ApexNonAxisChartSeries = [];
+  chartDetails: ApexChart = {
+    type: 'donut',
+    toolbar: {
+      show: true,
+    },
+  };
 
-  constructor(private service : ApiService, private cdr : ChangeDetectorRef){}
+  series!: ApexNonAxisChartSeries;
+  labels: string[] = [];
 
+  chartLabels!: string[] | any[];
 
-  ngOnInit () : void {
-    this.initializeChartOptions();
+  chartTitle: ApexTitleSubtitle = {
+    text: 'Top Sales Today',
+  };
+
+  constructor(private service: ApiService) {}
+
+  ngOnInit(): void {
     this.getData();
   }
 
-  private initializeChartOptions() : void {
-    this.title = {
-      text : 'Top sales today'
-    }
-
-    
-    this.series = [{
-       name : 'Top Monthly Daily', 
-       data : this.graphData,
-       type: 'bar',
-       color: '#ccc'
-      }];
-
-      this.chart = {
-        type: 'bar',
-      }
-
-  }
-
-  
-
-  getData(){
+  getData() {
     this.service.getFromUrl('/Sales/daily').subscribe({
-      next: (res) =>{
-
-        this.graphData = res.data.map((xData : any) => {
-          return {
-            x: xData.bouquet.name,
-            y: xData.totalUnitsSold
-          }
-        });
-
-        this.series = [
-          {
-            name: 'Top Monthly Sales',
-            data: this.graphData,
-            type: 'bar',
-            color: '#971c26'
-          }
-        ];
-        
-        this.cdr.detectChanges();
-        console.log(this.graphData);
-      }
-    })
+      next: (res) => {
+        this.chartSeries = res.data.map((xData: any) => xData.totalUnitsSold);
+        this.chartLabels = res.data.map((xData: any) => xData.bouquet.name);
+      },
+    });
   }
 
 }

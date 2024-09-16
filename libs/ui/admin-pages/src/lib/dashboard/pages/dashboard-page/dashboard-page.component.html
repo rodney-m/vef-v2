@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0 p-4">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 w-full min-w-0 p-4">
     <vef-dashboard-stat-card  [count]="statusesStats?.RECEIVED || 0" [status]="'Received'"></vef-dashboard-stat-card>
     <vef-dashboard-stat-card  [count]="statusesStats?.PROCESSING || 0" [status]="'Processing'"></vef-dashboard-stat-card>
     <vef-dashboard-stat-card  [count]="statusesStats?.DISPATCHED || 0" [status]="'Dispatched'"></vef-dashboard-stat-card>
@@ -7,7 +7,11 @@
     
 </div>
 
-<div class="space-y-4">
+<!-- <div>
+    <vef-sales-monthly-piechart></vef-sales-monthly-piechart>
+</div> -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2  gap-6 w-full min-w-0 p-4">
     <vef-sales-monthly-chart></vef-sales-monthly-chart>
     <vef-sales-weekly-chart></vef-sales-weekly-chart>
     <vef-sales-daily-chart></vef-sales-daily-chart>

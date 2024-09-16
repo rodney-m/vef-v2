@@ -9,7 +9,7 @@ import { ApiService } from '@vef/core';
 export class OrdersListComponent implements OnInit {
   ordersList :any[] =[]
   size = 10;
-  page = 0;
+  page = 1;
   totalItems = 0;
   currentPage = 0;
   loading = false;

@@ -15,7 +15,7 @@ export class FilterByCategoryComponent implements OnInit {
   isLoading = false;
   noMoreData = false;
   size = 8;
-  page = 0;
+  page = 1;
   category!: any;
   categories: any[] = [];
   categoryId!: number | string;

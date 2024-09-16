@@ -41,6 +41,7 @@ import { TestimonialsFormComponent } from './testimonials/pages/testimonials-for
 import { ViewExtraComponent } from './extras/pages/view-extra/view-extra.component';
 import { BouquetExpensesListComponent } from './bouquets/components/bouquet-expenses-list/bouquet-expenses-list.component';
 import { AddEditBouquetExpenseComponent } from './bouquets/components/add-edit-bouquet-expense/add-edit-bouquet-expense.component';
+import { SalesMonthlyPiechartComponent } from './dashboard/components/sales-monthly-piechart/sales-monthly-piechart.component';
 
 @NgModule({
   imports: [
@@ -88,6 +89,7 @@ import { AddEditBouquetExpenseComponent } from './bouquets/components/add-edit-b
     ViewExtraComponent,
     BouquetExpensesListComponent,
     AddEditBouquetExpenseComponent,
+    SalesMonthlyPiechartComponent
   ],
   providers: [ApiService, NzModalService, FileService],
 })

@@ -9,11 +9,13 @@ import { ApiService } from '@vef/core';
 export class AllBouquetsInfiniteScrollComponent implements OnInit {
   items: any[] = [];
   isLoading = false;
+  appendDataLoading = false;
 
-  currentPage = 0;
+  currentPage = 1;
   itemsPerPage = 8;
 
   toggleLoading = () => this.isLoading = ! this.isLoading;
+  toggleAppendDataLoading = () => this.appendDataLoading = ! this.appendDataLoading;
 
   loadData= () => {
     this.toggleLoading();
@@ -30,7 +32,7 @@ export class AllBouquetsInfiniteScrollComponent implements OnInit {
   }
 
   appendData(): void{
-    this.toggleLoading();
+    this.toggleAppendDataLoading();
     this.service.getPaginated({size: this.itemsPerPage, page: this.currentPage}, '/Bouquet/paged').subscribe({
       next: (res: any) =>{
         this.items = [...this.items, ...res.data.items]
@@ -38,7 +40,7 @@ export class AllBouquetsInfiniteScrollComponent implements OnInit {
       error: (err) => {
         console.log(err)
       },
-      complete: () => this.toggleLoading()
+      complete: () => this.toggleAppendDataLoading()
     })
   }
 

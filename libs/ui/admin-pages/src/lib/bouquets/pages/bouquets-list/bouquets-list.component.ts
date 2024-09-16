@@ -16,7 +16,7 @@ export class BouquetsListComponent implements OnInit {
   productsList: any[] = [];
   occasionsList: any[] = [];
   size = 10;
-  page = 0;
+  page = 1;
   totalItems = 0;
   currentPage = 0;
   loading = false;

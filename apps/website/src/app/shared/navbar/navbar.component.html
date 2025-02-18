@@ -1,23 +1,10 @@
 <div class="bg-white">
-  <!--
-    Mobile menu
 
-    Off-canvas menu for mobile, show/hide based on off-canvas menu state.
-  -->
   <div class="relative z-40" role="dialog" [class.hidden]="!isVisible" aria-modal="true">
     <div class="fixed inset-0 bg-black bg-opacity-25"></div>
 
     <div class="fixed inset-0 z-40 flex">
-      <!--
-        Off-canvas menu, show/hide based on off-canvas menu state.
-
-        Entering: "transition ease-in-out duration-300 transform"
-          From: "-translate-x-full"
-          To: "translate-x-0"
-        Leaving: "transition ease-in-out duration-300 transform"
-          From: "translate-x-0"
-          To: "-translate-x-full"
-      -->
+     
       <div
         class="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl"
       >
